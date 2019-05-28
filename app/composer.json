@@ -17,6 +17,7 @@
         "symfony/flex": "^1.1",
         "symfony/form": "3.4.*",
         "symfony/framework-bundle": "3.4.*",
+        "symfony/security-bundle": "3.4.*",
         "symfony/translation": "3.4.*",
         "symfony/twig-bundle": "3.4.*",
         "symfony/validator": "3.4.*",

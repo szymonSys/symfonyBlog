@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Strona główna' }}
+{% endblock %}
+
+{% block body %}
+    <h1>Strona Główna</h1>
+    {% if pagination is defined and pagination|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ url('article_new') }}" title="new">
+            dodaj artykuł
+        </a>
+    {% endif %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'id', 'a.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'data publikacji', 'a.publishedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'tytuł', 'a.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'autor', 'a.autor') }}</th>
+                <th>kategoria</th>
+                <th>opcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in pagination %}
+
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.publishedAt|localizeddate }}</td>
+                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="edit">{{ article.title }} </a></td>
+                    <td>{{ article.author.firstName }}</td>
+                    <td>{{ article.category.name }}</td>
+                    <td>
+                        <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
+                            edytuj
+                        </a><br>
+                        <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
+                            usuń
+                        </a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            brak artykułów
+        </p>
+    {% endif %}
+
+{% endblock %}

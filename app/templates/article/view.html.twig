@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block body %}
+    {% if article is defined and article|length %}
+        <h1>{{  article.title }}</h1>
+        <dl class="dl-horizontal">
+            <dt>autor</dt>
+            <dd>{{  article.author.firstName }}</dd>
+            <dt>data publikacji</dt>
+            <dd>{{ article.publishedAt|localizeddate }}</dd>
+            <dt>treść</dt>
+            <dd>{{  article.body }}</dd>
+            <dt>kategoria</dt>
+            <dd>{{  article.category.name }}</dd>
+            <dt>Id</dt>
+            <dd>{{ article.id }}</dd>
+        </dl>
+    {% else %}
+        <p>
+            nie znaleziono artykułu
+        </p>
+    {% endif %}
+{% endblock %}
