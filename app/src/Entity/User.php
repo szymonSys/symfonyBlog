@@ -108,13 +108,8 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="255",
-     * )
      *
-     * @SecurityAssert\UserPassword
+     *
      */
     private $password;
 
@@ -143,11 +138,6 @@ class User implements UserInterface
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="255",
-     * )
      */
     private $blogName;
 

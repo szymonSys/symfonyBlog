@@ -8,14 +8,23 @@
     {% if article is defined and article|length %}
         <h1>{{  article.title }}</h1>
         <dl class="dl-horizontal">
-            <dt>autor</dt>
+            <dt>Autor</dt>
             <dd>{{  article.author.firstName }}</dd>
-            <dt>data publikacji</dt>
+            <dt>Data publikacji</dt>
             <dd>{{ article.publishedAt|localizeddate }}</dd>
-            <dt>treść</dt>
+            <dt>Treść</dt>
             <dd>{{  article.body }}</dd>
-            <dt>kategoria</dt>
+            <dt>Kategoria</dt>
             <dd>{{  article.category.name }}</dd>
+            <dt>Tagi</dt>
+            <dd>
+            {% for tag in article.tags %}
+            {{ tag.name }}
+                {% if loop.index != article.tags|length %}
+                {{ ',' }}
+                {% endif %}
+            {% endfor %}
+            </dd>
             <dt>Id</dt>
             <dd>{{ article.id }}</dd>
         </dl>

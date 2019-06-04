@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -23,6 +24,22 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    /**
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function findAllThanCategory($category): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->innerJoin('App\Entity\Category', 'c', Join::WITH,'c = a.category' )
+            ->andWhere('c.name = :category')
+            ->setParameter('category', $category)
+            ->orderBy('a.publishedAt', 'DESC');
+//            ->getQuery();
+
+        return $qb;
     }
 
     /**

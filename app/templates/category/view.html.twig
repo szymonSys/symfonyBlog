@@ -11,22 +11,20 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <a href="{{ url('article_new') }}" title="new">
-            dodaj artykuł
-        </a>
-    {% endif %}
+{#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+{#            <a href="{{ url('article_new') }}" title="new">#}
+{#                dodaj artykuł#}
+{#            </a>#}
+{#        {% endif %}#}
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'id', 'a.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'data publikacji', 'a.publishedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'tytuł', 'a.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'autor', 'a.autor') }}</th>
+                <th>autor</th>
                 <th>kategoria</th>
-    {% if is_granted('ROLE_ADMIN') %}
                 <th>opcje</th>
-    {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -38,8 +36,6 @@
                     <td><a href="{{ url('article_view', {id: article.id}) }}" title="edit">{{ article.title }} </a></td>
                     <td>{{ article.author.firstName }}</td>
                     <td>{{ article.category.name }}</td>
-
-                    {% if is_granted('ROLE_ADMIN') %}
                     <td>
                         <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                             edytuj
@@ -48,7 +44,6 @@
                             usuń
                         </a>
                     </td>
-                    {% endif %}
                 </tr>
 
             {% endfor %}

@@ -18,7 +18,22 @@
         <div>
             <a href="{{ url('security_login') }}">zaloguj się</a>
         </div>
+        <div>
+            <a href="{{ url('app_register') }}">rejestracja</a>
+        </div>
     {% endif %}
+    <nav>
+        <ul>
+            <li><a href="{{ url('article_index') }}">artykuły</a></li>
+            <li><a href="{{ url('category_index') }}">kategorie</a></li>
+            <li><a href="">autorzy</a></li>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li><a href="">obserwowani</a></li>
+            <li><a href="{{ url('article_new') }}" title="new">dodaj artykuł</a></li>
+            {% endif %}
+            <li>wyszukaj</li>
+        </ul>
+    </nav>
     {% include 'default/_flash_messages.html.twig' %}
     {% block body %}{% endblock %}
 </div>

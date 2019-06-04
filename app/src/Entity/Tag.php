@@ -2,19 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
-class Category
+class Tag
 {
-    const NUMBER_OF_ITEMS = 10;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -23,16 +21,19 @@ class Category
     private $id;
 
     /**
-     * Name.
-     *
-     * @var string
-     *
-     * @ORM\Column(
-     *     type="string",
-     *     length=64
-     * )
-     *
-     * @Assert\NotBlank
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=64)
      * @Assert\Length(
      *     min="3",
      *     max="64",
@@ -50,24 +51,14 @@ class Category
      * @Gedmo\Slug(fields={"name"})
      *
      * @Assert\Length(
-     *      min="3",
+     *     min="3",
      *     max="64",
      * )
-     *
      */
     private $code;
 
     /**
-     * Articles.
-     *
-     * @var Collection|null
-     *
-     * @ORM\OneToMany(
-     *     targetEntity="App\Entity\Article",
-     *     mappedBy="category",
-     *     orphanRemoval=true,
-     *     fetch="EXTRA_LAZY",
-     * )
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="tags")
      */
     private $articles;
 
@@ -76,10 +67,33 @@ class Category
         $this->articles = new ArrayCollection();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -118,7 +132,7 @@ class Category
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setCategory($this);
+            $article->addTag($this);
         }
 
         return $this;
@@ -128,10 +142,7 @@ class Category
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
-            // set the owning side to null (unless already changed)
-            if ($article->getCategory() === $this) {
-                $article->setCategory(null);
-            }
+            $article->removeTag($this);
         }
 
         return $this;
