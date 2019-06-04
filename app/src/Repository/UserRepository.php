@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -21,6 +22,23 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
+     *
+     * @param $userId
+     * @return User[]
+     */
+    public function findAuthorDataById(int $userId): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'u.email', 'u.firstName')
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $userId);
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    /**
      * Query all records.
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
@@ -28,7 +46,7 @@ class UserRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('u.publishedAt', 'DESC');
+            ->orderBy('u.firstName', 'DESC');
     }
 
     /**

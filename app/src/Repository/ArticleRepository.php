@@ -42,6 +42,23 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb;
     }
 
+
+    /**
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function findAllThanUserId(int $userId): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->innerJoin('App\Entity\User', 'u', Join::WITH,'u = a.author' )
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('a.publishedAt', 'DESC');
+//            ->getQuery();
+
+        return $qb;
+    }
+
     /**
      * Query all records.
      *

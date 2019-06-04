@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Autorzy' }}
+{% endblock %}
+
+{% block body %}
+    <h1>Autorzy</h1>
+    {% if pagination is defined and pagination|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'id', 'u.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'blog', 'u.blogName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'imię', 'u.firstName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'dołączył', 'u.createdAt') }}</th>
+                <th> liczba artykułów </th>
+                <th>liczba obserwujących</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>opcje</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for author in pagination %}
+
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.blogName }}</td>
+                    <td><a href="{{ url('author_view', {id: author.id, firstName: author.firstName}) }}" title="view">{{ author.firstName }} </a></td>
+                    <td>{{ author.createdAt|localizeddate }}</td>
+                    <td>{{ author.articles|length }}</td>
+                    <td>{{ author.followers|length }}</td>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>
+                            <a href="{{ url('user_edit', {id: article.id}) }}" title="edit">
+                                edytuj
+                            </a><br>
+                            <a href="{{ url('user_delete', {id: article.id}) }}" title="delete">
+                                usuń
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            brak artykułów
+        </p>
+    {% endif %}
+
+{% endblock %}

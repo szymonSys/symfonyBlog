@@ -26,14 +26,21 @@
         <ul>
             <li><a href="{{ url('article_index') }}">artykuły</a></li>
             <li><a href="{{ url('category_index') }}">kategorie</a></li>
-            <li><a href="">autorzy</a></li>
+            <li><a href="{{ url('author_index') }}">autorzy</a></li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li><a href="">obserwowani</a></li>
             <li><a href="{{ url('article_new') }}" title="new">dodaj artykuł</a></li>
+                <li><a href="">mój blog</a></li>
             {% endif %}
-            <li>wyszukaj</li>
         </ul>
     </nav>
+    <div id="search">
+        <form method="get" action="">
+            <label for="search_input">wyszukaj:</label>
+            <input id="search_input" type="text">
+            <input type="submit" value="wyszukaj">
+        </form>
+    </div>
     {% include 'default/_flash_messages.html.twig' %}
     {% block body %}{% endblock %}
 </div>

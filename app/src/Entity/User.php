@@ -33,6 +33,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+
+    const NUMBER_OF_ITEMS = 12;
     /**
      * Role user.
      *
@@ -142,13 +144,31 @@ class User implements UserInterface
     private $blogName;
 
     /**
+     * Articles.
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
      */
     private $articles;
 
+    /**
+     * Followed authors.
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="followers")
+     */
+    private $followedAuthors;
+
+    /**
+     * Followers.
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="followedAuthors")
+     */
+    private $followers;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->followedAuthors = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     /**
@@ -353,6 +373,60 @@ class User implements UserInterface
             if ($article->getAuthor() === $this) {
                 $article->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollowedAuthors(): Collection
+    {
+        return $this->followedAuthors;
+    }
+
+    public function addFollowedAuthor(self $followedAuthor): self
+    {
+        if (!$this->followedAuthors->contains($followedAuthor)) {
+            $this->followedAuthors[] = $followedAuthor;
+        }
+
+        return $this;
+    }
+
+    public function removeFollowedAuthor(self $followedAuthor): self
+    {
+        if ($this->followedAuthors->contains($followedAuthor)) {
+            $this->followedAuthors->removeElement($followedAuthor);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->addFollowedAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        if ($this->followers->contains($follower)) {
+            $this->followers->removeElement($follower);
+            $follower->removeFollowedAuthor($this);
         }
 
         return $this;

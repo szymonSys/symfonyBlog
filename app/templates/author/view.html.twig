@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ categoryName }}
+    {{ authorData[0].firstName }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ categoryName }}</h1>
+    <h1>{{ authorData[0].firstName }}</h1>
+    <p>Id autora: {{ authorData[0].id }}</p>
+    <p>kontakt: {{ authorData[0].email}}</p>
+    {#        <p>obserwujący: {{ authorData.followers|length }}</p>#}
     {% if pagination is defined and pagination|length %}
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-{#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
-{#            <a href="{{ url('article_new') }}" title="new">#}
-{#                dodaj artykuł#}
-{#            </a>#}
-{#        {% endif %}#}
+        {#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+        {#            <a href="{{ url('article_new') }}" title="new">#}
+        {#                dodaj artykuł#}
+        {#            </a>#}
+        {#        {% endif %}#}
+        <p>blog: {{ authorData[0].firstName }}</p>
+        <p>Id autora: {{ authorData[0].id }}</p>
+        <p>kontakt: {{ authorData[0].email}}</p>
+{#        <p>obserwujący: {{ authorData.followers|length }}</p>#}
         <table class="table table-striped">
             <thead>
             <tr>

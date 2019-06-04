@@ -22,7 +22,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'id', 'a.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'data publikacji', 'a.publishedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'tytuł', 'a.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'autor', 'a.autor') }}</th>
+                <th>autor</th>
                 <th>kategoria</th>
     {% if is_granted('ROLE_ADMIN') %}
                 <th>opcje</th>
@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{ article.id }}</td>
                     <td>{{ article.publishedAt|localizeddate }}</td>
-                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="edit">{{ article.title }} </a></td>
+                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }} </a></td>
                     <td>{{ article.author.firstName }}</td>
                     <td>{{ article.category.name }}</td>
 
