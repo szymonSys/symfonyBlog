@@ -1,37 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ authorData[0].firstName }}
+    {{ 'Artykuły obserwowanych twórców' }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ authorData[0].firstName }}</h1>
-    <p>Id autora: {{ authorData[0].id }}</p>
-    <p>kontakt: {{ authorData[0].email}}</p>
-    <a href="{{ url('subscriptions_followers') }}">subskrypcje</a>
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% if not isSubscribed %}
-            <a href="{{ url('subscription_follow', {id: authorData[0].id}) }}" title="follow">obserwuj</a>
-        {% else %}
-            <a href="{{ url('subscription_unfollow', {id: authorData[0].id}) }}" title="unfollow">przestań obserwować</a>
-        {% endif %}
-    {% endif %}
-    {#        <p>obserwujący: {{ authorData.followers|length }}</p>#}
+    <h1>Artykuły obserwowanych twórców:</h1>
+    <a href="{{ url('subscriptions_followed') }}">obeserowani</a>
     {% if pagination is defined and pagination|length %}
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-        {#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
-        {#            <a href="{{ url('article_new') }}" title="new">#}
-        {#                dodaj artykuł#}
-        {#            </a>#}
-        {#        {% endif %}#}
-        <p>blog: {{ authorData[0].firstName }}</p>
-{#        {% for follower in authorData[0].followers if follower.id == loggedUser %}#}
-
-{#        {% endfor %}#}
-{#        <p>obserwujący: {{ authorData.followers|length }}</p>#}
         <table class="table table-striped">
             <thead>
             <tr>
@@ -51,9 +31,10 @@
                 <tr>
                     <td>{{ article.id }}</td>
                     <td>{{ article.publishedAt|localizeddate }}</td>
-                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }}</a></td>
-                    <td>{{ article.author.firstName }}</td>
+                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }} </a></td>
+                    <td><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></td>
                     <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
+
                     {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">

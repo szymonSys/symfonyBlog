@@ -69,6 +69,7 @@ class AuthorController extends AbstractController
     public function view(Request $request, ArticleRepository $articleRepository, UserRepository $userRepository, PaginatorInterface $paginator, int $id): Response
     {
         $authorData = $userRepository->findAuthorDataById($id);
+        $author = $userRepository->find($id);
 
         $pagination = $paginator->paginate(
             $articleRepository->findAllThanUserId($id),
@@ -76,11 +77,29 @@ class AuthorController extends AbstractController
             Article::NUMBER_OF_ITEMS
         );
 
+        $isSubscribed = false;
+
+        if($this->getUser()) {
+            $loggedUser = $this->getUser();
+            $followedAuthors = $loggedUser->getFollowedAuthors();
+            foreach ($followedAuthors as $followed) {
+                if ($author === $followed) {
+                    $isSubscribed = true;
+                    break;
+                }
+            }
+        } else {
+            $loggedUser = null;
+        };
+
         return $this->render(
             'author/view.html.twig',
             [
                 'authorData' => $authorData,
+                'isSubscribed' => $isSubscribed,
+                'loggedUser' => $loggedUser,
                 'pagination' => $pagination
+
             ]
         );
     }

@@ -28,7 +28,7 @@
             <li><a href="{{ url('category_index') }}">kategorie</a></li>
             <li><a href="{{ url('author_index') }}">autorzy</a></li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li><a href="">obserwowani</a></li>
+            <li><a href="{{ url('subscriptions_index') }}">subskrypcje</a></li>
             <li><a href="{{ url('article_new') }}" title="new">dodaj artykuł</a></li>
                 <li><a href="">mój blog</a></li>
             {% endif %}

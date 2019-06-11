@@ -24,7 +24,9 @@
                 <th>{{ knp_pagination_sortable(pagination, 'tytuł', 'a.title') }}</th>
                 <th>autor</th>
                 <th>kategoria</th>
-                <th>opcje</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>opcje</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -34,16 +36,18 @@
                     <td>{{ article.id }}</td>
                     <td>{{ article.publishedAt|localizeddate }}</td>
                     <td><a href="{{ url('article_view', {id: article.id}) }}" title="edit">{{ article.title }} </a></td>
-                    <td>{{ article.author.firstName }}</td>
+                    <td><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></td>
                     <td>{{ article.category.name }}</td>
-                    <td>
-                        <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
-                            edytuj
-                        </a><br>
-                        <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
-                            usuń
-                        </a>
-                    </td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>
+                            <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
+                                edytuj
+                            </a><br>
+                            <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
+                                usuń
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
 
             {% endfor %}

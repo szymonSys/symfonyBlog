@@ -37,6 +37,23 @@ class UserRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function findFollowedAuthorsArticles(int $userId): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'u.articles', 'a.author', 'u.followedAuthors')
+            ->innerJoin('App\Entity\Article', 'a', Join::WITH,'u = u_f.followers' )
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('a.publishedAt', 'DESC');
+//            ->getQuery();
+
+        return $qb;
+    }
+
 
     /**
      * Query all records.

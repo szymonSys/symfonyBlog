@@ -7,15 +7,23 @@
 {% block body %}
     {% if article is defined and article|length %}
         <h1>{{  article.title }}</h1>
+        {% if  article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN')%}
+            <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
+                edytuj
+            </a><br>
+            <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
+                usuń
+            </a>
+        {% endif %}
         <dl class="dl-horizontal">
             <dt>Autor</dt>
-            <dd>{{  article.author.firstName }}</dd>
+            <dd><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></dd>
             <dt>Data publikacji</dt>
             <dd>{{ article.publishedAt|localizeddate }}</dd>
             <dt>Treść</dt>
             <dd>{{  article.body }}</dd>
             <dt>Kategoria</dt>
-            <dd>{{  article.category.name }}</dd>
+            <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
             <dt>Tagi</dt>
             <dd>
             {% for tag in article.tags %}
