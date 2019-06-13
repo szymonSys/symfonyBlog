@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.category_list'|trans }}
+    {{ 'title.category_list'|trans}}
 {% endblock %}
 
 {% block body %}
@@ -21,9 +21,9 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'c.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'c.name') }}</th>
-                <th>number of articles</th>
+                <th>{{ 'label.number_of_article'|trans }}</th>
     {% if is_granted('ROLE_ADMIN') %}
-                <th>{{ 'label.actions'|trans }}</th>
+                <th>{{ 'label.options'|trans }}</th>
     {% endif %}
             </tr>
             </thead>

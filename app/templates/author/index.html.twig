@@ -14,14 +14,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'id', 'u.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'blog', 'u.blogName') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'imię', 'u.firstName') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'dołączył', 'u.createdAt') }}</th>
-                <th> liczba artykułów </th>
-                <th>liczba obserwujących</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'u.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.blog_name'|trans, 'u.blogName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'u.firstName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_date'|trans, 'u.createdAt') }}</th>
+                <th> {{ 'label.number_of_article'|trans }} </th>
+                <th>{{ 'label.number_of_followers'|trans }}</th>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <th>opcje</th>
+                    <th>{{ 'label.options'|trans }}</th>
                 {% endif %}
             </tr>
             </thead>
@@ -39,10 +39,10 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a href="{{ url('user_edit', {id: article.id}) }}" title="edit">
-                                edytuj
+                                {{ 'action.edit'|trans }}
                             </a><br>
                             <a href="{{ url('user_delete', {id: article.id}) }}" title="delete">
-                                usuń
+                                {{ 'action.delete'|trans }}
                             </a>
                         </td>
                     {% endif %}
@@ -58,7 +58,7 @@
 
     {% else %}
         <p>
-            brak artykułów
+            {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
 

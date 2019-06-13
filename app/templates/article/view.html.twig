@@ -9,22 +9,22 @@
         <h1>{{  article.title }}</h1>
         {% if  article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN')%}
             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
-                edytuj
+                {{ 'action.edit'|trans }}
             </a><br>
             <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
-                usuń
+                {{ 'action.delete'|trans }}
             </a>
         {% endif %}
         <dl class="dl-horizontal">
-            <dt>Autor</dt>
+            <dt>{{ 'label.author'|trans }}</dt>
             <dd><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></dd>
-            <dt>Data publikacji</dt>
+            <dt>{{ 'label.published_date'|trans }}</dt>
             <dd>{{ article.publishedAt|localizeddate }}</dd>
-            <dt>Treść</dt>
+            <dt>{{ 'label.content'|trans }}</dt>
             <dd>{{  article.body }}</dd>
-            <dt>Kategoria</dt>
+            <dt>{{ 'label.category'|trans }}</dt>
             <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
-            <dt>Tagi</dt>
+            <dt>{{ 'label.tags'|trans }}</dt>
             <dd>
             {% for tag in article.tags %}
             {{ tag.name }}
@@ -33,12 +33,12 @@
                 {% endif %}
             {% endfor %}
             </dd>
-            <dt>Id</dt>
+            <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ article.id }}</dd>
         </dl>
     {% else %}
         <p>
-            nie znaleziono artykułu
+            {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
 {% endblock %}

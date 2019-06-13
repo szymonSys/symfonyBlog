@@ -25,20 +25,20 @@
     <nav>
         <ul>
             <li><a href="{{ url('article_index') }}">artykuły</a></li>
-            <li><a href="{{ url('category_index') }}">kategorie</a></li>
-            <li><a href="{{ url('author_index') }}">autorzy</a></li>
+            <li><a href="{{ url('category_index') }}">{{ 'title.category_list'|trans }}</a></li>
+            <li><a href="{{ url('author_index') }}">{{ 'title.author_list'|trans }}</a></li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li><a href="{{ url('subscriptions_index') }}">subskrypcje</a></li>
-            <li><a href="{{ url('article_new') }}" title="new">dodaj artykuł</a></li>
-                <li><a href="">mój blog</a></li>
+            <li><a href="{{ url('subscriptions_index') }}">{{ 'title.subscription_list'|trans }}</a></li>
+            <li><a href="{{ url('article_new') }}" title="new">{{ 'action.add_article'|trans }}</a></li>
+                <li><a href="">{{ 'title.my_blog'|trans }}</a></li>
             {% endif %}
         </ul>
     </nav>
     <div id="search">
         <form method="get" action="">
-            <label for="search_input">wyszukaj:</label>
+            <label for="search_input"></label>
             <input id="search_input" type="text">
-            <input type="submit" value="wyszukaj">
+            <input type="submit" value="{{ 'label.search'|trans }}">
         </form>
     </div>
     {% include 'default/_flash_messages.html.twig' %}

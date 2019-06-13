@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="pl" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="label.id">
                 <source>label.id</source>
@@ -8,115 +8,115 @@
             </trans-unit>
             <trans-unit id="label.title">
                 <source>label.title</source>
-                <target>Title</target>
+                <target>Tytuł</target>
             </trans-unit>
             <trans-unit id="label.published_date">
                 <source>label.published_date</source>
-                <target>Published date</target>
+                <target>Data publikacji</target>
             </trans-unit>
             <trans-unit id="label.tags">
                 <source>label.tags</source>
-                <target>Tags</target>
+                <target>Tagi</target>
             </trans-unit>
             <trans-unit id="label.author">
                 <source>label.author</source>
-                <target>Author</target>
+                <target>Autor</target>
             </trans-unit>
             <trans-unit id="label.category">
                 <source>label.category</source>
-                <target>Category</target>
+                <target>Kategoria</target>
             </trans-unit>
             <trans-unit id="action.new">
                 <source>action.new</source>
-                <target>New</target>
+                <target>Dodaj</target>
             </trans-unit>
             <trans-unit id="label.options">
                 <source>label.options</source>
-                <target>Options</target>
+                <target>Opcje</target>
             </trans-unit>
             <trans-unit id="action.edit">
                 <source>action.edit</source>
-                <target>Edit</target>
+                <target>Edytuj</target>
             </trans-unit>
              <trans-unit id="action.delete">
                  <source>action.delete</source>
-                 <target>Delete</target>
+                 <target>Usuń</target>
              </trans-unit>
             <trans-unit id="message.empty_list">
                 <source>message.empty_list</source>
-                <target>List is empty</target>
+                <target>Lista jest pusta</target>
             </trans-unit>
             <trans-unit id="title.category_list">
                 <source>title.category_list</source>
-                <target>Categories</target>
+                <target>Kategorie</target>
             </trans-unit>
             <trans-unit id="title.article_list">
                 <source>title.article_list</source>
-                <target>Articles</target>
+                <target>Artykuły</target>
             </trans-unit>
             <trans-unit id="title.author_list">
                 <source>title.author_list</source>
-                <target>Authors</target>
+                <target>Autorzy</target>
             </trans-unit>
             <trans-unit id="title.subscription_list">
                 <source>title.subscription_list</source>
-                <target>Subscriptions</target>
+                <target>Subskrybcje</target>
             </trans-unit>
             <trans-unit id="title.subscription_header">
                 <source>title.subscription_header</source>
-                <target>Followers's articles</target>
+                <target>Artykuły obserwowanych twórców</target>
             </trans-unit>
             <trans-unit id="title.my_blog">
                 <source>title.my_blog</source>
-                <target>My blog</target>
+                <target>Mój blog</target>
             </trans-unit>
             <trans-unit id="title.login">
                 <source>title.login</source>
-                <target>Sign in</target>
+                <target>Zaloguj się</target>
             </trans-unit>
             <trans-unit id="title.logout">
                 <source>title.logout</source>
-                <target>Sign out</target>
+                <target>Wyloguj się</target>
             </trans-unit>
             <trans-unit id="title.register">
                 <source>title.register</source>
-                <target>Register</target>
+                <target>Rejestracja</target>
             </trans-unit>
              <trans-unit id="label.number_of_article">
                  <source>label.number_of_article</source>
-                 <target>Numbers of articles</target>
+                 <target>Liczba artykułów</target>
             </trans-unit>
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
-                <target>Back</target>
+                <target>Wróć</target>
             </trans-unit>
             <trans-unit id="action.next">
                 <source>action.next</source>
-                <target>Next</target>
+                <target>Następna</target>
             </trans-unit>
             <trans-unit id="action.previous">
                 <source>action.previous</source>
-                <target>Previous</target>
+                <target>Poprzednia</target>
             </trans-unit>
             <trans-unit id="action.add_article">
                 <source>action.add_article</source>
-                <target>Add article</target>
+                <target>Dodaj artykuł</target>
             </trans-unit>
             <trans-unit id="label.search">
                 <source>label.search</source>
-                <target>Search</target>
+                <target>Wyszukaj</target>
             </trans-unit>
             <trans-unit id="label.followers">
                 <source>label.followers</source>
-                <target>Followers</target>
+                <target>Obserwujący</target>
             </trans-unit>
             <trans-unit id="label.number_of_followers">
                 <source>label.number_of_followers</source>
-                <target>Number of Followers</target>
+                <target>Liczba obserwujących</target>
             </trans-unit>
             <trans-unit id="label.created_date">
                 <source>label.created_date</source>
-                <target>Join</target>
+                <target>Dołączył</target>
             </trans-unit>
             <trans-unit id="label.blog_name">
                 <source>label.blog_name</source>
@@ -124,27 +124,27 @@
             </trans-unit>
             <trans-unit id="title.followers">
                 <source>title.followers</source>
-                <target>Followers</target>
+                <target>Obserwujący</target>
             </trans-unit>
             <trans-unit id="message.form_error">
                 <source>message.form_error</source>
-                <target>Something is wrong :(</target>
+                <target>Coś poszło nie tak :(</target>
             </trans-unit>
             <trans-unit id="action.save">
                 <source>action.save</source>
-                <target>Save</target>
+                <target>Zapisz</target>
             </trans-unit>
             <trans-unit id="label.follow">
                 <source>label.follow</source>
-                <target>Follow</target>
+                <target>Obserwuj</target>
             </trans-unit>
             <trans-unit id="label.unfollow">
                 <source>label.unfollow</source>
-                <target>Unfollow</target>
+                <target>Przestań obserwować</target>
             </trans-unit>
             <trans-unit id="label.content">
                 <source>label.content</source>
-                <target>Content</target>
+                <target>Treść</target>
             </trans-unit>
         </body>
     </file>

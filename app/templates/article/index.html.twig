@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Strona główna' }}
+    {{ 'title.article_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Strona Główna</h1>
+    <h1>{{ 'title.article_list'|trans }}</h1>
     {% if pagination is defined and pagination|length %}
 
         <div class="navigation text-center">
@@ -13,19 +13,19 @@
         </div>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <a href="{{ url('article_new') }}" title="new">
-            dodaj artykuł
+            {{ 'action.add_article'|trans }}
         </a>
     {% endif %}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'id', 'a.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'data publikacji', 'a.publishedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'tytuł', 'a.title') }}</th>
-                <th>autor</th>
-                <th>kategoria</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'a.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</th>
+                <th>{{ 'label.author'|trans }}</th>
+                <th>{{ 'label.category'|trans }}</th>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <th>opcje</th>
+                    <th>{{ 'label.options'|trans }}</th>
                 {% endif %}
             </tr>
             </thead>
@@ -42,10 +42,10 @@
                     {% if is_granted('ROLE_ADMIN') %}
                     <td>
                         <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
-                            edytuj
+                            {{ 'action.edit'|trans }}
                         </a><br>
                         <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
-                            usuń
+                            {{ 'action.delete'|trans }}
                         </a>
                     </td>
                     {% endif %}
@@ -61,7 +61,7 @@
 
     {% else %}
         <p>
-            brak artykułów
+            {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
 
