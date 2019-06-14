@@ -56,6 +56,39 @@ class UserRepository extends ServiceEntityRepository
 
 
     /**
+     * Find followed authors.
+     *
+     * @param User $user
+     * @return QueryBuilder
+     */
+    public function findFollowedAuthors(User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->innerJoin('App\Entity\User', 'f', Join::WITH, 'f = u')
+            ->orderBy('f.firstName', 'ASC');
+
+        foreach ($user->getFollowedAuthors() as $key => $author) {
+            $qb->orWhere('f.id = '.$author->getId());
+        }
+
+        return $qb;
+    }
+
+
+    public function findFollowers(User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->innerJoin('App\Entity\User', 'f', Join::WITH, 'u = f')
+            ->orderBy('f.firstName', 'ASC');
+
+        foreach ($user->getFollowers() as $key => $author) {
+            $qb->orWhere('f.id = '.$author->getId());
+        }
+
+        return $qb;
+    }
+
+    /**
      * Query all records.
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder

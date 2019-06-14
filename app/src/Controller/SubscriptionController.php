@@ -27,6 +27,7 @@ class SubscriptionController extends AbstractController
     /**
      * @param Request $request
      * @param PaginatorInterface $paginator
+     * @param UserRepository $repository
      * @return Response
      *
      * @Route(
@@ -34,23 +35,35 @@ class SubscriptionController extends AbstractController
      *     name="subscriptions_index",
      * )
      */
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator, ArticleRepository $repository): Response
     {
         $subscriber = $this->getUser();
-        $followedAuthors = $subscriber->getFollowedAuthors();
-        $articles = [];
-        foreach ($followedAuthors as $author) {
-            foreach ($author->getArticles() as $article) {
-                array_push($articles, $article);
-            }
-        };
+
+        if(!count($subscriber->getFollowedAuthors())){
+            return $this->render('subscription/index.html.twig');
+        }
 
         $pagination = $paginator->paginate(
-            $articles,
+            $repository->findAllByFollowed($subscriber),
             $request->query->getInt('page', 1),
             Article::NUMBER_OF_ITEMS
         );
 
+//        $subscriber = $this->getUser();
+//        $followedAuthors = $subscriber->getFollowedAuthors();
+//        $articles = [];
+//        foreach ($followedAuthors as $author) {
+//            foreach ($author->getArticles() as $article) {
+//                array_push($articles, $article);
+//            }
+//        };
+//
+//        $pagination = $paginator->paginate(
+//            $articles,
+//            $request->query->getInt('page', 1),
+//            Article::NUMBER_OF_ITEMS
+//        );
+//
         return $this->render(
             'subscription/index.html.twig',
             ['pagination' => $pagination]
@@ -60,6 +73,7 @@ class SubscriptionController extends AbstractController
     /**
      * @param Request $request
      * @param PaginatorInterface $paginator
+     * @param UserRepository $repository
      * @return Response
      *
      * @Route(
@@ -67,12 +81,16 @@ class SubscriptionController extends AbstractController
      *     name="subscriptions_followed",
      * )
      */
-    public function showFollowed(Request $request, PaginatorInterface $paginator): Response
+    public function showFollowed(Request $request, PaginatorInterface $paginator, UserRepository $repository): Response
     {
         $subscriber = $this->getUser();
 
+        if(!count($subscriber->getFollowedAuthors())){
+            return $this->render('subscription/followed.html.twig');
+        }
+
         $pagination = $paginator->paginate(
-            $followedAuthors = $subscriber->getFollowedAuthors(),
+            $repository->findFollowedAuthors($subscriber),
             $request->query->getInt('page', 1),
             User::NUMBER_OF_ITEMS
         );
@@ -86,6 +104,7 @@ class SubscriptionController extends AbstractController
     /**
      * @param Request $request
      * @param PaginatorInterface $paginator
+     * @param UserRepository $repository
      * @return Response
      *
      * @Route(
@@ -93,15 +112,20 @@ class SubscriptionController extends AbstractController
      *     name="subscriptions_followers",
      * )
      */
-    public function showFollowers(Request $request, PaginatorInterface $paginator): Response
+    public function showFollowers(Request $request, PaginatorInterface $paginator, UserRepository $repository): Response
     {
         $subscriber = $this->getUser();
 
+        if(!count($subscriber->getFollowers())){
+            return $this->render('subscription/followers.html.twig');
+        }
+
         $pagination = $paginator->paginate(
-            $followedAuthors = $subscriber->getFollowers(),
+            $repository->findFollowers($subscriber),
             $request->query->getInt('page', 1),
             User::NUMBER_OF_ITEMS
         );
+
 
         return $this->render(
             'subscription/followers.html.twig',

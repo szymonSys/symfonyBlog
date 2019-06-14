@@ -30,7 +30,7 @@
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li><a href="{{ url('subscriptions_index') }}">{{ 'title.subscription_list'|trans }}</a></li>
             <li><a href="{{ url('article_new') }}" title="new">{{ 'action.add_article'|trans }}</a></li>
-                <li><a href="">{{ 'title.my_blog'|trans }}</a></li>
+                <li><a href="{{ url('author_view', {id: app.user.id, firstName: app.user.firstName} ) }}">{{ 'title.my_blog'|trans }}</a></li>
             {% endif %}
         </ul>
     </nav>

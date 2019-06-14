@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Article
 {
-const NUMBER_OF_ITEMS = 6;
+    const NUMBER_OF_ITEMS = 6;
 
     /**
      * @ORM\Id()
@@ -25,7 +25,6 @@ const NUMBER_OF_ITEMS = 6;
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
-
     private $publishedAt;
 
     /**
@@ -70,9 +69,24 @@ const NUMBER_OF_ITEMS = 6;
      */
     private $tags;
 
+    /**
+     * Comments.
+     *
+     * @var Collection|null
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Comment",
+     *     mappedBy="article",
+     *     orphanRemoval=true,
+     *     fetch="EXTRA_LAZY",
+     * )
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,6 +175,37 @@ const NUMBER_OF_ITEMS = 6;
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
         }
 
         return $this;

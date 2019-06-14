@@ -6,7 +6,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -63,15 +66,40 @@ class ArticleController extends AbstractController
      *
      * @Route(
      *     "/{id}",
+     *     methods={"GET", "POST"},
      *     name="article_view",
      *     requirements={"id": "[1-9]\d*"},
      * )
      */
-    public function view(ArticleRepository $repository, int $id): Response
+    public function view(Request $request, ArticleRepository $articleRepository, CommentRepository $commentRepository, int $id): Response
     {
+        $article = $articleRepository->find($id);
+        $form = null;
+        if($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $comment = new Comment();
+
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()) {
+
+                $comment->setArticle($article);
+                $comment->setAuthor($this->getUser());
+                $commentRepository->save($comment);
+
+                $this->addFlash('success', 'message.created_successfully');
+
+                return $this->redirectToRoute('article_view', ['id' => $id]);
+            }
+        }
+
         return $this->render(
             'article/view.html.twig',
-            ['article' => $repository->find($id)]
+            [
+                'article' => $article,
+                'comments' => $commentRepository->findForArticle($id),
+                'comment_form' => is_null($form) ? null : $form->createView()
+            ]
         );
     }
 

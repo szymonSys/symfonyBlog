@@ -7,7 +7,7 @@
 {% block body %}
     {% if article is defined and article|length %}
         <h1>{{  article.title }}</h1>
-        {% if  article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN')%}
+        {% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                 {{ 'action.edit'|trans }}
             </a><br>
@@ -40,5 +40,34 @@
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
+    {% endif %}
+    <h2>Komentarze</h2>
+    {% if comments is defined and comments|length %}
+        {% for comment in comments %}
+            <dl class="dl-horizontal">
+                <dt>data dodania</dt>
+                <dd>{{ comment.createdAt|localizeddate }}</dd>
+                <dt>autor</dt>
+                <dd>{{ comment.author.firstName }}</dd>
+                <dt>blog</dt>
+                <dd>{{ comment.author.blogName }}</dd>
+                <dt>treść</dt>
+                <dd>{{ comment.content }}</dd>
+            </dl>
+            <br><br>
+        {% endfor %}
+        {% else %}
+            <p>brak komentarzy</p>
+    {% endif %}
+    <h3>Dodaj komentarz</h3>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and comment_form is defined %}
+    {{ form_start(comment_form, { method: 'POST', action: url('article_view', {id: article.id}) }) }}
+    {{ form_widget(comment_form) }}
+    <div class="form-group row float-sm-right">
+        <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary" />
+    </div>
+    {{ form_end(comment_form) }}
+        {% else %}
+        <p><a href="{{ url('security_login') }}">zaloguj się</a>, by móc komentować</p>
     {% endif %}
 {% endblock %}

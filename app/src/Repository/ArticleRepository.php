@@ -56,6 +56,24 @@ class ArticleRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->orderBy('a.publishedAt', 'DESC');
 //            ->getQuery();
+        return $qb;
+    }
+
+    /**
+     * Find followed authors's articles.
+     *
+     * @param User $user
+     * @return QueryBuilder
+     */
+    public function findAllByFollowed(User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a')
+            ->join('App\Entity\User', 'f', Join::WITH, 'f = a.author')
+            ->orderBy('a.publishedAt', 'DESC');
+        foreach ($user->getFollowedAuthors() as $author) {
+            $qb->orWhere('f.id = '.$author->getId());
+        }
 
         return $qb;
     }

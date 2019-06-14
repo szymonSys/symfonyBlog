@@ -8,8 +8,10 @@
     <h1>{{ authorData[0].firstName }}</h1>
     <p>{{ authorData[0].id }}</p>
     <p>{{ authorData[0].email}}</p>
-    <a href="{{ url('subscriptions_followers') }}">{{ 'title.subscription_list'|trans }}</a>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if app.user.id == authorData[0].id%}
+            <a href="{{ url('subscriptions_followers') }}">{{ 'title.subscription_list'|trans }}</a>
+        {% endif %}
         {% if not isSubscribed %}
             <a href="{{ url('subscription_follow', {id: authorData[0].id}) }}" title="follow">{{ 'label.follow'|trans }}</a>
         {% else %}
