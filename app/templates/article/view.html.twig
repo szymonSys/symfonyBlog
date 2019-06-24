@@ -27,7 +27,7 @@
             <dt>{{ 'label.tags'|trans }}</dt>
             <dd>
             {% for tag in article.tags %}
-            {{ tag.name }}
+                <a href="{{ url('tag_articles', {name: tag.name, id: tag.id}) }}">{{ tag.name }}</a>
                 {% if loop.index != article.tags|length %}
                 {{ ',' }}
                 {% endif %}

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\Tag;
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -76,6 +77,35 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         return $qb;
+    }
+
+//    public function findByTag(Tag $tag): QueryBuilder
+//    {
+//        $qb = $this->createQueryBuilder('a')
+//            ->select('a')
+//            ->innerJoin('App\Entity\Tag', 't', Join::WITH, 'a.tags = t')
+//            ->andWhere()
+//
+//    }
+
+    /**
+     * @param Tag $tag
+     * @return QueryBuilder
+     */
+    public function findByTag(Tag $tag): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a')
+            ->join('App\Entity\Tag', 't');
+        foreach ($tag->getArticles() as $article){
+            $qb->orWhere('a.id = '.$article->getId());
+        }
+//            $qb->orWhere('t.articles = :articles')
+//            ->setParameter('articles', $tag->getArticles())
+        $qb->orderBy('a.publishedAt', 'DESC');
+
+        return $qb;
+
     }
 
     /**
