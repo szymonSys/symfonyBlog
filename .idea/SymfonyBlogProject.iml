@@ -30,7 +30,9 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/gedmo/doctrine-extensions" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/knplabs/knp-components" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/knplabs/knp-markdown-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/knplabs/knp-paginator-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/michelf/php-markdown" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/ocramius/package-versions" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/ocramius/proxy-manager" />

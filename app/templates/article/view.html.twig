@@ -5,23 +5,23 @@
 {% endblock %}
 
 {% block body %}
+    {% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
+        <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
+            {{ 'action.edit'|trans }}
+        </a><br>
+        <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
+            {{ 'action.delete'|trans }}
+        </a>
+    {% endif %}
     {% if article is defined and article|length %}
         <h1>{{  article.title }}</h1>
-        {% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
-            <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
-                {{ 'action.edit'|trans }}
-            </a><br>
-            <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
-                {{ 'action.delete'|trans }}
-            </a>
-        {% endif %}
+{#        <p>{{ 'label.content'|trans }}</p>#}
+        <div>{{  article.body|markdown }}</div>
         <dl class="dl-horizontal">
             <dt>{{ 'label.author'|trans }}</dt>
             <dd><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></dd>
             <dt>{{ 'label.published_date'|trans }}</dt>
             <dd>{{ article.publishedAt|localizeddate }}</dd>
-            <dt>{{ 'label.content'|trans }}</dt>
-            <dd>{{  article.body }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
             <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
             <dt>{{ 'label.tags'|trans }}</dt>
@@ -61,12 +61,14 @@
     {% endif %}
     <h3>Dodaj komentarz</h3>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and comment_form is defined %}
+
     {{ form_start(comment_form, { method: 'POST', action: url('article_view', {id: article.id}) }) }}
     {{ form_widget(comment_form) }}
-    <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary" />
-    </div>
+            <div class="form-group row float-sm-left">
+                <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary" />
+            </div>
     {{ form_end(comment_form) }}
+        </div>
         {% else %}
         <p><a href="{{ url('security_login') }}">zaloguj się</a>, by móc komentować</p>
     {% endif %}
