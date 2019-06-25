@@ -23,6 +23,23 @@ class TagRepository extends ServiceEntityRepository
 
 
     /**
+     * @param string $searchParam
+     * @return array
+     */
+    public function search(string $searchParam): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('t')
+//            ->join('App\Entity\Tag', 'a')
+            ->where('t.name like :searchParam')
+            ->setParameter('searchParam', '%'.$searchParam.'%')
+            ->getQuery()
+            ->getResult();
+        return $qb;
+    }
+
+
+    /**
      * Save record.
      *
      * @param \App\Entity\Tag $article Tag entity
@@ -35,6 +52,7 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->persist($tag);
         $this->_em->flush($tag);
     }
+
 
     /**
      * Delete record.

@@ -9,6 +9,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\User;
+use App\Form\AuthorType;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -61,7 +62,7 @@ class AuthorController extends AbstractController
      * @return Response
      *
      * @Route(
-     *     "/{firstName}-{id}",
+     *     "/{firstName}/{id}",
      *     requirements={"id": "[1-9]\d*"},
      *     name="author_view",
      * )
@@ -100,6 +101,43 @@ class AuthorController extends AbstractController
                 'loggedUser' => $loggedUser,
                 'pagination' => $pagination
 
+            ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param UserRepository $repository
+     * @param int $id
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="edit_author",
+     * )
+     */
+    public function editAuthor(Request $request, UserRepository $repository, int $id): Response
+    {
+        $author = $repository->find($id);
+        $form = $this->createForm(AuthorType::class, $author, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $repository->save($author);
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('author_view', ['id' => $id, 'firstName' => $author->getFirstName()]);
+        }
+
+        return $this->render(
+            'author/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'author' => $author
             ]
         );
     }

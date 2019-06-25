@@ -1,9 +1,9 @@
 {% include 'default/_form.html.twig' with {
-    page_title: 'title.article_edit',
-    page_title_param: {'%id%': article.id},
+    page_title: 'title.author_edit',
+    page_title_param: {'%id%': author.id},
     attr: {
         method: 'PUT',
-        action: url('article_edit', {'id': article.id}),
+        action: url('edit_author', {'id': author.id}),
     },
     back_to_list_path: 'article_index',
 } %}

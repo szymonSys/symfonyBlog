@@ -178,6 +178,15 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Assert\Length(
+     *     max="500",
+     * )
+     */
+    private $bio;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -474,6 +483,18 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
 
         return $this;
     }

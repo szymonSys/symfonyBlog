@@ -36,16 +36,6 @@
                     <td>{{ author.articles|length }}</td>
                     <td>{{ author.followers|length }}</td>
 
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td>
-                            <a href="{{ url('user_edit', {id: article.id}) }}" title="edit">
-                                {{ 'action.edit'|trans }}
-                            </a><br>
-                            <a href="{{ url('user_delete', {id: article.id}) }}" title="delete">
-                                {{ 'action.delete'|trans }}
-                            </a>
-                        </td>
-                    {% endif %}
                 </tr>
 
             {% endfor %}

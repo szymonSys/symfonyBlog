@@ -89,6 +89,21 @@ class ArticleRepository extends ServiceEntityRepository
 //    }
 
     /**
+     * @param string $searchParam
+     * @return array
+     */
+public function search(string $searchParam): array
+{
+    $qb = $this->createQueryBuilder('a')
+        ->select('a')
+        ->where('a.title like :searchParam')
+        ->setParameter('searchParam', '%'.$searchParam.'%')
+        ->getQuery()
+        ->getResult();
+    return $qb;
+}
+
+    /**
      * @param Tag $tag
      * @return QueryBuilder
      */

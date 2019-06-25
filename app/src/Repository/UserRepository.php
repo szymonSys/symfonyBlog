@@ -29,7 +29,7 @@ class UserRepository extends ServiceEntityRepository
     public function findAuthorDataById(int $userId): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'u.email', 'u.firstName')
+            ->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName')
             ->andWhere('u.id = :userId')
             ->setParameter('userId', $userId);
 
@@ -51,6 +51,23 @@ class UserRepository extends ServiceEntityRepository
             ->orderBy('a.publishedAt', 'DESC');
 //            ->getQuery();
 
+        return $qb;
+    }
+
+
+    /**
+     * @param string $searchParam
+     * @return array
+     */
+    public function search(string $searchParam): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.firstName like :searchParam')
+            ->orWhere('u.blogName like :searchParam')
+            ->setParameter('searchParam', '%'.$searchParam.'%')
+            ->getQuery()
+            ->getResult();
         return $qb;
     }
 
