@@ -83,6 +83,11 @@ class Article
      */
     private $comments;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Photo", mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $coverPhoto;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -206,6 +211,23 @@ class Article
             if ($comment->getArticle() === $this) {
                 $comment->setArticle(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getCoverPhoto(): ?Photo
+    {
+        return $this->coverPhoto;
+    }
+
+    public function setCoverPhoto(Photo $coverPhoto): self
+    {
+        $this->coverPhoto = $coverPhoto;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $coverPhoto->getArticle()) {
+            $coverPhoto->setArticle($this);
         }
 
         return $this;

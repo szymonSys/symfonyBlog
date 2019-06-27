@@ -38,7 +38,9 @@ class AvatarController extends AbstractController
      *
      * @param Request $request
      * @param AvatarRepository $repository
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *

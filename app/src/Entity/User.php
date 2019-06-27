@@ -182,7 +182,7 @@ class User implements UserInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Assert\Length(
-     *     max="500",
+     *     max="1000",
      * )
      */
     private $bio;

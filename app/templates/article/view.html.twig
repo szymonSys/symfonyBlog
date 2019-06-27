@@ -14,33 +14,38 @@
         </a>
     {% endif %}
     {% if article is defined and article|length %}
-        <h1>{{  article.title }}</h1>
-{#        <p>{{ 'label.content'|trans }}</p>#}
+        <header>
+            {% if article.coverPhoto.file is defined %}
+                <img src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}">
+                {% else %}
+                    <img src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+    {% endif %}
+            <h1>{{  article.title }}</h1>
+            <div>
+                {% if article.author.avatar.file is defined %}
+                    <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}">
+                {% else %}
+                    <img width="120px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+                {% endif %}
+                <a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>{{ 'label.published_date'|trans }}</dt>
+                <dd>{{ article.publishedAt|localizeddate }}</dd>
+                <dt>{{ 'label.category'|trans }}</dt>
+                <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
+            </dl>
+        </header>
         <div>{{  article.body|markdown }}</div>
-        {% if article.author.avatar.file is defined %}
-            <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}">
-            {% else %}
-                <img class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
-        {% endif %}
-        <dl class="dl-horizontal">
-            <dt>{{ 'label.author'|trans }}</dt>
-            <dd><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></dd>
-            <dt>{{ 'label.published_date'|trans }}</dt>
-            <dd>{{ article.publishedAt|localizeddate }}</dd>
-            <dt>{{ 'label.category'|trans }}</dt>
-            <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
-            <dt>{{ 'label.tags'|trans }}</dt>
-            <dd>
+        <div>
+            <span>{{ 'label.tags'|trans }}: </span>
             {% for tag in article.tags %}
                 <a href="{{ url('tag_articles', {name: tag.name, id: tag.id}) }}">{{ tag.name }}</a>
                 {% if loop.index != article.tags|length %}
-                {{ ',' }}
+                    {{ ',' }}
                 {% endif %}
             {% endfor %}
-            </dd>
-            <dt>{{ 'label.id'|trans }}</dt>
-            <dd>{{ article.id }}</dd>
-        </dl>
+        </div>
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
@@ -50,14 +55,21 @@
     {% if comments is defined and comments|length %}
         {% for comment in comments %}
             <dl class="dl-horizontal">
-                <dt>data dodania</dt>
-                <dd>{{ comment.createdAt|localizeddate }}</dd>
                 <dt>autor</dt>
-                <dd>{{ comment.author.firstName }}</dd>
-                <dt>blog</dt>
-                <dd>{{ comment.author.blogName }}</dd>
+                <dd>
+                    <a href="{{ url('author_view', {id: comment.author.id, firstName: comment.author.firstName}) }}">
+                    {% if comment.author.avatar.file is defined %}
+                        <img width="40px" src="{{ asset('uploads/photos/'~ comment.author.avatar.file.filename) }}" alt="">
+                        {% else %}
+                            <img width="40px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+                    {% endif %}
+                    <span>{{ comment.author.firstName }}</span>
+                    </a>
+                </dd>
                 <dt>treść</dt>
                 <dd>{{ comment.content }}</dd>
+                <dt>data dodania</dt>
+                <dd>{{ comment.createdAt|localizeddate }}</dd>
             </dl>
             <br><br>
         {% endfor %}

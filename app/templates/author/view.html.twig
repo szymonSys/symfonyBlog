@@ -5,28 +5,31 @@
 {% endblock %}
 
 {% block body %}
-    {% if authorData[0].blogName is defined %}
+    {% if authorData[0].blogName is not null %}
         <h1>{{ authorData[0].blogName }}</h1>
         {% else %}
             <h1>{{ authorData[0].firstName }}</h1>
     {% endif %}
+    <div>
     {% if authorData[0].avatar is defined %}
-        <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
-        {% if app.user.id == authorData[0].id%}
-                <div><a href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień avatar</a></div>
-                <div><a href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń avatar</a></div>
-            {% endif %}
+        <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
+            <br>
+            <a href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień avatar</a>
+            <br>
+            <a href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń avatar</a>
+        {% endif %}
         {% else %}
-            <div><img class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}"></div>
+            <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
             {% if app.user.id == authorData[0].id%}
+                <br>
                 <a href="{{ url('avatar_new') }}">dodaj avatar</a>
             {% endif %}
     {% endif %}
+    </div>
     {% if authorData[0].bio is defined %}
         <p style="font-weight: bold">{{ authorData[0].bio }}</p>
     {% endif %}
-    <p>{{ authorData[0].id }}</p>
-    <p>{{ authorData[0].email}}</p>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% if app.user.id == authorData[0].id %}
             <div><a href="{{ url('subscriptions_followers') }}">{{ 'title.subscription_list'|trans }}</a></div>
@@ -51,11 +54,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'a.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</th>
                 <th>{{ 'label.category'|trans }}</th>
-                {% if is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id %}
+                <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
+                {% if (is_granted('IS_AUTHENTICATED_REMEMBERED')) and (is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id) %}
                     <th>{{ 'label.options'|trans }}</th>
                 {% endif %}
             </tr>
@@ -64,11 +66,19 @@
             {% for article in pagination %}
 
                 <tr>
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.publishedAt|localizeddate }}</td>
-                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }}</a></td>
+                    <td>
+                        <a href="{{ url('article_view', {id: article.id}) }}" title="view">
+                            {% if article.coverPhoto.file is defined %}
+                                <img width="120px" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
+                            {% else %}
+                                <img width="120px" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                            {% endif %}
+                            <span>{{ article.title }}</span>
+                        </a>
+                    </td>
                     <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
-                    {% if is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id %}
+                    <td>{{ article.publishedAt|localizeddate }}</td>
+                    {% if (is_granted('IS_AUTHENTICATED_REMEMBERED')) and (is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id) %}
                         <td>
                             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                                 {{ 'action.edit'|trans }}

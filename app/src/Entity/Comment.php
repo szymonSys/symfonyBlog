@@ -32,7 +32,7 @@ class Comment
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="text", length=500)
+     * @ORM\Column(type="text", length=1000)
      */
     private $content;
 

@@ -11,10 +11,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.id'|trans }}</th>
-            <th>{{ 'label.blog_name'|trans }}</th>
             <th>{{ 'label.author'|trans }}</th>
-            <th></th>
             <th>{{ 'label.created_date'|trans }}</th>
             <th>{{ 'label.number_of_article'|trans }}</th>
             <th>{{ 'label.number_of_followers'|trans }}</th>
@@ -27,14 +24,19 @@
         {% for author in authors %}
 
             <tr>
-                <td>{{ author.id }}</td>
-                <td>{{ author.blogName }}</td>
-                <td><a href="{{ url('author_view', {id: author.id, firstName: author.firstName}) }}" title="view">{{ author.firstName }} </a></td>
-                {% if author.avatar.file is defined %}
-                    <td><img width="50px" src="{{ asset('uploads/photos/'~ author.avatar.file.filename) }}" alt=""></td>
-                {% else %}
-                    <td><img width="50px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt=""></td>
-                {% endif %}
+                <td>
+                    <a href="{{ url('author_view', {id: author.id, firstName: author.firstName}) }}">
+                        {% if author.avatar.file is defined %}
+                            <img width="60px" src="{{ asset('uploads/photos/'~ author.avatar.file.filename) }}" alt="">
+                        {% else %}
+                            <img width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
+                        {% endif %}
+                        <span>{{ author.firstName }}</span>
+                        {% if author.blogName is not null %}
+                            <span> ({{ author.blogName }})</span>
+                        {% endif %}
+                    </a>
+                </td>
                 <td>{{ author.createdAt|localizeddate }}</td>
                 <td>{{ author.articles|length }}</td>
                 <td>{{ author.followers|length }}</td>
@@ -49,12 +51,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'label.id'|trans }}</th>
-                <th>{{ 'label.published_date'|trans }}</th>
                 <th>{{ 'label.title'|trans }}</th>
                 <th>{{ 'label.author'|trans }}</th>
-                <th></th>
                 <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.published_date'|trans }}</th>
                 {% if is_granted('ROLE_ADMIN') %}
                     <th>{{ 'label.options'|trans }}</th>
                 {% endif %}
@@ -64,16 +64,31 @@
             {% for article in articles %}
 
                 <tr>
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.publishedAt|localizeddate }}</td>
-                    <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }} </a></td>
-                    <td><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></td>
-                    {% if article.author.avatar.file is defined %}
-                        <td><img width="50px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt=""></td>
-                    {% else %}
-                        <td><img width="50px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt=""></td>
-                    {% endif %}
+                    <td>
+                        <a href="{{ url('article_view', {id: article.id}) }}" title="view">
+                            {% if article.coverPhoto.file is defined %}
+                                <img width="120px" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
+                            {% else %}
+                                <img width="120px" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                            {% endif %}
+                            <span>{{ article.title }}</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
+                            {% if article.author.avatar.file is defined %}
+                                <img width="60px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt="">
+                            {% else %}
+                                <img width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
+                            {% endif %}
+                            <span>{{ article.author.firstName }}</span>
+                            {% if article.author.blogName is not null %}
+                                <span> ({{ article.author.blogName }})</span>
+                            {% endif %}
+                        </a>
+                    </td>
                     <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
+                    <td>{{ article.publishedAt|localizeddate }}</td>
 
                     {% if is_granted('ROLE_ADMIN') %}
                         <td>
@@ -101,12 +116,10 @@
         <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.id'|trans }}</th>
-            <th>{{ 'label.published_date'|trans }}</th>
             <th>{{ 'label.title'|trans }}</th>
             <th>{{ 'label.author'|trans }}</th>
-            <th></th>
             <th>{{ 'label.category'|trans }}</th>
+            <th>{{ 'label.published_date'|trans }}</th>
             {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ 'label.options'|trans }}</th>
             {% endif %}
@@ -116,16 +129,31 @@
 
         {% for article in tag.articles %}
             <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.publishedAt|localizeddate }}</td>
-                <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }} </a></td>
-                <td><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></td>
-                {% if article.author.avatar.file is defined %}
-                    <td><img width="50px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt=""></td>
-                {% else %}
-                    <td><img width="50px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt=""></td>
-                {% endif %}
+                <td>
+                    <a href="{{ url('article_view', {id: article.id}) }}" title="view">
+                        {% if article.coverPhoto.file is defined %}
+                            <img width="120px" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
+                        {% else %}
+                            <img width="120px" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                        {% endif %}
+                        <span>{{ article.title }}</span>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
+                        {% if article.author.avatar.file is defined %}
+                            <img width="60px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt="">
+                        {% else %}
+                            <img width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
+                        {% endif %}
+                        <span>{{ article.author.firstName }}</span>
+                        {% if article.author.blogName is not null %}
+                            <span> ({{ article.author.blogName }})</span>
+                        {% endif %}
+                    </a>
+                </td>
                 <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
+                <td>{{ article.publishedAt|localizeddate }}</td>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <td>

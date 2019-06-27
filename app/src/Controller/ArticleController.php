@@ -133,7 +133,9 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', 'message.created_successfully');
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute(
+                'photo_new', ['id' => $article->getId()]
+            );
         }
 
         return $this->render(

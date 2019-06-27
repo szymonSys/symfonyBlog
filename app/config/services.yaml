@@ -38,5 +38,11 @@ services:
             - { name: doctrine.event_listener, event: postLoad }
             - { name: doctrine.event_listener, event: preRemove }
 
+    App\EventListener\PhotoUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
