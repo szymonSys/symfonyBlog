@@ -14,6 +14,11 @@
         <div>
             <a href="{{ url('security_logout') }}">wyloguj się</a>
         </div>
+        {% if app.user.avatar.file.filename is defined %}
+            <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ app.user.avatar.file.filename) }}">
+        {% else %}
+            <img class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+        {% endif %}
     {% else %}
         <div>
             <a href="{{ url('security_login') }}">zaloguj się</a>
@@ -21,6 +26,9 @@
         <div>
             <a href="{{ url('app_register') }}">rejestracja</a>
         </div>
+        {% if app.user.avatar.file is defined and app.user.avatar.file|length %}
+            <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ app.user.avatar.file.filename) }}">
+        {% endif %}
     {% endif %}
     <nav>
         <ul>

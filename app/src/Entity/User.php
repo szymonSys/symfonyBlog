@@ -187,6 +187,11 @@ class User implements UserInterface
      */
     private $bio;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -495,6 +500,24 @@ class User implements UserInterface
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $avatar === null ? null : $this;
+        if ($newUser !== $avatar->getUser()) {
+            $avatar->setUser($newUser);
+        }
 
         return $this;
     }

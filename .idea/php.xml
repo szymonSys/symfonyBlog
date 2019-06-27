@@ -102,6 +102,7 @@
       <path value="$PROJECT_DIR$/app/vendor/composer" />
       <path value="$PROJECT_DIR$/app/vendor/michelf/php-markdown" />
       <path value="$PROJECT_DIR$/app/vendor/knplabs/knp-markdown-bundle" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/contracts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

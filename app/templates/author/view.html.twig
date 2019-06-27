@@ -10,13 +10,25 @@
         {% else %}
             <h1>{{ authorData[0].firstName }}</h1>
     {% endif %}
+    {% if authorData[0].avatar is defined %}
+        <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
+        {% if app.user.id == authorData[0].id%}
+                <div><a href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień avatar</a></div>
+                <div><a href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń avatar</a></div>
+            {% endif %}
+        {% else %}
+            <div><img class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}"></div>
+            {% if app.user.id == authorData[0].id%}
+                <a href="{{ url('avatar_new') }}">dodaj avatar</a>
+            {% endif %}
+    {% endif %}
     {% if authorData[0].bio is defined %}
         <p style="font-weight: bold">{{ authorData[0].bio }}</p>
     {% endif %}
     <p>{{ authorData[0].id }}</p>
     <p>{{ authorData[0].email}}</p>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% if app.user.id == authorData[0].id%}
+        {% if app.user.id == authorData[0].id %}
             <div><a href="{{ url('subscriptions_followers') }}">{{ 'title.subscription_list'|trans }}</a></div>
             <div><a href="{{ url('edit_author', {id: authorData[0].id}) }}">Edytuj informacje</a></div>
         {% else %}
@@ -42,9 +54,8 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'a.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</th>
-                <th>{{ 'label.author'|trans }}</th>
                 <th>{{ 'label.category'|trans }}</th>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id %}
                     <th>{{ 'label.options'|trans }}</th>
                 {% endif %}
             </tr>
@@ -56,9 +67,8 @@
                     <td>{{ article.id }}</td>
                     <td>{{ article.publishedAt|localizeddate }}</td>
                     <td><a href="{{ url('article_view', {id: article.id}) }}" title="view">{{ article.title }}</a></td>
-                    <td>{{ article.author.firstName }}</td>
                     <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id %}
                         <td>
                             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                                 {{ 'action.edit'|trans }}

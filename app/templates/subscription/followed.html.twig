@@ -17,6 +17,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'u.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.blog_name'|trans, 'u.blogName') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'u.firstName') }}</th>
+                <th></th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_date'|trans, 'u.createdAt') }}</th>
                 <th> {{ 'label.number_of_article'|trans }} </th>
                 <th>{{ 'label.number_of_followers'|trans }}</th>
@@ -32,6 +33,11 @@
                     <td>{{ author.id }}</td>
                     <td>{{ author.blogName }}</td>
                     <td><a href="{{ url('author_view', {id: author.id, firstName: author.firstName}) }}" title="view">{{ author.firstName }} </a></td>
+                    {% if author.avatar.file is defined %}
+                        <td><img width="50px" src="{{ asset('uploads/photos/'~ author.avatar.file.filename) }}" alt=""></td>
+                    {% else %}
+                        <td><img width="50px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt=""></td>
+                    {% endif %}
                     <td>{{ author.createdAt|localizeddate }}</td>
                     <td>{{ author.articles|length }}</td>
                     <td>{{ author.followers|length }}</td>

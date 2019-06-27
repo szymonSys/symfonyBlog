@@ -231,6 +231,9 @@
             "./bin/console"
         ]
     },
+    "symfony/contracts": {
+        "version": "v1.1.5"
+    },
     "symfony/debug": {
         "version": "v3.4.27"
     },

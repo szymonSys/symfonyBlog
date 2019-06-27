@@ -27,5 +27,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%photos_directory%'
+
+    App\EventListener\AvatarUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+            - { name: doctrine.event_listener, event: preRemove }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

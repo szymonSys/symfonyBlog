@@ -69,9 +69,8 @@ class AuthorController extends AbstractController
      */
     public function view(Request $request, ArticleRepository $articleRepository, UserRepository $userRepository, PaginatorInterface $paginator, int $id): Response
     {
-        $authorData = $userRepository->findAuthorDataById($id);
         $author = $userRepository->find($id);
-
+        $authorData = $userRepository->findAuthorData($author);
         $pagination = $paginator->paginate(
             $articleRepository->findAllThanUserId($id),
             $request->query->getInt('page', 1),

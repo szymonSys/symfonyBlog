@@ -17,6 +17,11 @@
         <h1>{{  article.title }}</h1>
 {#        <p>{{ 'label.content'|trans }}</p>#}
         <div>{{  article.body|markdown }}</div>
+        {% if article.author.avatar.file is defined %}
+            <img class="nav-profile-img" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}">
+            {% else %}
+                <img class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+        {% endif %}
         <dl class="dl-horizontal">
             <dt>{{ 'label.author'|trans }}</dt>
             <dd><a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a></dd>

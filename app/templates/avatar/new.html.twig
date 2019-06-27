@@ -1,0 +1,8 @@
+{% include 'default/_form.html.twig' with {
+    page_title: 'name.avatar_new',
+    attr: {
+        method: 'POST',
+        action: url('avatar_new')
+    },
+    back_to_list_path: 'author_index',
+} %}

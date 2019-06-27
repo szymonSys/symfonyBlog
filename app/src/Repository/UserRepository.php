@@ -23,15 +23,20 @@ class UserRepository extends ServiceEntityRepository
 
     /**
      *
-     * @param $userId
+     * @param User $user
      * @return User[]
      */
-    public function findAuthorDataById(int $userId): array
+    public function findAuthorData(User $user): array
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName')
-            ->andWhere('u.id = :userId')
-            ->setParameter('userId', $userId);
+        $qb = $this->createQueryBuilder('u');
+        if ($user->getAvatar()){
+            $qb->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName', 'a.file AS avatar', 'a.id AS avatarId')
+                ->innerJoin('App\Entity\Avatar', 'a', Join::WITH, 'a.user = u');
+        } else {
+            $qb->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName');
+        }
+            $qb->andWhere('u.id = :userId')
+            ->setParameter('userId', $user->getId());
 
 
         return $qb->getQuery()->getResult();

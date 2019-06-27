@@ -75,6 +75,7 @@ class ArticleController extends AbstractController
     {
         $article = $articleRepository->find($id);
         $form = null;
+
         if($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $comment = new Comment();
 
