@@ -98,6 +98,7 @@ public function search(string $searchParam): array
         ->select('a')
         ->where('a.title like :searchParam')
         ->setParameter('searchParam', '%'.$searchParam.'%')
+        ->orderBy('a.publishedAt', 'DESC')
         ->getQuery()
         ->getResult();
     return $qb;

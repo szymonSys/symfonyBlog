@@ -5,46 +5,55 @@
 {% endblock %}
 
 {% block body %}
-    {% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
-        <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
-            {{ 'action.edit'|trans }}
-        </a><br>
-        <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
-            {{ 'action.delete'|trans }}
+    <header class="article-header">
+    <div class="article-info">
+        <a class="article-author" href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
+            {% if article.author.avatar.file is defined %}
+                <img width="80px" class="article-author-avatar rounded-circle" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}">
+            {% else %}
+                <img width="80px" class="article-author-avatar rounded-circle" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+            {% endif %}
+            <span class="article-author-name">{{ article.author.firstName }}</span>
         </a>
-    {% endif %}
-    {% if article is defined and article|length %}
-        <header>
+        <div class="article-published-date">
+            <span class="article-date-title">{{ 'label.published_date'|trans }}: </span>
+            <span class="article-date-item">{{ article.publishedAt|localizeddate }}</span>
+        </div>
+        <div class="article-category">
+            <span class="article-category-title">{{ 'label.category'|trans }}: </span>
+            <span class="article-category-item"><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></span>
+        </div>
+    </div>
+    <div class="title-background">
+        {% if article is defined and article|length %}
             {% if article.coverPhoto.file is defined %}
-                <img src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}">
+                <img class="article-photo article-header-item" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}">
+                <a class="edit-photo" href="{{ url('photo_edit', {articleId: article.id, id: article.coverPhoto.id}) }}">edytuj zdjęcie</a>
                 {% else %}
-                    <img src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
-    {% endif %}
-            <h1>{{  article.title }}</h1>
-            <div>
-                {% if article.author.avatar.file is defined %}
-                    <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}">
-                {% else %}
-                    <img width="120px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
-                {% endif %}
-                <a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">{{ article.author.firstName }}</a>
+                    <img class="article-photo article-header-item" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                    <a class="edit-photo" href="{{ url('photo_new', {id: article.id}) }}">dodaj zdjęcie</a>
+        {% endif %}
+            <h1 class="article-title article-header-item">{{  article.title }}</h1>
             </div>
-            <dl class="dl-horizontal">
-                <dt>{{ 'label.published_date'|trans }}</dt>
-                <dd>{{ article.publishedAt|localizeddate }}</dd>
-                <dt>{{ 'label.category'|trans }}</dt>
-                <dd><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></dd>
-            </dl>
-        </header>
-        <div>{{  article.body|markdown }}</div>
-        <div>
-            <span>{{ 'label.tags'|trans }}: </span>
-            {% for tag in article.tags %}
-                <a href="{{ url('tag_articles', {name: tag.name, id: tag.id}) }}">{{ tag.name }}</a>
-                {% if loop.index != article.tags|length %}
-                    {{ ',' }}
+            <div class="managed-article">
+                {% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
+                    <a class="article-managed-item btn btn-warning" href="{{ url('article_edit', {id: article.id}) }}" title="edit">
+                        {{ 'action.edit'|trans }}
+                    </a><br>
+                    <a class="article-managed-item btn btn-danger" href="{{ url('article_delete', {id: article.id}) }}" title="delete">
+                        {{ 'action.delete'|trans }}
+                    </a>
                 {% endif %}
+            </div>
+        </header>
+        <main class="article-content">{{  article.body|markdown }}</main>
+        <div>
+            <h3 class="sub-header">Tagi</h3>
+            <section class="tags-container">
+            {% for tag in article.tags %}
+                <span class="tag"><a class="badge badge-info tag" href="{{ url('tag_articles', {id: tag.id, name: tag.name}) }}">{{ tag.name }}</a></span>
             {% endfor %}
+            </section>
         </div>
     {% else %}
         <p>
@@ -52,31 +61,29 @@
         </p>
     {% endif %}
     <h2>Komentarze</h2>
+    <div class="comments-container">
     {% if comments is defined and comments|length %}
         {% for comment in comments %}
-            <dl class="dl-horizontal">
-                <dt>autor</dt>
-                <dd>
-                    <a href="{{ url('author_view', {id: comment.author.id, firstName: comment.author.firstName}) }}">
+            <div class="comment">
+                    <a class="comment-avatar-link" href="{{ url('author_view', {id: comment.author.id, firstName: comment.author.firstName}) }}">
                     {% if comment.author.avatar.file is defined %}
-                        <img width="40px" src="{{ asset('uploads/photos/'~ comment.author.avatar.file.filename) }}" alt="">
+                        <img class="rounded-circle" width="60px" src="{{ asset('uploads/photos/'~ comment.author.avatar.file.filename) }}" alt="">
                         {% else %}
-                            <img width="40px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+                            <img class="rounded-circle" width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
                     {% endif %}
-                    <span>{{ comment.author.firstName }}</span>
                     </a>
-                </dd>
-                <dt>treść</dt>
-                <dd>{{ comment.content }}</dd>
-                <dt>data dodania</dt>
-                <dd>{{ comment.createdAt|localizeddate }}</dd>
-            </dl>
-            <br><br>
+                <div class="comment-info">
+                    <span class="comment-author"><a href="{{ url('author_view', {id: comment.author.id, firstName: comment.author.firstName}) }}">{{ comment.author.firstName }}</a></span>
+                <span class="comment-date">{{ comment.createdAt|localizeddate }}</span>
+                </div>
+                <p class="comment-content">{{ comment.content }}</p>
+            </div>
         {% endfor %}
         {% else %}
             <p>brak komentarzy</p>
     {% endif %}
-    <h3>Dodaj komentarz</h3>
+    </div>
+    <h3 class="sub-header">Dodaj komentarz</h3>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and comment_form is defined %}
 
     {{ form_start(comment_form, { method: 'POST', action: url('article_view', {id: article.id}) }) }}

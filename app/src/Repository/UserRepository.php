@@ -71,6 +71,7 @@ class UserRepository extends ServiceEntityRepository
             ->where('u.firstName like :searchParam')
             ->orWhere('u.blogName like :searchParam')
             ->setParameter('searchParam', '%'.$searchParam.'%')
+            ->orderBy('u.firstName', 'ASC')
             ->getQuery()
             ->getResult();
         return $qb;

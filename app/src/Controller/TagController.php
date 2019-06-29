@@ -49,7 +49,10 @@ class TagController extends AbstractController
 
         return $this->render(
             'tag/view.html.twig',
-            ['pagination' => $pagination]
+            [
+                'pagination' => $pagination,
+                'tagName' => $tag->getName()
+            ]
         );
     }
 }

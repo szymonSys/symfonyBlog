@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Category
 {
-    const NUMBER_OF_ITEMS = 10;
+    const NUMBER_OF_ITEMS = 6;
 
     /**
      * @ORM\Id()

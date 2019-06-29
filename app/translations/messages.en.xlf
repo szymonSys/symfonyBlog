@@ -62,6 +62,46 @@
                 <source>title.subscription_list</source>
                 <target>Subscriptions</target>
             </trans-unit>
+            <trans-unit id="label.name">
+                <source>label.name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="label.bio">
+                <source>label.bio</source>
+                <target>Bio</target>
+            </trans-unit>
+              <trans-unit id="title.author_edit">
+                  <source>title.author_edit</source>
+                  <target>Edit blog</target>
+              </trans-unit>
+            <trans-unit id="name.category_edit">
+                <source>name.category_edit</source>
+                <target>Edit category</target>
+            </trans-unit>
+            <trans-unit id="name.category_delete">
+                <source>name.category_delete</source>
+                <target>Delete category</target>
+            </trans-unit>
+            <trans-unit id="name.category_new">
+                <source>name.category_new</source>
+                <target>New category</target>
+            </trans-unit>
+            <trans-unit id="title.user_register">
+                <source>title.user_register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="title.article_edit">
+                <source>title.article_edit</source>
+                <target>Edit article</target>
+            </trans-unit>
+            <trans-unit id="title.article_delete">
+                <source>title.article_delete</source>
+                <target>Usuń artykuł</target>
+            </trans-unit>
+            <trans-unit id="title.article_new">
+                <source>title.article_new</source>
+                <target>New article</target>
+            </trans-unit>
             <trans-unit id="title.subscription_header">
                 <source>title.subscription_header</source>
                 <target>Followers's articles</target>

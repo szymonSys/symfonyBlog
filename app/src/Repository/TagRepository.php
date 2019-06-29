@@ -33,6 +33,7 @@ class TagRepository extends ServiceEntityRepository
 //            ->join('App\Entity\Tag', 'a')
             ->where('t.name like :searchParam')
             ->setParameter('searchParam', '%'.$searchParam.'%')
+            ->orderBy('t.name', 'ASC')
             ->getQuery()
             ->getResult();
         return $qb;

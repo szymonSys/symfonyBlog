@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Article
 {
-    const NUMBER_OF_ITEMS = 6;
+    const NUMBER_OF_ITEMS = 12;
 
     /**
      * @ORM\Id()

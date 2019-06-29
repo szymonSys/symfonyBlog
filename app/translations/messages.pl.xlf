@@ -26,10 +26,42 @@
                 <source>label.category</source>
                 <target>Kategoria</target>
             </trans-unit>
+            <trans-unit id="title.article_delete">
+                <source>title.article_delete</source>
+                <target>Usuń artykuł</target>
+            </trans-unit>
+            <trans-unit id="name.category_new">
+                <source>name.category_new</source>
+                <target>Nowa kategoria</target>
+            </trans-unit>
+            <trans-unit id="label.name">
+                <source>label.name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="name.category_edit">
+                <source>name.category_edit</source>
+                <target>Edytuj kategorie</target>
+            </trans-unit>
+            <trans-unit id="name.category_delete">
+                <source>name.category_delete</source>
+                <target>Usuń kategorie</target>
+            </trans-unit>
             <trans-unit id="action.new">
                 <source>action.new</source>
                 <target>Dodaj</target>
             </trans-unit>
+            <trans-unit id="title.article_edit">
+                <source>title.article_edit</source>
+                <target>Edytuj artykuł</target>
+            </trans-unit>
+            <trans-unit id="label.bio">
+                <source>label.bio</source>
+                <target>Bio</target>
+            </trans-unit>
+             <trans-unit id="title.author_edit">
+                 <source>title.author_edit</source>
+                 <target>Edytuj blog</target>
+             </trans-unit>
             <trans-unit id="label.options">
                 <source>label.options</source>
                 <target>Opcje</target>
@@ -60,11 +92,19 @@
             </trans-unit>
             <trans-unit id="title.subscription_list">
                 <source>title.subscription_list</source>
-                <target>Subskrybcje</target>
+                <target>Subskrypcje</target>
             </trans-unit>
             <trans-unit id="title.subscription_header">
                 <source>title.subscription_header</source>
                 <target>Artykuły obserwowanych twórców</target>
+            </trans-unit>
+            <trans-unit id="title.article_new">
+                <source>title.article_new</source>
+                <target>Nowy artykuł</target>
+            </trans-unit>
+            <trans-unit id="title.user_register">
+                <source>title.user_register</source>
+                <target>Rejestracja</target>
             </trans-unit>
             <trans-unit id="title.my_blog">
                 <source>title.my_blog</source>

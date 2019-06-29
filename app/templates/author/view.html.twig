@@ -4,97 +4,119 @@
     {{ authorData[0].firstName }}
 {% endblock %}
 
+{% block myBlogActive %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
+        text-dark
+    {% endif %}
+{% endblock %}
 {% block body %}
     {% if authorData[0].blogName is not null %}
-        <h1>{{ authorData[0].blogName }}</h1>
+        <h1 class="header">{{ authorData[0].blogName }}</h1>
         {% else %}
-            <h1>{{ authorData[0].firstName }}</h1>
+            <h1 class="header">{{ authorData[0].firstName }}</h1>
     {% endif %}
-    <div>
-    {% if authorData[0].avatar is defined %}
-        <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
-            <br>
-            <a href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień avatar</a>
-            <br>
-            <a href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń avatar</a>
-        {% endif %}
-        {% else %}
-            <img width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
-            {% if app.user.id == authorData[0].id%}
-                <br>
-                <a href="{{ url('avatar_new') }}">dodaj avatar</a>
+    <div class="user-section">
+        <div class="user-image-section">
+            {% if authorData[0].avatar is defined %}
+                <img class="rounded-circle" width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
+                    <div class="manage-avatar">
+                        <a class="edit-avatar" href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień</a>
+                        <span> | </span>
+                        <a class="delete-avatar" href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń</a>
+                    </div>
+                {% endif %}
+                {% else %}
+                    <img class="rounded-circle" width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
+                    {% if app.user.id == authorData[0].id%}
+                        <a class="add-avatar" href="{{ url('avatar_new') }}">dodaj avatar</a>
+                    {% endif %}
             {% endif %}
-    {% endif %}
+        </div>
+        {% if authorData[0].bio is defined %}
+            <p class="user-bio">{{ authorData[0].bio }}</p>
+        {% endif %}
+        <div class="manage-blog">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% if app.user.id == authorData[0].id %}
+                    <a class="followed-link btn btn-secondary" href="{{ url('subscriptions_followers') }}">{{ 'title.followers'|trans }}</a>
+                    <a class="edit-blog-data btn btn-warning" href="{{ url('edit_author', {id: authorData[0].id}) }}">Edytuj blog</a>
+                {% else %}
+                    {% if not isSubscribed %}
+                        <a class="btn btn-success" href="{{ url('subscription_follow', {id: authorData[0].id}) }}" title="follow">{{ 'label.follow'|trans }}</a>
+                    {% else %}
+                        <a class="btn btn-danger" href="{{ url('subscription_unfollow', {id: authorData[0].id}) }}" title="unfollow">{{ 'label.unfollow'|trans }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <p class="user-name">{{ authorData[0].firstName }}</p>
     </div>
-    {% if authorData[0].bio is defined %}
-        <p style="font-weight: bold">{{ authorData[0].bio }}</p>
-    {% endif %}
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% if app.user.id == authorData[0].id %}
-            <div><a href="{{ url('subscriptions_followers') }}">{{ 'title.subscription_list'|trans }}</a></div>
-            <div><a href="{{ url('edit_author', {id: authorData[0].id}) }}">Edytuj informacje</a></div>
-        {% else %}
-            {% if not isSubscribed %}
-                <div><a href="{{ url('subscription_follow', {id: authorData[0].id}) }}" title="follow">{{ 'label.follow'|trans }}</a></div>
-            {% else %}
-                <div><a href="{{ url('subscription_unfollow', {id: authorData[0].id}) }}" title="unfollow">{{ 'label.unfollow'|trans }}</a></div>
-            {% endif %}
-        {% endif %}
-    {% endif %}
 
     {% if pagination is defined and pagination|length %}
 
-        <div class="navigation text-center">
+        <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
 
-        <p>{{ 'label.author'|trans }}: {{ authorData[0].firstName }}</p>
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</th>
-                <th>{{ 'label.category'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
-                {% if (is_granted('IS_AUTHENTICATED_REMEMBERED')) and (is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id) %}
-                    <th>{{ 'label.options'|trans }}</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
+        <div class="sort-bar">
+            <div><span>Sortuj: </span></div>
+            <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</span>
+            <span>|</span>
+            <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</span>
+        </div>
+        <section class="articles-container">
             {% for article in pagination %}
-
-                <tr>
-                    <td>
-                        <a href="{{ url('article_view', {id: article.id}) }}" title="view">
-                            {% if article.coverPhoto.file is defined %}
-                                <img width="120px" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
-                            {% else %}
-                                <img width="120px" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                <div class="articles-item">
+                    <a class="article-link" href="{{ url('article_view', {id: article.id}) }}" title="view">
+                        {% if article.coverPhoto.file is defined %}
+                            <img class="articles-image" width="100%" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
+                        {% else %}
+                            <img class="articles-image" width="100%" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                        {% endif %}
+                        <div class="articles-title">
+                            <h2>{{ article.title }}</h2>
+                        </div>
+                    </a>
+                    <a class="articles-author" href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
+                        {% if article.author.avatar.file is defined %}
+                            <img class="articles-author-avatar rounded-circle" width="60px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt="">
+                        {% else %}
+                            <img class="articles-author-avatar rounded-circle" width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
+                        {% endif %}
+                        <div class="articles-author-name">
+                            <span>{{ article.author.firstName }}</span>
+                            {% if article.author.blogName is not null %}
+                                <span> ({{ article.author.blogName }})</span>
                             {% endif %}
-                            <span>{{ article.title }}</span>
-                        </a>
-                    </td>
-                    <td><a href="{{ url('category_view', {name: article.category.name}) }}">{{ article.category.name }}</a></td>
-                    <td>{{ article.publishedAt|localizeddate }}</td>
-                    {% if (is_granted('IS_AUTHENTICATED_REMEMBERED')) and (is_granted('ROLE_ADMIN') or app.user.id == authorData[0].id) %}
-                        <td>
+                        </div>
+                    </a>
+                    <div class="articles-category">
+                        <span>{{ 'label.category'|trans }}:
+                            <a  href="{{ url('category_view', {name: article.category.name}) }}">
+                                {{ article.category.name }}
+                            </a>
+                        </span>
+                    </div>
+                    <div class="articles-date">
+                        {{ article.publishedAt|localizeddate }}
+                    </div>
+                    <div class="articles-options">
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                                 {{ 'action.edit'|trans }}
-                            </a><br>
+                            </a>
+                            <span>|</span>
                             <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
                                 {{ 'action.delete'|trans }}
                             </a>
-                        </td>
-                    {% endif %}
-                </tr>
-
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
-            </tbody>
-        </table>
+        </section>
 
-        <div class="navigation text-center">
+        <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
 

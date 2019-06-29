@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ categoryName }}</h1>
+    <h1 class="header">Kategoria: {{ categoryName }}</h1>
     {% if pagination is defined and pagination|length %}
 
-        <div class="navigation text-center">
+        <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
 {#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
@@ -16,64 +16,65 @@
 {#                dodaj artykuł#}
 {#            </a>#}
 {#        {% endif %}#}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</th>
-                <th>{{ 'label.author'|trans }}</th>
-                <th>{{ 'label.category'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th>{{ 'label.options'|trans }}</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for article in pagination %}
 
-                <tr>
-                    <td>
-                        <a href="{{ url('article_view', {id: article.id}) }}" title="view">
-                            {% if article.coverPhoto.file is defined %}
-                                <img width="120px" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
-                            {% else %}
-                                <img width="120px" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
-                            {% endif %}
-                            <span>{{ article.title }}</span>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
-                            {% if article.author.avatar.file is defined %}
-                                <img width="60px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt="">
-                            {% else %}
-                                <img width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
-                            {% endif %}
+        <div class="sort-bar">
+            <div><span>Sortuj: </span></div>
+            <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</span>
+            <span>|</span>
+            <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</span>
+        </div>
+        <section class="articles-container">
+            {% for article in pagination %}
+                <div class="articles-item">
+                    <a class="article-link" href="{{ url('article_view', {id: article.id}) }}" title="view">
+                        {% if article.coverPhoto.file is defined %}
+                            <img class="articles-image" width="100%" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}" alt="">
+                        {% else %}
+                            <img class="articles-image" width="100%" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
+                        {% endif %}
+                        <div class="articles-title">
+                            <h2>{{ article.title }}</h2>
+                        </div>
+                    </a>
+                    <a class="articles-author" href="{{ url('author_view', {id: article.author.id, firstName: article.author.firstName}) }}">
+                        {% if article.author.avatar.file is defined %}
+                            <img class="articles-author-avatar rounded-circle" width="60px" src="{{ asset('uploads/photos/'~ article.author.avatar.file.filename) }}" alt="">
+                        {% else %}
+                            <img class="articles-author-avatar rounded-circle" width="60px" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}" alt="">
+                        {% endif %}
+                        <div class="articles-author-name">
                             <span>{{ article.author.firstName }}</span>
                             {% if article.author.blogName is not null %}
                                 <span> ({{ article.author.blogName }})</span>
                             {% endif %}
-                        </a>
-                    </td>
-                    <td>{{ article.category.name }}</td>
-                    <td>{{ article.publishedAt|localizeddate }}</td>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td>
+                        </div>
+                    </a>
+                    <div class="articles-category">
+                        <span>{{ 'label.category'|trans }}:
+                            <a  href="{{ url('category_view', {name: article.category.name}) }}">
+                                {{ article.category.name }}
+                            </a>
+                        </span>
+                    </div>
+                    <div class="articles-date">
+                        {{ article.publishedAt|localizeddate }}
+                    </div>
+                    <div class="articles-options">
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ url('article_edit', {id: article.id}) }}" title="edit">
                                 {{ 'action.edit'|trans }}
-                            </a><br>
+                            </a>
+                            <span>|</span>
                             <a href="{{ url('article_delete', {id: article.id}) }}" title="delete">
                                 {{ 'action.delete'|trans }}
                             </a>
-                        </td>
-                    {% endif %}
-                </tr>
-
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
-            </tbody>
-        </table>
+        </section>
 
-        <div class="navigation text-center">
+        <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
 

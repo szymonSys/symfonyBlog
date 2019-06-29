@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
 
-    const NUMBER_OF_ITEMS = 12;
+    const NUMBER_OF_ITEMS = 6;
     /**
      * Role user.
      *

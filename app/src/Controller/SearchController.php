@@ -51,7 +51,8 @@ class SearchController extends AbstractController
             [
                 'articles' => $articlesResult,
                 'authors' => $usersResult,
-                'tags' => $tagsResult
+                'tags' => $tagsResult,
+                'searchParam' => $searchParam
             ]
         );
 
