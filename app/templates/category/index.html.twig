@@ -8,16 +8,19 @@
 
 {% block body %}
     <h1 class="header">{{ 'title.category_list'|trans }}</h1>
-    {% if pagination is defined and pagination|length %}
 
-        <div class="navigation text-center flex-column">
-            {{ knp_pagination_render(pagination) }}
-        </div>
     {% if is_granted('ROLE_ADMIN') %}
         <a class="btn btn-success add-artcle-btn" href="{{ url('category_new') }}" title="{{ 'action.new'|trans }}">
             {{ 'action.new'|trans }}
         </a>
     {% endif %}
+
+    {% if pagination is defined and pagination|length %}
+
+        <div class="navigation text-center flex-column">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
         <section class="categories-container">
         <table class="table table-striped">
             <thead>

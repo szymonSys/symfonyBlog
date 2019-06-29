@@ -108,6 +108,10 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request, CategoryRepository $repository): Response
     {
+        if(!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('category_index');
+        }
+
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -150,7 +154,17 @@ class CategoryController extends AbstractController
      */
     public function edit(Request $request, CategoryRepository $repository, int $id): Response
     {
+
         $category = $repository->find($id);
+
+        if(!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('category_index');
+        }
+
+        if(!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('category_index');
+        }
+
         $form = $this->createForm(CategoryType::class, $category, ['method' => 'PUT']);
         $form->handleRequest($request);
 
@@ -195,6 +209,10 @@ class CategoryController extends AbstractController
     public function delete(Request $request, CategoryRepository $repository, int $id): Response
     {
         $category = $repository->find($id);
+
+        if(!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('category_index');
+        }
 
         if ($category->getArticles()->count()) {
             $this->addFlash('warning', 'message.category_contains_tasks');

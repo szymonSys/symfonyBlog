@@ -2,30 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56cf03f4-f9bb-45ae-8a58-df930d755ac9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Controller/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/TagController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Repository/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/ArticleRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Repository/TagRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/TagRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/article/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/article/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/article/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/article/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/article/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/article/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/author/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/author/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/author/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/author/view.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/category/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/category/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/category/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/category/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/photo/delete.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/photo/delete.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/search/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/search/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/subscription/followed.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/subscription/followed.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/subscription/followers.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/subscription/followers.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/subscription/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/subscription/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/tag/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tag/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/translations/messages.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/app/translations/messages.en.xlf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/translations/messages.pl.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/app/translations/messages.pl.xlf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +22,7 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/Repository/TagRepository.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,19 +33,60 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/article/view.html.twig">
+        <entry file="file://$PROJECT_DIR$/app/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="95" selection-start-line="32" selection-start-column="95" selection-end-line="32" selection-end-column="95" />
+            <state relative-caret-position="221">
+              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-391">
+              <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/templates/base.html.twig">
+        <entry file="file://$PROJECT_DIR$/app/templates/category/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="271" column="45" selection-start-line="271" selection-start-column="45" selection-end-line="271" selection-end-column="45" />
+            <state relative-caret-position="255">
+              <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/.env">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/composer.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3740">
+              <caret line="220" column="32" selection-start-line="220" selection-start-column="32" selection-end-line="220" selection-end-column="32" />
+              <folding>
+                <element signature="e#6#36#0#PHP" expanded="true" />
+                <element signature="e#65#88#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/article/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -101,7 +124,6 @@
         <option value="$PROJECT_DIR$/app/src/EventListener/AvatarUploadListener.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/AvatarController.php" />
         <option value="$PROJECT_DIR$/app/src/Repository/PhotoRepository.php" />
-        <option value="$PROJECT_DIR$/app/src/Controller/ArticleController.php" />
         <option value="$PROJECT_DIR$/app/templates/photo/new.html.twig" />
         <option value="$PROJECT_DIR$/app/src/Entity/Photo.php" />
         <option value="$PROJECT_DIR$/app/src/EventListener/PhotoUploadListener.php" />
@@ -112,10 +134,8 @@
         <option value="$PROJECT_DIR$/app/templates/photo/edit.html.twig" />
         <option value="$PROJECT_DIR$/app/src/Entity/Comment.php" />
         <option value="$PROJECT_DIR$/app/templates/photo/delete.html.twig" />
-        <option value="$PROJECT_DIR$/app/src/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/app/templates/article/temp.html.twig" />
         <option value="$PROJECT_DIR$/app/src/Entity/Article.php" />
-        <option value="$PROJECT_DIR$/app/templates/article/index.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/subscription/index.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/category/view.html.twig" />
         <option value="$PROJECT_DIR$/app/src/Controller/TagController.php" />
@@ -127,7 +147,6 @@
         <option value="$PROJECT_DIR$/app/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/app/src/Entity/Category.php" />
         <option value="$PROJECT_DIR$/app/templates/search/view.html.twig" />
-        <option value="$PROJECT_DIR$/app/templates/category/index.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/author/index.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/subscription/followed.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/article/new.html.twig" />
@@ -136,7 +155,11 @@
         <option value="$PROJECT_DIR$/app/translations/messages.en.xlf" />
         <option value="$PROJECT_DIR$/app/templates/author/view.html.twig" />
         <option value="$PROJECT_DIR$/app/templates/article/view.html.twig" />
+        <option value="$PROJECT_DIR$/app/templates/article/index.html.twig" />
+        <option value="$PROJECT_DIR$/app/src/Controller/ArticleController.php" />
         <option value="$PROJECT_DIR$/app/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/src/Controller/CategoryController.php" />
+        <option value="$PROJECT_DIR$/app/templates/category/index.html.twig" />
       </list>
     </option>
   </component>
@@ -231,8 +254,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="809" />
-    <option name="y" value="-18" />
+    <option name="x" value="2045" />
+    <option name="y" value="147" />
     <option name="width" value="861" />
     <option name="height" value="985" />
   </component>
@@ -241,7 +264,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,40 +275,6 @@
               <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="uploads" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="uploads" type="462c0819:PsiDirectoryNode" />
-              <item name="photos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
@@ -305,85 +293,7 @@
               <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="EventListener" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
-              <item name="EventListener" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Security" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Twig" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="article" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="author" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="avatar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
@@ -392,71 +302,17 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="category" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="photo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="registration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="security" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="subscription" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="tag" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/templates/photo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -503,16 +359,19 @@
       <workItem from="1561579211975" duration="11599000" />
       <workItem from="1561618059085" duration="41471000" />
       <workItem from="1561708745127" duration="54540000" />
+      <workItem from="1561768184129" duration="1532000" />
+      <workItem from="1561772593526" duration="4166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305317000" />
+    <option name="totallyTimeSpent" value="311015000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="1912" y="151" width="1296" height="1040" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21481876" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24676375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -525,7 +384,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17445482" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.038588755" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -569,24 +428,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/article/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="54" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Form/AuthorType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-          <folding>
-            <element signature="e#6#29#0#PHP" expanded="true" />
-            <element signature="e#52#72#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/category/delete.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -747,17 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="92" column="29" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
-          <folding>
-            <element signature="e#6#36#0#PHP" expanded="true" />
-            <element signature="e#65#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/Entity/Comment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -769,13 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -835,13 +658,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/article/temp.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/article/temp.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -871,20 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/article/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/category/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -961,10 +764,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Repository/TagRepository.php">
+    <entry file="file://$PROJECT_DIR$/app/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/composer.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="3740">
+          <caret line="220" column="32" selection-start-line="220" selection-start-column="32" selection-end-line="220" selection-end-column="32" />
+          <folding>
+            <element signature="e#6#36#0#PHP" expanded="true" />
+            <element signature="e#65#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -975,10 +795,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/src/Repository/TagRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="271" column="45" selection-start-line="271" selection-start-column="45" selection-end-line="271" selection-end-column="45" />
+        <state relative-caret-position="136">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/article/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/category/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
         </state>
       </provider>
     </entry>

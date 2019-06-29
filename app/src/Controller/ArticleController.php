@@ -21,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleController.
  *
- * @Route("/article")
  */
 
 class ArticleController extends AbstractController
@@ -65,7 +64,7 @@ class ArticleController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
-     *     "/{id}",
+     *     "/article/{id}",
      *     methods={"GET", "POST"},
      *     name="article_view",
      *     requirements={"id": "[1-9]\d*"},
@@ -116,13 +115,17 @@ class ArticleController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @Route(
-     *     "/new",
+     *     "/article/new",
      *     methods={"GET", "POST"},
      *     name="article_new",
      * )
      */
     public function new(Request $request, ArticleRepository $repository): Response
     {
+        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('article_index');
+        }
+
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -157,7 +160,7 @@ class ArticleController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @Route(
-     *     "/{id}/edit",
+     *     "/article/{id}/edit",
      *     methods={"GET", "PUT"},
      *     requirements={"id": "[1-9]\d*"},
      *     name="article_edit",
@@ -165,7 +168,13 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, ArticleRepository $repository, int $id):Response
     {
+
         $article = $repository->find($id);
+
+        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId()) {
+            return $this->redirectToRoute('article_index');
+        }
+
         $form = $this->createForm(ArticleType::class, $article, ['method' => 'PUT']);
         $form->handleRequest($request);
 
@@ -198,7 +207,7 @@ class ArticleController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @Route(
-     *     "/{id}/delete",
+     *     "/article/{id}/delete",
      *     methods={"GET", "DELETE"},
      *     requirements={"id": "[1-9]\d*"},
      *     name="article_delete",
@@ -207,6 +216,10 @@ class ArticleController extends AbstractController
     public function delete(Request $request, ArticleRepository $repository, int $id):Response
     {
         $article = $repository->find($id);
+
+        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId()) {
+            return $this->redirectToRoute('article_index');
+        }
 
         $form = $this->createForm(FormType::class, $article, ['method' => 'DELETE']);
         $form->handleRequest($request);
