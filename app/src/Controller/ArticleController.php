@@ -171,7 +171,7 @@ class ArticleController extends AbstractController
 
         $article = $repository->find($id);
 
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId()) {
+        if(!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
             return $this->redirectToRoute('article_index');
         }
 
@@ -217,7 +217,7 @@ class ArticleController extends AbstractController
     {
         $article = $repository->find($id);
 
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId()) {
+        if(!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
             return $this->redirectToRoute('article_index');
         }
 

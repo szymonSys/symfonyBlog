@@ -35,7 +35,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findAllThanCategory($category): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a')
-            ->innerJoin('App\Entity\Category', 'c', Join::WITH,'c = a.category' )
+            ->innerJoin('a.category', 'c')
             ->andWhere('c.name = :category')
             ->setParameter('category', $category)
             ->orderBy('a.publishedAt', 'DESC');

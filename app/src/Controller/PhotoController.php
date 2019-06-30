@@ -55,9 +55,10 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
+
         $article = $articleRepository->find($id);
 
-        if($article->getAuthor()->getId() !== $this->getUser()->getId()) {
+        if(!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
             return $this->redirectToRoute(
                 'article_view',
                 [
@@ -121,7 +122,7 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        if($article->getAuthor()->getId() !== $this->getUser()->getId()) {
+        if(!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
             return $this->redirectToRoute(
                 'article_view',
                 [

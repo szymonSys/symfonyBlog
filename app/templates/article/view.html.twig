@@ -28,10 +28,14 @@
         {% if article is defined and article|length %}
             {% if article.coverPhoto.file is defined %}
                 <img class="article-photo article-header-item" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}">
-                <a class="edit-photo" href="{{ url('photo_edit', {articleId: article.id, id: article.coverPhoto.id}) }}">edytuj zdjęcie</a>
+			{% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
+                		<a class="edit-photo" href="{{ url('photo_edit', {articleId: article.id, id: article.coverPhoto.id}) }}">edytuj zdjęcie</a>
+			{% endif %}
                 {% else %}
                     <img class="article-photo article-header-item" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
-                    <a class="edit-photo" href="{{ url('photo_new', {id: article.id}) }}">dodaj zdjęcie</a>
+			{% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
+                    		<a class="edit-photo" href="{{ url('photo_new', {id: article.id}) }}">dodaj zdjęcie</a>
+			 {% endif %}
         {% endif %}
             <h1 class="article-title article-header-item">{{  article.title }}</h1>
             </div>
