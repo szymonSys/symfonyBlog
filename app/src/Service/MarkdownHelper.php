@@ -2,6 +2,7 @@
 /**
  * Markdown helper.
  */
+
 namespace App\Service;
 
 use Michelf\MarkdownInterface;

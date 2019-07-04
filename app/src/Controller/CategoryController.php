@@ -27,8 +27,8 @@ class CategoryController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\CategoryRepository $repository Category repository
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
+     * @param \App\Repository\CategoryRepository        $repository Category repository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -55,9 +55,9 @@ class CategoryController extends AbstractController
     /**
      * View action.
      *
-     * @param \App\Entity\Category $category Category entity
+     * @param \App\Entity\Category               $category   Category entity
      * @param \App\Repository\CategoryRepository $repository Category repository
-     * @param int                            $id         Element Id
+     * @param int                                $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -69,7 +69,7 @@ class CategoryController extends AbstractController
      */
     public function view(Request $request, CategoryRepository $categoryRepository, PaginatorInterface $paginator, ArticleRepository $articleRepository, string $name): Response
     {
-        if(!is_null($name)) {
+        if (!is_null($name)) {
             $categoryName = $categoryRepository->findOneBy(['name' => $name])->getName();
         }
 
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
             'category/view.html.twig',
             [
                 'categoryName' => $categoryName,
-                'pagination' => $pagination
+                'pagination' => $pagination,
             ]
         );
     }
@@ -93,7 +93,7 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                            $id         Element Id
+     * @param int                                       $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -108,7 +108,7 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request, CategoryRepository $repository): Response
     {
-        if(!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('category_index');
         }
 
@@ -138,7 +138,7 @@ class CategoryController extends AbstractController
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Entity\Category                      $category   Category entity
      * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                            $id         Element Id
+     * @param int                                       $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -154,14 +154,13 @@ class CategoryController extends AbstractController
      */
     public function edit(Request $request, CategoryRepository $repository, int $id): Response
     {
-
         $category = $repository->find($id);
 
-        if(!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('category_index');
         }
 
-        if(!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('category_index');
         }
 
@@ -192,7 +191,7 @@ class CategoryController extends AbstractController
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Entity\Category                      $category   Category entity
      * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                            $id         Element Id
+     * @param int                                       $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -210,7 +209,7 @@ class CategoryController extends AbstractController
     {
         $category = $repository->find($id);
 
-        if(!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('category_index');
         }
 

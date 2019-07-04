@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\ArticleRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
@@ -19,15 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/search")
  */
-
 class SearchController extends AbstractController
 {
     /**
-     * @param Request $request
-     * @param UserRepository $userRepository
+     * @param Request           $request
+     * @param UserRepository    $userRepository
      * @param ArticleRepository $articleRepository
-     * @param TagRepository $tagRepository
-     * @param string $search
+     * @param TagRepository     $tagRepository
+     * @param string            $search
+     *
      * @return Response
      *
      * @Route(
@@ -45,16 +44,14 @@ class SearchController extends AbstractController
         $tagsResult = $tagRepository->search($searchParam);
         $usersResult = $userRepository->search($searchParam);
 
-
         return $this->render(
             'search/view.html.twig',
             [
                 'articles' => $articlesResult,
                 'authors' => $usersResult,
                 'tags' => $tagsResult,
-                'searchParam' => $searchParam
+                'searchParam' => $searchParam,
             ]
         );
-
     }
 }

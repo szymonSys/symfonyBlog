@@ -53,7 +53,6 @@ class Category
      *      min="3",
      *     max="64",
      * )
-     *
      */
     private $code;
 
@@ -75,7 +74,6 @@ class Category
     {
         $this->articles = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {

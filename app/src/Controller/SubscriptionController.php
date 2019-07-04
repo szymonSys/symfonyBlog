@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
@@ -21,13 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/subscriptions")
  */
-
 class SubscriptionController extends AbstractController
 {
     /**
-     * @param Request $request
+     * @param Request            $request
      * @param PaginatorInterface $paginator
-     * @param UserRepository $repository
+     * @param UserRepository     $repository
+     *
      * @return Response
      *
      * @Route(
@@ -39,7 +38,7 @@ class SubscriptionController extends AbstractController
     {
         $subscriber = $this->getUser();
 
-        if(!count($subscriber->getFollowedAuthors())){
+        if (!count($subscriber->getFollowedAuthors())) {
             return $this->render('subscription/index.html.twig');
         }
 
@@ -56,9 +55,10 @@ class SubscriptionController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param Request            $request
      * @param PaginatorInterface $paginator
-     * @param UserRepository $repository
+     * @param UserRepository     $repository
+     *
      * @return Response
      *
      * @Route(
@@ -70,7 +70,7 @@ class SubscriptionController extends AbstractController
     {
         $subscriber = $this->getUser();
 
-        if(!count($subscriber->getFollowedAuthors())){
+        if (!count($subscriber->getFollowedAuthors())) {
             return $this->render('subscription/followed.html.twig');
         }
 
@@ -80,16 +80,17 @@ class SubscriptionController extends AbstractController
             User::NUMBER_OF_ITEMS
         );
 
-                return $this->render(
+        return $this->render(
                     'subscription/followed.html.twig',
                     ['pagination' => $pagination]
                 );
     }
 
     /**
-     * @param Request $request
+     * @param Request            $request
      * @param PaginatorInterface $paginator
-     * @param UserRepository $repository
+     * @param UserRepository     $repository
+     *
      * @return Response
      *
      * @Route(
@@ -101,7 +102,7 @@ class SubscriptionController extends AbstractController
     {
         $subscriber = $this->getUser();
 
-        if(!count($subscriber->getFollowers())){
+        if (!count($subscriber->getFollowers())) {
             return $this->render('subscription/followers.html.twig');
         }
 
@@ -111,7 +112,6 @@ class SubscriptionController extends AbstractController
             User::NUMBER_OF_ITEMS
         );
 
-
         return $this->render(
             'subscription/followers.html.twig',
             ['pagination' => $pagination]
@@ -120,8 +120,10 @@ class SubscriptionController extends AbstractController
 
     /**
      * @param UserRepository $repository
-     * @param int $id
+     * @param int            $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -131,11 +133,11 @@ class SubscriptionController extends AbstractController
      *     name="subscription_follow",
      * )
      */
-    public  function follow(UserRepository $repository, int $id): Response
+    public function follow(UserRepository $repository, int $id): Response
     {
         $author = $repository->find($id);
 
-        if($this->getUser()) {
+        if ($this->getUser()) {
             $subscriber = $this->getUser();
             $followedAuthors = $subscriber->getFollowedAuthors();
             $isSubscribed = false;
@@ -146,7 +148,7 @@ class SubscriptionController extends AbstractController
                 }
             }
 
-            if(!$isSubscribed) {
+            if (!$isSubscribed) {
                 $subscriber->addFollowedAuthor($author);
                 $repository->save($subscriber);
                 $this->addFlash('success', 'message.followed_created_successfully');
@@ -164,8 +166,10 @@ class SubscriptionController extends AbstractController
 
     /**
      * @param UserRepository $repository
-     * @param int $id
+     * @param int            $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -179,7 +183,7 @@ class SubscriptionController extends AbstractController
     {
         $author = $repository->find($id);
 
-        if($this->getUser()) {
+        if ($this->getUser()) {
             $subscriber = $this->getUser();
             $followedAuthors = $subscriber->getFollowedAuthors();
             $isSubscribed = false;
@@ -190,7 +194,7 @@ class SubscriptionController extends AbstractController
                 }
             }
 
-            if($isSubscribed) {
+            if ($isSubscribed) {
                 $subscriber->removeFollowedAuthor($author);
                 $repository->save($subscriber);
                 $this->addFlash('success', 'message.followed_deleted_successfully');
@@ -205,7 +209,4 @@ class SubscriptionController extends AbstractController
             ]
         );
     }
-
 }
-
-

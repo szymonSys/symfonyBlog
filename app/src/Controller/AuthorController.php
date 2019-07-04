@@ -5,8 +5,6 @@
 
 namespace App\Controller;
 
-
-
 use App\Entity\Article;
 use App\Entity\User;
 use App\Form\AuthorType;
@@ -23,15 +21,15 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("author")
  */
-
 class AuthorController extends AbstractController
 {
     /**
      * Index action.
      *
-     * @param Request $request
-     * @param UserRepository $repository
+     * @param Request            $request
+     * @param UserRepository     $repository
      * @param PaginatorInterface $paginator
+     *
      * @return Response
      *
      * @Route(
@@ -49,16 +47,17 @@ class AuthorController extends AbstractController
 
         return $this->render(
             'author/index.html.twig',
-            ["pagination" => $pagination]
+            ['pagination' => $pagination]
         );
     }
 
     /**
      * View action.
      *
-     * @param Request $request
+     * @param Request            $request
      * @param PaginatorInterface $paginator
-     * @param int $id
+     * @param int                $id
+     *
      * @return Response
      *
      * @Route(
@@ -79,7 +78,7 @@ class AuthorController extends AbstractController
 
         $isSubscribed = false;
 
-        if($this->getUser()) {
+        if ($this->getUser()) {
             $loggedUser = $this->getUser();
             $followedAuthors = $loggedUser->getFollowedAuthors();
             foreach ($followedAuthors as $followed) {
@@ -90,7 +89,7 @@ class AuthorController extends AbstractController
             }
         } else {
             $loggedUser = null;
-        };
+        }
 
         return $this->render(
             'author/view.html.twig',
@@ -98,17 +97,18 @@ class AuthorController extends AbstractController
                 'authorData' => $authorData,
                 'isSubscribed' => $isSubscribed,
                 'loggedUser' => $loggedUser,
-                'pagination' => $pagination
-
+                'pagination' => $pagination,
             ]
         );
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param UserRepository $repository
-     * @param int $id
+     * @param int            $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
@@ -125,7 +125,7 @@ class AuthorController extends AbstractController
         $form = $this->createForm(AuthorType::class, $author, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $repository->save($author);
             $this->addFlash('success', 'message.author_updated_successfully');
 
@@ -136,7 +136,7 @@ class AuthorController extends AbstractController
             'author/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'author' => $author
+                'author' => $author,
             ]
         );
     }

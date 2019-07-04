@@ -2,6 +2,7 @@
 /**
  * User Controller.
  */
+
 namespace App\Controller;
 
 use App\Repository\UserRepository;
@@ -37,15 +38,14 @@ class UserController extends AbstractController
     public function editRole(Request $request, UserRepository $repository, int $id): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
-
             return $this->redirectToRoute('author_index');
-        };
+        }
         $user = $repository->find($id);
         $form = $this->createForm(FormType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
         $isAdmin = $user->checkIfAdmin();
         if ($form->isSubmitted() && $form->isValid()) {
-            if($isAdmin) {
+            if ($isAdmin) {
                 $user->divestAdmin();
             } else {
                 $user->makeAdmin();
@@ -54,7 +54,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'message.user_role_edited_successfully');
 
             return $this->redirectToRoute('author_index');
-        };
+        }
 
         return $this->render(
             'users/edit.html.twig',
@@ -62,7 +62,7 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
                 'id' => $id,
                 'title' => $isAdmin ? 'label.remove_admin_privileges' : 'label.add_admin_privileges',
-                'userName' => $user->getFirstName()
+                'userName' => $user->getFirstName(),
             ]
         );
     }
@@ -90,21 +90,19 @@ class UserController extends AbstractController
     {
         $user = $repository->find($id);
         if (!$this->isGranted('ROLE_ADMIN')) {
-
             return $this->redirectToRoute('author_index');
-        };
+        }
         $form = $this->createForm(FormType::class, $user, ['method' => 'DELETE']);
         $form->handleRequest($request);
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
-        };
-        if($form->isSubmitted() && $form->isValid()) {
-
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
             $repository->delete($user);
             $this->addFlash('success', 'message.user_deleted_successfully');
 
             return $this->redirectToRoute('author_index');
-        };
+        }
 
         return $this->render(
             'users/delete.html.twig',

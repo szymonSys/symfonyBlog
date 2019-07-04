@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.0.8",
+        "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.6.10",
@@ -55,10 +55,16 @@
             "security-checker security:check": "script"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpcs-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpcs-scripts"
+        ],
+        "phpcs-scripts": [
+            "vendor\\bin\\phpcs --config-set installed_paths \"E:\\DOKUMENTY - miszmasz\\Projekt PHP\\SymfonyBlogProject\\app\\vendor\\escapestudios\\symfony2-coding-standard\"",
+            "vendor\\bin\\phpcs --config-set default_standard Symfony"
         ]
     },
     "conflict": {

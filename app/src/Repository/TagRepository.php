@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -21,9 +20,9 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-
     /**
      * @param string $searchParam
+     *
      * @return array
      */
     public function search(string $searchParam): array
@@ -36,9 +35,9 @@ class TagRepository extends ServiceEntityRepository
             ->orderBy('t.name', 'ASC')
             ->getQuery()
             ->getResult();
+
         return $qb;
     }
-
 
     /**
      * Save record.
@@ -53,7 +52,6 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->persist($tag);
         $this->_em->flush($tag);
     }
-
 
     /**
      * Delete record.

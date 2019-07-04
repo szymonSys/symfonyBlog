@@ -29,7 +29,6 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
     public function findAllThanCategory($category): QueryBuilder
@@ -44,15 +43,13 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb;
     }
 
-
     /**
-     *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
     public function findAllThanUserId(int $userId): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a')
-            ->innerJoin('App\Entity\User', 'u', Join::WITH,'u = a.author' )
+            ->innerJoin('App\Entity\User', 'u', Join::WITH, 'u = a.author')
             ->andWhere('u.id = :userId')
             ->setParameter('userId', $userId)
             ->orderBy('a.publishedAt', 'DESC');
@@ -64,6 +61,7 @@ class ArticleRepository extends ServiceEntityRepository
      * Find followed authors's articles.
      *
      * @param User $user
+     *
      * @return QueryBuilder
      */
     public function findAllByFollowed(User $user): QueryBuilder
@@ -90,22 +88,25 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * @param string $searchParam
+     *
      * @return array
      */
-public function search(string $searchParam): array
-{
-    $qb = $this->createQueryBuilder('a')
+    public function search(string $searchParam): array
+    {
+        $qb = $this->createQueryBuilder('a')
         ->select('a')
         ->where('a.title like :searchParam')
         ->setParameter('searchParam', '%'.$searchParam.'%')
         ->orderBy('a.publishedAt', 'DESC')
         ->getQuery()
         ->getResult();
-    return $qb;
-}
+
+        return $qb;
+    }
 
     /**
      * @param Tag $tag
+     *
      * @return QueryBuilder
      */
     public function findByTag(Tag $tag): QueryBuilder
@@ -113,7 +114,7 @@ public function search(string $searchParam): array
         $qb = $this->createQueryBuilder('a')
             ->select('a')
             ->join('App\Entity\Tag', 't');
-        foreach ($tag->getArticles() as $article){
+        foreach ($tag->getArticles() as $article) {
             $qb->orWhere('a.id = '.$article->getId());
         }
 //            $qb->orWhere('t.articles = :articles')
@@ -121,7 +122,6 @@ public function search(string $searchParam): array
         $qb->orderBy('a.publishedAt', 'DESC');
 
         return $qb;
-
     }
 
     /**
@@ -174,7 +174,6 @@ public function search(string $searchParam): array
     {
         return $queryBuilder ?: $this->createQueryBuilder('a');
     }
-
 
     // /**
     //  * @return Article[] Returns an array of Article objects

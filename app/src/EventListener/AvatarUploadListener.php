@@ -26,7 +26,7 @@ class AvatarUploadListener
     protected $uploaderService = null;
 
     /**
-     * Filesystem
+     * Filesystem.
      *
      * @var |null
      */
@@ -126,7 +126,9 @@ class AvatarUploadListener
 
         $this->removeFile($entity);
     }
-// ...
+
+    // ...
+
     /**
      * Remove file from disk.
      *

@@ -5,12 +5,9 @@
 
 namespace App\Controller;
 
-
-
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\TagRepository;
-
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,15 +19,15 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/tag")
  */
-
 class TagController extends AbstractController
 {
     /**
      * Articles view action.
      *
-     * @param Request $request
-     * @param ArticleRepository $repository
+     * @param Request            $request
+     * @param ArticleRepository  $repository
      * @param PaginatorInterface $paginator
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route(
      *     "/{name}/{id}",
@@ -39,7 +36,7 @@ class TagController extends AbstractController
      */
     public function articlesView(Request $request, TagRepository $tagRepository, ArticleRepository $articleRepository, PaginatorInterface $paginator, int $id): Response
     {
-       $tag = $tagRepository->find($id);
+        $tag = $tagRepository->find($id);
 
         $pagination = $paginator->paginate(
             $articleRepository->findbyTag($tag),
@@ -51,7 +48,7 @@ class TagController extends AbstractController
             'tag/view.html.twig',
             [
                 'pagination' => $pagination,
-                'tagName' => $tag->getName()
+                'tagName' => $tag->getName(),
             ]
         );
     }

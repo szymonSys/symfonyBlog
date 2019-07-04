@@ -186,7 +186,6 @@ class Avatar implements \Serializable
     public function setUser(?User $user): void
     {
         $this->user = $user;
-
     }
 
     /**

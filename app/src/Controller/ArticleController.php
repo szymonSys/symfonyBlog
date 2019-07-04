@@ -20,12 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ArticleController.
- *
  */
-
 class ArticleController extends AbstractController
 {
-
     /**
      * Index action.
      *
@@ -59,7 +56,7 @@ class ArticleController extends AbstractController
      *
 
      * @param \App\Repository\ArticleRepository $repository Article repository
-     * @param int                            $id         Element Id
+     * @param int                               $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -75,14 +72,13 @@ class ArticleController extends AbstractController
         $article = $articleRepository->find($id);
         $form = null;
 
-        if($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $comment = new Comment();
 
             $form = $this->createForm(CommentType::class, $comment);
             $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()) {
-
+            if ($form->isSubmitted() && $form->isValid()) {
                 $comment->setArticle($article);
                 $comment->setAuthor($this->getUser());
                 $commentRepository->save($comment);
@@ -98,7 +94,7 @@ class ArticleController extends AbstractController
             [
                 'article' => $article,
                 'comments' => $commentRepository->findForArticle($id),
-                'comment_form' => is_null($form) ? null : $form->createView()
+                'comment_form' => is_null($form) ? null : $form->createView(),
             ]
         );
     }
@@ -107,7 +103,7 @@ class ArticleController extends AbstractController
      * New action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository            $repository Article repository
+     * @param \App\Repository\ArticleRepository         $repository Article repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -122,7 +118,7 @@ class ArticleController extends AbstractController
      */
     public function new(Request $request, ArticleRepository $repository): Response
     {
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('article_index');
         }
 
@@ -130,7 +126,7 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $article->setAuthor($this->getUser());
             $repository->save($article);
 
@@ -151,8 +147,8 @@ class ArticleController extends AbstractController
      * Edit action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository            $repository Article repository
-     * @param int                            $id         Element Id
+     * @param \App\Repository\ArticleRepository         $repository Article repository
+     * @param int                                       $id         Element Id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -166,24 +162,24 @@ class ArticleController extends AbstractController
      *     name="article_edit",
      * )
      */
-    public function edit(Request $request, ArticleRepository $repository, int $id):Response
+    public function edit(Request $request, ArticleRepository $repository, int $id): Response
     {
-
         $article = $repository->find($id);
 
-        if(!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
+        if (!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
             return $this->redirectToRoute('article_index');
         }
 
         $form = $this->createForm(ArticleType::class, $article, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $repository->save($article);
 
             $this->addFlash('success', 'message.article_updated_successfully');
+
             return $this->redirectToRoute('article_index');
-        };
+        }
 
         return $this->render(
             'article/edit.html.twig',
@@ -198,8 +194,8 @@ class ArticleController extends AbstractController
      * Delete action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository            $repository Article repository
-     * $category = $repository->find($id);
+     * @param \App\Repository\ArticleRepository         $repository Article repository
+     *                                                              $category = $repository->find($id);
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -213,24 +209,23 @@ class ArticleController extends AbstractController
      *     name="article_delete",
      * )
      */
-    public function delete(Request $request, ArticleRepository $repository, int $id):Response
+    public function delete(Request $request, ArticleRepository $repository, int $id): Response
     {
         $article = $repository->find($id);
         if (!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
-
             return $this->redirectToRoute('article_index');
-        };
+        }
         $form = $this->createForm(FormType::class, $article, ['method' => 'DELETE']);
         $form->handleRequest($request);
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
-        };
-        if($form->isSubmitted() && $form->isValid()) {
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
             $repository->delete($article);
             $this->addFlash('success', 'message.article_deleted_successfully');
 
             return $this->redirectToRoute('article_index');
-        };
+        }
 
         return $this->render(
             'article/delete.html.twig',
@@ -241,5 +236,3 @@ class ArticleController extends AbstractController
         );
     }
 }
-
-

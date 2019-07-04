@@ -36,7 +36,7 @@ class PhotoController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Repository\PhotoRepository           $repository Photo repository
-     * @param int $id
+     * @param int                                       $id
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -55,14 +55,13 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-
         $article = $articleRepository->find($id);
 
-        if(!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
+        if (!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
             return $this->redirectToRoute(
                 'article_view',
                 [
-                    'id' => $id
+                    'id' => $id,
                 ]
             );
         }
@@ -79,7 +78,7 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute(
                 'article_view',
                 [
-                    'id' => $id
+                    'id' => $id,
                 ]
             );
         }
@@ -88,7 +87,7 @@ class PhotoController extends AbstractController
             'photo/new.html.twig',
             [
                 'id' => $id,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }
@@ -118,15 +117,15 @@ class PhotoController extends AbstractController
         $article = $articleRepository->find($articleId);
         $photo = $photoRepository->find($id);
 
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('security_login');
         }
 
-        if(!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
+        if (!$this->isGranted('ROLE_ADMIN') && $article->getAuthor()->getId() !== $this->getUser()->getId()) {
             return $this->redirectToRoute(
                 'article_view',
                 [
-                    'id' => $articleId
+                    'id' => $articleId,
                 ]
             );
         }
@@ -150,7 +149,7 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute(
                 'article_view',
                 [
-                    'id' => $articleId
+                    'id' => $articleId,
                 ]
             );
         }
@@ -160,7 +159,7 @@ class PhotoController extends AbstractController
             [
                 'form' => $form->createView(),
                 'id' => $id,
-                'articleId' => $articleId
+                'articleId' => $articleId,
             ]
         );
     }

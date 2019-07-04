@@ -131,7 +131,6 @@ class Photo implements \Serializable
         return $this->file;
     }
 
-
     /**
      * Setter for File name.
      *

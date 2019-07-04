@@ -2,6 +2,7 @@
 /**
  * Registration Ccontroller.
  */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -31,9 +32,8 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-
             return $this->redirectToRoute('article_index');
-        };
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -51,6 +51,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'message.user_created_successfully');
+
             return $this->redirectToRoute('security_login');
         }
 

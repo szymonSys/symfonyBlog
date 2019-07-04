@@ -2,44 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56cf03f4-f9bb-45ae-8a58-df930d755ac9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/ArticleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/AuthorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/AuthorController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/AvatarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/AvatarController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/PhotoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/PhotoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/SearchController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Controller/SubscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/SubscriptionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Controller/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/TagController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/AbstractBaseFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/AbstractBaseFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/ArticleFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/ArticleFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/CategoryFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/CategoryFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/CommentFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/CommentFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/TagFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/TagFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Entity/Avatar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/Avatar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Entity/Photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/Photo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/EventListener/AvatarUploadListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/EventListener/AvatarUploadListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/EventListener/PhotoUploadListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/EventListener/PhotoUploadListener.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Form/ArticleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/ArticleType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Form/AuthorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/AuthorType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/AvatarType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/AvatarType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/CategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/CategoryType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/CommentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/CommentType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/DataTransformer/TagsDataTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/DataTransformer/TagsDataTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/EventListener/DefaultAvatarFileEventSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/EventListener/DefaultAvatarFileEventSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/EventListener/DefaultPhotoFileEventSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/EventListener/DefaultPhotoFileEventSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Form/PhotoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/PhotoType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190603122754.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190604160834.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190614161441.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190625123814.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190626213834.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190627071919.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190627141645.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Migrations/Version20190704105535.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Migrations/Version20190704105535.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Repository/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/ArticleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Repository/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Repository/TagRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/TagRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Repository/UserRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/article/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/article/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/article/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/article/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/author/delete.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/author/delete.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/author/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/author/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/author/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/author/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/photo/delete.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/search/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/search/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/subscription/followed.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/subscription/followed.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/tag/view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tag/view.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/translations/messages.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/app/translations/messages.en.xlf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/translations/messages.pl.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/app/translations/messages.pl.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Service/FileUploader.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Service/FileUploader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Service/MarkdownHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Service/MarkdownHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/Twig/AppExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/Twig/AppExtension.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,69 +59,52 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/app/composer.json</pharConfigPath>
     <execution>
-      <executable />
+      <executable path="C:\ProgramData\ComposerSetup\bin\composer" />
     </execution>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.36034912">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/translations/messages.pl.xlf">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="187" column="25" selection-start-line="187" selection-start-column="25" selection-end-line="187" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/translations/messages.en.xlf">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="693">
-                  <caret line="366" column="24" selection-start-line="366" selection-start-column="24" selection-end-line="366" selection-end-column="24" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/Controller/UserController.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="558">
-                  <caret line="101" selection-start-line="101" selection-end-line="101" />
-                  <folding>
-                    <element signature="e#6#33#0#PHP" expanded="true" />
-                    <element signature="e#61#95#0#PHP" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/Form/PhotoType.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="527">
-                  <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="39" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/src/Form/RegistrationFormType.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="422">
-                  <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/PhotoController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="51" column="42" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/AuthorController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="863">
+              <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2274">
+              <caret line="229" column="29" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+              <folding>
+                <element signature="e#6#36#0#PHP" expanded="true" />
+                <element signature="e#65#88#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -128,6 +120,8 @@
       <find>title.article_new</find>
       <find>edytuj bl</find>
       <find>label.photo</find>
+      <find>content</find>
+      <find>subskrybcj</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,7 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/EventListener/AvatarUploadListener.php" />
         <option value="$PROJECT_DIR$/app/src/Repository/PhotoRepository.php" />
         <option value="$PROJECT_DIR$/app/templates/photo/new.html.twig" />
         <option value="$PROJECT_DIR$/app/src/Entity/Photo.php" />
@@ -178,17 +171,24 @@
         <option value="$PROJECT_DIR$/app/src/Controller/ArticleController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/AuthorController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/AvatarController.php" />
-        <option value="$PROJECT_DIR$/app/src/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/PhotoController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/RegistrationController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/SubscriptionController.php" />
         <option value="$PROJECT_DIR$/app/src/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/app/src/Form/ArticleType.php" />
-        <option value="$PROJECT_DIR$/app/translations/messages.pl.xlf" />
         <option value="$PROJECT_DIR$/app/src/Form/RegistrationFormType.php" />
         <option value="$PROJECT_DIR$/app/translations/messages.en.xlf" />
+        <option value="$PROJECT_DIR$/app/translations/messages.pl.xlf" />
+        <option value="$PROJECT_DIR$/app/composer.json" />
+        <option value="$PROJECT_DIR$/app/src/Controller/CategoryController.php" />
       </list>
     </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -280,7 +280,7 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/contracts" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="386" />
     <option name="y" value="-19" />
     <option name="width" value="861" />
@@ -314,7 +314,7 @@
               <item name="SymfonyBlogProject" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SymfonyBlogProject" type="b2602c69:ProjectViewProjectNode" />
@@ -335,6 +335,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -383,20 +385,20 @@
       <workItem from="1561772593526" duration="4590000" />
       <workItem from="1561780107564" duration="781000" />
       <workItem from="1561884674677" duration="126000" />
-      <workItem from="1562230218851" duration="27042000" />
+      <workItem from="1562230218851" duration="34419000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="339388000" />
+    <option name="totallyTimeSpent" value="346765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14498934" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14498934" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32917964" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -407,8 +409,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.035306334" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49946696" weight="0.3364486" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.3364486" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -451,13 +453,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/users/delete.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/author/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="581">
@@ -569,35 +564,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="229" column="56" selection-start-line="229" selection-start-column="56" selection-end-line="229" selection-end-column="56" />
-          <folding>
-            <element signature="e#6#36#0#PHP" expanded="true" />
-            <element signature="e#65#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/AuthorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/Controller/AvatarController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
           <caret line="65" column="75" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="123" column="77" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -609,13 +579,6 @@
             <element signature="e#6#42#0#PHP" expanded="true" />
             <element signature="e#70#90#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/Controller/PhotoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="147" column="12" lean-forward="true" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -766,24 +729,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/translations/messages.en.xlf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="366" column="24" selection-start-line="366" selection-start-column="24" selection-end-line="366" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/translations/messages.pl.xlf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="187" column="25" selection-start-line="187" selection-start-column="25" selection-end-line="187" selection-end-column="25" />
+        <state relative-caret-position="145">
+          <caret line="336" column="24" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/Form/RegistrationFormType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
+        <state relative-caret-position="456">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/translations/messages.en.xlf">
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/AuthorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="366" column="24" selection-start-line="366" selection-start-column="24" selection-end-line="366" selection-end-column="24" />
+        <state relative-caret-position="863">
+          <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/ArticleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2274">
+          <caret line="229" column="29" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+          <folding>
+            <element signature="e#6#36#0#PHP" expanded="true" />
+            <element signature="e#65#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/PhotoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="51" column="42" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/Controller/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
         </state>
       </provider>
     </entry>

@@ -2,6 +2,7 @@
 /**
  * Category fixture.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;

@@ -27,7 +27,7 @@ class TagFixtures extends AbstractBaseFixtures implements DependentFixtureInterf
             $tag->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $tag->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
 
-            for ($i = 0; $i <= 3; $i++) {
+            for ($i = 0; $i <= 3; ++$i) {
                 $tag->addArticle($this->getRandomReference('article'));
             }
 

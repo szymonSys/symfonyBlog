@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Avatar;
 use App\Form\AvatarType;
 use App\Repository\AvatarRepository;
@@ -19,8 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FileUploader;
 
 /**
- * Class AvatarController
- * @package App\Controller
+ * Class AvatarController.
  *
  * @Route("/avatar")
  */
@@ -36,7 +34,7 @@ class AvatarController extends AbstractController
     /**
      * New action.
      *
-     * @param Request $request
+     * @param Request          $request
      * @param AvatarRepository $repository
      *
      * @return Response
@@ -69,7 +67,7 @@ class AvatarController extends AbstractController
                 'author_view',
                 [
                     'id' => $this->getUser()->getId(),
-                    'firstName' => $this->getUser()->getFirstName()
+                    'firstName' => $this->getUser()->getFirstName(),
                 ]
             );
         }
@@ -83,10 +81,10 @@ class AvatarController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request $request
-     * @param int $id
+     * @param Request          $request
+     * @param int              $id
      * @param AvatarRepository $repository
-     * @param Filesystem $filesystem
+     * @param Filesystem       $filesystem
      *
      * @return Response
      *
@@ -104,11 +102,11 @@ class AvatarController extends AbstractController
     {
         $avatar = $repository->find($id);
 
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('security_login');
         }
 
-        if($id !== $this->getUser()->getAvatar()->getId()) {
+        if ($id !== $this->getUser()->getAvatar()->getId()) {
             return $this->redirectToRoute(
                 'author_view',
                 [
@@ -123,10 +121,10 @@ class AvatarController extends AbstractController
         $form = $this->createForm(AvatarType::class, $avatar, ['method' => 'PUT']);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            if($formData->getFile() instanceof UploadedFile) {
+            if ($formData->getFile() instanceof UploadedFile) {
                 $repository->save($avatar);
                 $file = $originalAvatar->getFile();
                 $filesystem->remove($file->getPathname());
@@ -153,9 +151,9 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param Request          $request
      * @param AvatarRepository $repository
-     * @param int $id
+     * @param int              $id
      *
      * @return Response
      *
@@ -171,14 +169,13 @@ class AvatarController extends AbstractController
      */
     public function delete(Request $request, AvatarRepository $repository, int $id): Response
     {
-
         $avatar = $repository->find($id);
 
-        if(!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('security_login');
         }
 
-        if($id !== $this->getUser()->getAvatar()->getId()) {
+        if ($id !== $this->getUser()->getAvatar()->getId()) {
             return $this->redirectToRoute(
                 'author_view',
                 [

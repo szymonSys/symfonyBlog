@@ -1,10 +1,9 @@
 <?php
 /**
- * Comment Type
+ * Comment Type.
  */
 
 namespace App\Form;
-
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
@@ -18,14 +17,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class CommentType extends AbstractType
 {
-
     /**
      * Build the form.
      *
      * @see FormTypeExtensionInterface
      *
      * @param FormBuilderInterface $builder The form builder
-     * @param array $options The options
+     * @param array                $options The options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

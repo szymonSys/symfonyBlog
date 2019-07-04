@@ -22,33 +22,32 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     *
      * @param User $user
+     *
      * @return User[]
      */
     public function findAuthorData(User $user): array
     {
         $qb = $this->createQueryBuilder('u');
-        if ($user->getAvatar()){
+        if ($user->getAvatar()) {
             $qb->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName', 'u.roles', 'a.file AS avatar', 'a.id AS avatarId')
                 ->innerJoin('App\Entity\Avatar', 'a', Join::WITH, 'a.user = u');
         } else {
-            $qb->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName','u.roles');
-        };
+            $qb->select('u.id', 'u.email', 'u.firstName', 'u.bio', 'u.blogName', 'u.roles');
+        }
         $qb->andWhere('u.id = :userId')->setParameter('userId', $user->getId());
 
         return $qb->getQuery()->getResult();
     }
 
     /**
-     *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
     public function findFollowedAuthorsArticles(int $userId): QueryBuilder
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'u.articles', 'a.author', 'u.followedAuthors')
-            ->innerJoin('App\Entity\Article', 'a', Join::WITH,'u = u_f.followers' )
+            ->innerJoin('App\Entity\Article', 'a', Join::WITH, 'u = u_f.followers')
             ->andWhere('u.id = :userId')
             ->setParameter('userId', $userId)
             ->orderBy('a.publishedAt', 'DESC');
@@ -56,9 +55,9 @@ class UserRepository extends ServiceEntityRepository
         return $qb;
     }
 
-
     /**
      * @param string $searchParam
+     *
      * @return array
      */
     public function search(string $searchParam): array
@@ -71,14 +70,15 @@ class UserRepository extends ServiceEntityRepository
             ->orderBy('u.firstName', 'ASC')
             ->getQuery()
             ->getResult();
+
         return $qb;
     }
-
 
     /**
      * Find followed authors.
      *
      * @param User $user
+     *
      * @return QueryBuilder
      */
     public function findFollowedAuthors(User $user): QueryBuilder
@@ -93,7 +93,6 @@ class UserRepository extends ServiceEntityRepository
 
         return $qb;
     }
-
 
     public function findFollowers(User $user): QueryBuilder
     {

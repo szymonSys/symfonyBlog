@@ -7,9 +7,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Category;
-use App\Entity\Tag;
 use App\Form\DataTransformer\TagsDataTransformer;
-use App\Repository\TagRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,7 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class ArticleType.
  */
-
 class ArticleType extends AbstractType
 {
     /**
@@ -73,13 +70,13 @@ class ArticleType extends AbstractType
             'category',
             EntityType::class,
             [
-                'class'=> Category::class,
+                'class' => Category::class,
                 'choice_label' => function (Category $category) {
                     return $category->getName();
                 },
                 'label' => 'label.category',
                 'required' => true,
-                'placeholder' => 'wybierz kategorie...'
+                'placeholder' => 'wybierz kategorie...',
             ]
         );
 

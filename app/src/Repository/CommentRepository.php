@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Article;
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -24,6 +23,7 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * @param int $articleId
+     *
      * @return array
      */
     public function findForArticle(int $articleId): array
@@ -36,6 +36,7 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameter('articleId', $articleId)
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()->getResult();
+
         return $qb;
     }
 

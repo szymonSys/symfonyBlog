@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -33,7 +32,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-
     const NUMBER_OF_ITEMS = 6;
     /**
      * Role users.
@@ -93,7 +91,7 @@ class User implements UserInterface
     /**
      * E-mail.
      *
-     * @var string $email
+     * @var string
      *
      * @ORM\Column(
      *     type="string",
@@ -109,9 +107,6 @@ class User implements UserInterface
      * Password.
      *
      * @ORM\Column(type="string", length=255)
-     *
-     *
-     *
      */
     private $password;
 
@@ -139,7 +134,6 @@ class User implements UserInterface
      * Blog name.
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $blogName;
 
@@ -341,8 +335,9 @@ class User implements UserInterface
         foreach ($this->getRoles() as $role) {
             if ('ROLE_ADMIN' === $role) {
                 $isAdmin = true;
-            };
-        };
+            }
+        }
+
         return $isAdmin;
     }
 
@@ -353,7 +348,7 @@ class User implements UserInterface
 
     public function divestAdmin(): void
     {
-        if (isset($this->roles[1]) && $this->roles[1] === 'ROLE_ADMIN') {
+        if (isset($this->roles[1]) && 'ROLE_ADMIN' === $this->roles[1]) {
             unset($this->roles[1]);
         }
     }
@@ -394,7 +389,6 @@ class User implements UserInterface
     {
         $this->firstName = $firstName;
     }
-
 
     public function getBlogName(): ?string
     {
@@ -546,7 +540,7 @@ class User implements UserInterface
         $this->avatar = $avatar;
 
         // set (or unset) the owning side of the relation if necessary
-        $newUser = $avatar === null ? null : $this;
+        $newUser = null === $avatar ? null : $this;
         if ($newUser !== $avatar->getUser()) {
             $avatar->setUser($newUser);
         }

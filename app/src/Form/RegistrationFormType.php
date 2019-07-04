@@ -24,7 +24,7 @@ class RegistrationFormType extends AbstractType
                 [
                     'label' => 'label.first_name',
                     'required' => true,
-                    'attr' => ['max_length' => 255]
+                    'attr' => ['max_length' => 255],
                 ]
             )
             ->add('email',
@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'first_options'  => ['label' => 'label.password'],
+                'first_options' => ['label' => 'label.password'],
                 'second_options' => ['label' => 'label.repeat_password'],
                 'constraints' => [
                     new NotBlank([

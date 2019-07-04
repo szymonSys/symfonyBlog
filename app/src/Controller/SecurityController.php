@@ -5,13 +5,10 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-
 
 /**
  * Class SecurityController.
@@ -38,9 +35,9 @@ class SecurityController extends AbstractController
         // last username entered by the users
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        if($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('article_index');
-        };
+        }
 
         return $this->render(
             'security/login.html.twig',
@@ -66,7 +63,6 @@ class SecurityController extends AbstractController
         // Request is intercepted before reaches this exception:
         throw new \Exception('Internal security module error');
     }
-
 
 //    /**
 //     * Register action.
@@ -115,5 +111,3 @@ class SecurityController extends AbstractController
 //        );
 //    }
 }
-
-
