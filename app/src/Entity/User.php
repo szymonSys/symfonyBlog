@@ -36,7 +36,7 @@ class User implements UserInterface
 
     const NUMBER_OF_ITEMS = 6;
     /**
-     * Role user.
+     * Role users.
      *
      * @var string
      */
@@ -146,7 +146,11 @@ class User implements UserInterface
     /**
      * Articles.
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Article",
+     *     mappedBy="author",
+     *     orphanRemoval=true
+     * )
      */
     private $articles;
 
@@ -307,10 +311,10 @@ class User implements UserInterface
      *
      * @return array Roles
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // guarantee every users at least has ROLE_USER
         $roles[] = static::ROLE_USER;
 
         return array_unique($roles);
@@ -327,6 +331,34 @@ class User implements UserInterface
     }
 
     /**
+     * Check if admin.
+     *
+     * @return bool
+     */
+    public function checkIfAdmin(): bool
+    {
+        $isAdmin = false;
+        foreach ($this->getRoles() as $role) {
+            if ('ROLE_ADMIN' === $role) {
+                $isAdmin = true;
+            };
+        };
+        return $isAdmin;
+    }
+
+    public function makeAdmin(): void
+    {
+        $this->roles[] = 'ROLE_ADMIN';
+    }
+
+    public function divestAdmin(): void
+    {
+        if (isset($this->roles[1]) && $this->roles[1] === 'ROLE_ADMIN') {
+            unset($this->roles[1]);
+        }
+    }
+
+    /**
      * @see UserInterface
      */
     public function getSalt()
@@ -339,7 +371,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // If you store any temporary, sensitive data on the users, clear it here
         // $this->plainPassword = null;
     }
 

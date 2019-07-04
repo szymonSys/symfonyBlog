@@ -186,6 +186,190 @@
                 <source>label.content</source>
                 <target>Content</target>
             </trans-unit>
+            <trans-unit id="label.edit_photo">
+                <source>label.edit_photo</source>
+                <target>edit photo</target>
+            </trans-unit>
+            <trans-unit id="label.add_photo">
+                <source>label.add_photo</source>
+                <target>add photo</target>
+            </trans-unit>
+            <trans-unit id="label.comments">
+                <source>label.comments</source>
+                <target>Comments</target>
+            </trans-unit>
+            <trans-unit id="label.add_comments">
+                <source>label.add_comments</source>
+                <target>Add comment</target>
+            </trans-unit>
+            <trans-unit id="label.no_comments">
+                <source>label.no_comments</source>
+                <target>There are no comments</target>
+            </trans-unit>
+            <trans-unit id="desctiption.login_to_comment">
+                <source>desctiption.login_to_comment</source>
+                <target>to be able to comment</target>
+            </trans-unit>
+            <trans-unit id="label.sort">
+                <source>label.sort</source>
+                <target>Sort</target>
+            </trans-unit>
+            <trans-unit id="action.change">
+                <source>action.change</source>
+                <target>Change</target>
+            </trans-unit>
+             <trans-unit id="action.add_avatar">
+                 <source>action.add_avatar</source>
+                 <target>Add avatar</target>
+             </trans-unit>
+             <trans-unit id="action.edit_blog">
+                 <source>action.edit_blog</source>
+                 <target>Edit blog</target>
+             </trans-unit>
+             <trans-unit id="label.remove_admin_privileges">
+                 <source>label.remove_admin_privileges</source>
+                 <target>Deprive administrator permissions</target>
+             </trans-unit>
+             <trans-unit id="label.add_admin_privileges">
+                 <source>label.add_admin_privileges</source>
+                 <target>Give administrator permissions</target>
+             </trans-unit>
+             <trans-unit id="label.delete_user">
+                 <source>label.delete_user</source>
+                 <target>Delete user</target>
+             </trans-unit>
+             <trans-unit id="name.avatar_new">
+                 <source>name.avatar_new</source>
+                 <target>New avatar</target>
+             </trans-unit>
+             <trans-unit id="name.avatar_edit">
+                 <source>name.avatar_edit</source>
+                 <target>Edit avatar</target>
+             </trans-unit>
+             <trans-unit id="name.avatar_delete">
+                 <source>name.avatar_delete</source>
+                 <target>Delete avatar</target>
+             </trans-unit>
+             <trans-unit id="name.photo_new">
+                 <source>name.photo_new</source>
+                 <target>Add article photo</target>
+             </trans-unit>
+             <trans-unit id="name.photo_edit">
+                 <source>name.photo_edit</source>
+                 <target>Edit article photo</target>
+             </trans-unit>
+             <trans-unit id="label.sign_in">
+                 <source>label.sign_in</source>
+                 <target>Logining</target>
+             </trans-unit>
+             <trans-unit id="label.followed_authors">
+                 <source>label.followed_authors</source>
+                 <target>Followed</target>
+             </trans-unit>
+             <trans-unit id="label.tag">
+                 <source>label.tag</source>
+                 <target>Tag</target>
+             </trans-unit>
+             <trans-unit id="title.main_page">
+                 <source>title.main_page</source>
+                 <target>Main Site</target>
+             </trans-unit>
+            <trans-unit id="message.comment_created_successfully">
+                <source>message.comment_created_successfully</source>
+                <target>Added comment</target>
+            </trans-unit>
+            <trans-unit id="message.article_created_successfully">
+                <source>message.article_created_successfully</source>
+                <target>Added article</target>
+            </trans-unit>
+            <trans-unit id="message.article_updated_successfully">
+                <source>message.article_updated_successfully</source>
+                <target>Edited article</target>
+            </trans-unit>
+            <trans-unit id="message.article_deleted_successfully">
+                <source>message.article_deleted_successfully</source>
+                <target>Deleted article</target>
+            </trans-unit>
+            <trans-unit id="message.author_updated_successfully">
+                <source>message.author_updated_successfully</source>
+                <target>Edited user informations</target>
+            </trans-unit>
+            <trans-unit id="message.avatar_created_successfully">
+                <source>message.avatar_created_successfully</source>
+                <target>Added avatar</target>
+            </trans-unit>
+            <trans-unit id="message.avatar_updated_successfully">
+                <source>message.avatar_updated_successfully</source>
+                <target>Edited avatar</target>
+            </trans-unit>
+            <trans-unit id="message.avatar_deleted_successfully">
+                <source>message.avatar_deleted_successfully</source>
+                <target>Deleted avatar</target>
+            </trans-unit>
+            <trans-unit id="message.category_created_successfully">
+                <source>message.category_created_successfully</source>
+                <target>Added category</target>
+            </trans-unit>
+            <trans-unit id="message.category_updated_successfully">
+                <source>message.category_updated_successfully</source>
+                <target>Edited category</target>
+            </trans-unit>
+            <trans-unit id="message.category_deleted_successfully">
+                <source>message.category_deleted_successfully</source>
+                <target>Deleted category</target>
+            </trans-unit>
+            <trans-unit id="message.photo_created_successfully">
+                <source>message.photo_created_successfully</source>
+                <target>Added article photo</target>
+            </trans-unit>
+            <trans-unit id="message.photo_updated_successfully">
+                <source>message.photo_updated_successfully</source>
+                <target>Edited article photo</target>
+            </trans-unit>
+            <trans-unit id="message.user_created_successfully">
+                <source>message.user_created_successfully</source>
+                <target>Account created, you can already log in!</target>
+            </trans-unit>
+            <trans-unit id="message.followed_created_successfully">
+                <source>message.followed_created_successfully</source>
+                <target>Add new subscription</target>
+            </trans-unit>
+            <trans-unit id="message.followed_deleted_successfully">
+                <source>message.followed_deleted_successfully</source>
+                <target>Canceled subscription</target>
+            </trans-unit>
+            <trans-unit id="message.user_role_edited_successfully">
+                <source>message.user_role_edited_successfully</source>
+                <target>User permissions have been changed!</target>
+            </trans-unit>
+            <trans-unit id="message.user_deleted_successfully">
+                <source>message.user_deleted_successfully</source>
+                <target>Deleted user</target>
+            </trans-unit>
+            <trans-unit id="label.avatar">
+                <source>label.avatar</source>
+                <target>Avatar</target>
+            </trans-unit>
+            <trans-unit id="label.photo">
+                <source>label.photo</source>
+                <target>Photo</target>
+            </trans-unit>
+            <trans-unit id="label.first_name">
+                <source>label.first_name</source>
+                <target>First name</target>
+            </trans-unit>
+            <trans-unit id="label.mail">
+                <source>label.mail</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="label.repeat_password">
+                <source>label.repeat_password</source>
+                <target>Repeat password</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -63,7 +63,7 @@ class AvatarController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar->setUser($this->getUser());
             $repository->save($avatar);
-            $this->addFlash('success', 'message.created_successfully');
+            $this->addFlash('success', 'message.avatar_created_successfully');
 
             return $this->redirectToRoute(
                 'author_view',
@@ -132,7 +132,7 @@ class AvatarController extends AbstractController
                 $filesystem->remove($file->getPathname());
             }
 
-            $this->addFlash('success', 'message.updated_successfully');
+            $this->addFlash('success', 'message.avatar_updated_successfully');
 
             return $this->redirectToRoute(
                 'author_view',
@@ -197,7 +197,7 @@ class AvatarController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->delete($avatar);
-            $this->addFlash('success', 'message.deleted_successfully');
+            $this->addFlash('success', 'message.avatar_deleted_successfully');
 
             return $this->redirectToRoute(
                 'author_view',

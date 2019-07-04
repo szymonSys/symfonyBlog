@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="header">Tag: {{ tagName }}</h1>
+    <h1 class="header">{{ 'label.tag'|trans }}: {{ tagName }}</h1>
     {% if pagination is defined and pagination|length %}
 
         <div class="navigation text-center flex-column">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="sort-bar">
-            <div><span>Sortuj: </span></div>
+            <div><span>{{ 'label.sort'|trans }}: </span></div>
             <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</span>
             <span>|</span>
             <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</span>

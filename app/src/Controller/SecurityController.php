@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // last username entered by the users
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -87,23 +87,23 @@ class SecurityController extends AbstractController
 //     */
 //    public function register(Request $request, UserRepository $repository, UserPasswordEncoderInterface $passwordEncoder): Response
 //    {
-//        $user = new User();
-//        $form = $this->createForm(UserType::class, $user);
+//        $users = new User();
+//        $form = $this->createForm(UserType::class, $users);
 //        $form->handleRequest($request);
 //
 //        if($form->isSubmitted() && $form->isValid()) {
-//            $user->setPassword(
+//            $users->setPassword(
 //                $passwordEncoder->encodePassword(
-//                    $user,
+//                    $users,
 //                    $form->get('password')->getData()
 //                )
 //            );
 //
-//            $user->setRoles(['ROLE_USER']);
-//            $user->setBlogName(
+//            $users->setRoles(['ROLE_USER']);
+//            $users->setBlogName(
 //              $form->get('firstName')->getData()
 //            );
-//            $repository->save($user);
+//            $repository->save($users);
 //            $this->addFlash('success', 'message.updated_successfully');
 //
 //            return $this->redirectToRoute('security_login');

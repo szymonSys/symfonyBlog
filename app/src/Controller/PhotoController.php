@@ -74,7 +74,7 @@ class PhotoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $photo->setArticle($article);
             $photoRepository->save($photo);
-            $this->addFlash('success', 'message.created_successfully');
+            $this->addFlash('success', 'message.photo_created_successfully');
 
             return $this->redirectToRoute(
                 'article_view',
@@ -145,7 +145,7 @@ class PhotoController extends AbstractController
                 $filesystem->remove($file->getPathname());
             }
 
-            $this->addFlash('success', 'message.updated_successfully');
+            $this->addFlash('success', 'message.photo_updated_successfully');
 
             return $this->redirectToRoute(
                 'article_view',

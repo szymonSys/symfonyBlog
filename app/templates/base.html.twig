@@ -433,7 +433,7 @@
     <div class="fixed-top navbar navbar-dark nav-bar-top bg-dark text-white row menu-shadow ">
         <div class="pd-left-50px col-auto">
             <a class="nav-link text-light" href="{{ url('article_index') }}">
-                Strona Główna
+                {{ 'title.main_page'|trans }}
             </a>
         </div>
         <div class="col-5">
@@ -447,7 +447,7 @@
         <div class="pd-right-100px col-auto">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div class="d-inline-block btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-outline-light" href="{{ url('security_logout') }}">wyloguj się</a>
+                <a class="btn btn-outline-light" href="{{ url('security_logout') }}">{{ 'title.logout'|trans }}</a>
                 <a title="{{ app.user.firstName }}" href="{{ url('author_view', {id: app.user.id, firstName: app.user.firstName} ) }}">
                     {% if app.user.avatar.file.filename is defined %}
                         <img width="50px" class="nav-profile-img rounded-circle" src="{{ asset('uploads/photos/'~ app.user.avatar.file.filename) }}">
@@ -458,8 +458,8 @@
             </div>
                         {% else %}
                             <div class="d-inline-block btn-group" role="group" aria-label="Basic example">
-                                <a class="btn btn-success" href="{{ url('security_login') }}">zaloguj się</a>
-                                <a class="btn btn-light" href="{{ url('app_register') }}">rejestracja</a>
+                                <a class="btn btn-success" href="{{ url('security_login') }}">{{ 'title.login'|trans }}</a>
+                                <a class="btn btn-light" href="{{ url('app_register') }}">{{ 'title.register'|trans }}</a>
                             </div>
             {% endif %}
         </div>
@@ -467,23 +467,23 @@
     <div class="row">
             <nav class="col-2 vertical-menu-contener navbar-dark bg-info text-white menu-shadow">
                 <ul class="nav fz-20px vertical-menu">
-                    <li><a class="nav-link text-light {% block articlesActive %}{% endblock %}" href="{{ url('article_index') }}">Artykuły</a></li>
+                    <li><a class="nav-link text-light {% block articlesActive %}{% endblock %}" href="{{ url('article_index') }}">{{ 'title.article_list'|trans }}</a></li>
                     <li><a class="nav-link text-light {% block categoriesActive %}{% endblock %}" href="{{ url('category_index') }}">{{ 'title.category_list'|trans }}</a></li>
                     <li><a class="last-sublist-elem nav-link text-light {% block authorsActive %}{% endblock %}" href="{{ url('author_index') }}">{{ 'title.author_list'|trans }}</a></li>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li><a class="nav-link text-light {% block myBlogActive %}{% endblock %}" href="{{ url('author_view', {id: app.user.id, firstName: app.user.firstName} ) }}">{{ 'title.my_blog'|trans }}</a></li>
                         <li><a class="nav-link text-light {% block subscriptionsActive %}{% endblock %}" href="{{ url('subscriptions_index') }}">{{ 'title.subscription_list'|trans }}</a></li>
-                        <li><a class="nav-link text-light {% block followedActive %}{% endblock %}" href="{{ url('subscriptions_followed') }}">Obserwowani</a></li>
+                        <li><a class="nav-link text-light {% block followedActive %}{% endblock %}" href="{{ url('subscriptions_followed') }}">{{ 'label.followed_authors'|trans }}</a></li>
                         <li><a class="nav-link text-light {% block followersActive %}{% endblock %}" href="{{ url('subscriptions_followers') }}">{{ 'title.followers'|trans }}</a></li>
                         <li><a class="nav-link text-light" href="{{ url('article_new') }}" title="new">{{ 'action.add_article'|trans }}</a></li>
-                        <li><a class="nav-link text-light" href="{{ url('edit_author', {id: app.user.id}) }}">Edytuj blog</a></li>
+                        <li><a class="nav-link text-light" href="{{ url('edit_author', {id: app.user.id}) }}">{{ 'title.author_edit'|trans }}</a></li>
                         {% else %}
                             <li><a class="nav-link disabled" href="">{{ 'title.my_blog'|trans }}</a></li>
                             <li><a class="nav-link disabled" href="">{{ 'title.subscription_list'|trans }}</a></li>
-                            <li><a class="nav-link disabled" href="">Obserwowani</a></li>
+                            <li><a class="nav-link disabled" href="">{{ 'label.followed_authors'|trans }}</a></li>
                             <li><a class="nav-link disabled" href="">{{ 'title.followers'|trans }}</a></li>
                             <li><a class="nav-link disabled" href="">{{ 'action.add_article'|trans }}</a></li>
-                            <li><a class="nav-link disabled" href="">Edytuj blog</a></li>
+                            <li><a class="nav-link disabled" href="">{{ 'title.author_edit'|trans }}</a></li>
                     {% endif %}
                 </ul>
             </nav>

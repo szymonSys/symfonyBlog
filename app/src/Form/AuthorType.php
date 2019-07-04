@@ -71,6 +71,6 @@ class AuthorType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'user';
+        return 'users';
     }
 }

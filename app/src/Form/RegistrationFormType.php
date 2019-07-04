@@ -22,7 +22,7 @@ class RegistrationFormType extends AbstractType
                 'firstName',
                 TextType::class,
                 [
-                    'label' => 'imię',
+                    'label' => 'label.first_name',
                     'required' => true,
                     'attr' => ['max_length' => 255]
                 ]
@@ -30,7 +30,7 @@ class RegistrationFormType extends AbstractType
             ->add('email',
                 EmailType::class,
                 [
-                    'label' => 'mail',
+                    'label' => 'label.mail',
                     'required' => true,
                 ]
             )
@@ -41,8 +41,8 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'first_options'  => ['label' => 'hasło'],
-                'second_options' => ['label' => 'powtórz hasło'],
+                'first_options'  => ['label' => 'label.password'],
+                'second_options' => ['label' => 'label.repeat_password'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -55,7 +55,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -75,6 +74,6 @@ class RegistrationFormType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'user';
+        return 'users';
     }
 }

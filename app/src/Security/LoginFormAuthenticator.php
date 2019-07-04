@@ -114,7 +114,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * Get user.
+     * Get users.
      *
      * @param mixed                                                       $credentials  Credentials
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider User provider

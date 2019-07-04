@@ -49,21 +49,6 @@ class SubscriptionController extends AbstractController
             Article::NUMBER_OF_ITEMS
         );
 
-//        $subscriber = $this->getUser();
-//        $followedAuthors = $subscriber->getFollowedAuthors();
-//        $articles = [];
-//        foreach ($followedAuthors as $author) {
-//            foreach ($author->getArticles() as $article) {
-//                array_push($articles, $article);
-//            }
-//        };
-//
-//        $pagination = $paginator->paginate(
-//            $articles,
-//            $request->query->getInt('page', 1),
-//            Article::NUMBER_OF_ITEMS
-//        );
-//
         return $this->render(
             'subscription/index.html.twig',
             ['pagination' => $pagination]
@@ -164,7 +149,7 @@ class SubscriptionController extends AbstractController
             if(!$isSubscribed) {
                 $subscriber->addFollowedAuthor($author);
                 $repository->save($subscriber);
-                $this->addFlash('success', 'message.created_successfully');
+                $this->addFlash('success', 'message.followed_created_successfully');
             }
         }
 
@@ -208,7 +193,7 @@ class SubscriptionController extends AbstractController
             if($isSubscribed) {
                 $subscriber->removeFollowedAuthor($author);
                 $repository->save($subscriber);
-                $this->addFlash('success', 'message.deleted_successfully');
+                $this->addFlash('success', 'message.followed_deleted_successfully');
             }
         }
 

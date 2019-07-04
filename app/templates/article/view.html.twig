@@ -29,12 +29,12 @@
             {% if article.coverPhoto.file is defined %}
                 <img class="article-photo article-header-item" src="{{ asset('uploads/photos/'~ article.coverPhoto.file.filename) }}">
 			{% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
-                		<a class="edit-photo" href="{{ url('photo_edit', {articleId: article.id, id: article.coverPhoto.id}) }}">edytuj zdjęcie</a>
+                		<a class="edit-photo" href="{{ url('photo_edit', {articleId: article.id, id: article.coverPhoto.id}) }}">{{ 'label.edit_photo'|trans }}</a>
 			{% endif %}
                 {% else %}
                     <img class="article-photo article-header-item" src="{{ asset('uploads/photos/cover_placeholder_image.jpg') }}">
 			{% if app.user.firstName is defined and (article.author.firstName == app.user.firstName or is_granted('ROLE_ADMIN'))%}
-                    		<a class="edit-photo" href="{{ url('photo_new', {id: article.id}) }}">dodaj zdjęcie</a>
+                    		<a class="edit-photo" href="{{ url('photo_new', {id: article.id}) }}">{{ 'label.add_photo'|trans }}</a>
 			 {% endif %}
         {% endif %}
             <h1 class="article-title article-header-item">{{  article.title }}</h1>
@@ -52,7 +52,7 @@
         </header>
         <main class="article-content">{{  article.body|markdown }}</main>
         <div>
-            <h3 class="sub-header">Tagi</h3>
+            <h3 class="sub-header">{{ 'label.tags'|trans }}</h3>
             <section class="tags-container">
             {% for tag in article.tags %}
                 <span class="tag"><a class="badge badge-info tag" href="{{ url('tag_articles', {id: tag.id, name: tag.name}) }}">{{ tag.name }}</a></span>
@@ -64,7 +64,7 @@
             {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
-    <h2>Komentarze</h2>
+    <h2>{{ 'label.comments'|trans }}</h2>
     <div class="comments-container">
     {% if comments is defined and comments|length %}
         {% for comment in comments %}
@@ -84,10 +84,10 @@
             </div>
         {% endfor %}
         {% else %}
-            <p>brak komentarzy</p>
+            <p>{{ 'label.no_comments'|trans }}</p>
     {% endif %}
     </div>
-    <h3 class="sub-header">Dodaj komentarz</h3>
+    <h3 class="sub-header">{{ 'label.add_comments'|trans }}</h3>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and comment_form is defined %}
 
     {{ form_start(comment_form, { method: 'POST', action: url('article_view', {id: article.id}) }) }}
@@ -98,6 +98,6 @@
     {{ form_end(comment_form) }}
         </div>
         {% else %}
-        <p><a href="{{ url('security_login') }}">zaloguj się</a>, by móc komentować</p>
+        <p><a href="{{ url('security_login') }}">{{ 'title.login'|trans }}</a>, {{ 'desctiption.login_to_comment'|trans }}.</p>
     {% endif %}
 {% endblock %}

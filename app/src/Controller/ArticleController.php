@@ -87,7 +87,7 @@ class ArticleController extends AbstractController
                 $comment->setAuthor($this->getUser());
                 $commentRepository->save($comment);
 
-                $this->addFlash('success', 'message.created_successfully');
+                $this->addFlash('success', 'message.comment_created_successfully');
 
                 return $this->redirectToRoute('article_view', ['id' => $id]);
             }
@@ -134,7 +134,7 @@ class ArticleController extends AbstractController
             $article->setAuthor($this->getUser());
             $repository->save($article);
 
-            $this->addFlash('success', 'message.created_successfully');
+            $this->addFlash('success', 'message.article_created_successfully');
 
             return $this->redirectToRoute(
                 'photo_new', ['id' => $article->getId()]
@@ -181,7 +181,7 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $repository->save($article);
 
-            $this->addFlash('success', 'message.updated_successfully');
+            $this->addFlash('success', 'message.article_updated_successfully');
             return $this->redirectToRoute('article_index');
         };
 
@@ -216,24 +216,21 @@ class ArticleController extends AbstractController
     public function delete(Request $request, ArticleRepository $repository, int $id):Response
     {
         $article = $repository->find($id);
+        if (!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
 
-        if(!$this->isGranted('ROLE_ADMIN') && (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->getUser()->getId() !== $article->getAuthor()->getId())) {
             return $this->redirectToRoute('article_index');
-        }
-
+        };
         $form = $this->createForm(FormType::class, $article, ['method' => 'DELETE']);
         $form->handleRequest($request);
-
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
-        }
-
+        };
         if($form->isSubmitted() && $form->isValid()) {
             $repository->delete($article);
+            $this->addFlash('success', 'message.article_deleted_successfully');
 
-            $this->addFlash('success', 'message.deleted_successfully');
             return $this->redirectToRoute('article_index');
-        }
+        };
 
         return $this->render(
             'article/delete.html.twig',

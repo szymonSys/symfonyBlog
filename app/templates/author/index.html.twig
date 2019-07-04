@@ -17,8 +17,14 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'u.firstName') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_date'|trans, 'u.createdAt') }}</th>
-                <th class="ta-right"> {{ 'label.number_of_article'|trans }} </th>
-                <th class="ta-right">{{ 'label.number_of_followers'|trans }}</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th class="ta-center"> {{ 'label.number_of_article'|trans }} </th>
+                    <th class="ta-center">{{ 'label.number_of_followers'|trans }}</th>
+                    <th class="ta-right">{{ 'label.options'|trans }}</th>
+                {% else %}
+                    <th class="ta-right"> {{ 'label.number_of_article'|trans }} </th>
+                    <th class="ta-right">{{ 'label.number_of_followers'|trans }}</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -38,8 +44,18 @@
                         </a>
                     </td>
                     <td>{{ author.createdAt|localizeddate }}</td>
-                    <td class="ta-right">{{ author.articles|length }}</td>
-                    <td class="ta-right">{{ author.followers|length }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td class="ta-center"> {{ author.articles|length }} </td>
+                        <td class="ta-center">{{ author.followers|length }}</td>
+                        <td class="ta=right">
+                            <a href="{{ url('delete_user', {id: author.id}) }}" title="{{ 'action.delete'|trans }}">
+                                {{ 'action.delete'|trans }}
+                            </a>
+                        </td>
+                    {% else %}
+                        <td class="ta-right">{{ author.articles|length }}</td>
+                        <td class="ta-right">{{ author.followers|length }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

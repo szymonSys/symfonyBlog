@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Obserwowani
+    {{ 'label.followed_authors'|trans }}
 {% endblock %}
 
 {% block followedActive %}text-dark{% endblock %}
 
 {% block body %}
-    <h1 class="header">Obserwowani</h1>
+    <h1 class="header">{{ 'label.followed_authors'|trans }}</h1>
     {% if pagination is defined and pagination|length %}
 
         <div class="navigation text-center flex-column">

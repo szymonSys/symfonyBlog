@@ -21,15 +21,15 @@
                 <img class="rounded-circle" width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/'~ authorData[0].avatar) }}">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
                     <div class="manage-avatar">
-                        <a class="edit-avatar" href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">zmień</a>
+                        <a class="edit-avatar" href="{{ url('avatar_edit', {id: authorData[0].avatarId}) }}">{{ 'action.change'|trans }}</a>
                         <span> | </span>
-                        <a class="delete-avatar" href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">usuń</a>
+                        <a class="delete-avatar" href="{{ url('avatar_delete', {id: authorData[0].avatarId}) }}">{{ 'action.delete'|trans }}</a>
                     </div>
                 {% endif %}
                 {% else %}
                     <img class="rounded-circle" width="120px" class="nav-profile-img" src="{{ asset('uploads/photos/user_placeholder_image.jpg') }}">
-                    {% if app.user.id == authorData[0].id%}
-                        <a class="add-avatar" href="{{ url('avatar_new') }}">dodaj avatar</a>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user.id == authorData[0].id %}
+                        <a class="add-avatar" href="{{ url('avatar_new') }}">{{ 'action.add_avatar'|trans }}</a>
                     {% endif %}
             {% endif %}
         </div>
@@ -40,13 +40,21 @@
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {% if app.user.id == authorData[0].id %}
                     <a class="followed-link btn btn-secondary" href="{{ url('subscriptions_followers') }}">{{ 'title.followers'|trans }}</a>
-                    <a class="edit-blog-data btn btn-warning" href="{{ url('edit_author', {id: authorData[0].id}) }}">Edytuj blog</a>
+                    <a class="edit-blog-data btn btn-warning" href="{{ url('edit_author', {id: authorData[0].id}) }}">{{ 'action.edit_blog'|trans }}</a>
                 {% else %}
                     {% if not isSubscribed %}
                         <a class="btn btn-success" href="{{ url('subscription_follow', {id: authorData[0].id}) }}" title="follow">{{ 'label.follow'|trans }}</a>
                     {% else %}
                         <a class="btn btn-danger" href="{{ url('subscription_unfollow', {id: authorData[0].id}) }}" title="unfollow">{{ 'label.unfollow'|trans }}</a>
                     {% endif %}
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% if authorData[0].roles[1] is defined and authorData[0].roles[1] == 'ROLE_ADMIN' %}
+                        <a href="{{ url('edit_role', {id: authorData[0].id}) }}">{{ 'label.remove_admin_privileges'|trans }}</a>
+                            {% else %}
+                                <a href="{{ url('edit_role', {id: authorData[0].id}) }}">{{ 'label.add_admin_privileges'|trans }}</a>
+                    {% endif %}
+                    <a href="{{ url('delete_user', {id: authorData[0].id}) }}">{{ 'label.delete_user'|trans }}</a>
                 {% endif %}
             {% endif %}
         </div>
@@ -60,7 +68,7 @@
         </div>
 
         <div class="sort-bar">
-            <div><span>Sortuj: </span></div>
+            <div><span>{{ 'label.sort'|trans }}: </span></div>
             <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</span>
             <span>|</span>
             <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</span>

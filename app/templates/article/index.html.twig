@@ -14,19 +14,11 @@
         </a>
     {% endif %}
     {% if pagination is defined and pagination|length %}
-
         <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
-
-{#                {{ 'label.author'|trans }}#}
-
-{#                {% if is_granted('ROLE_ADMIN') %}#}
-{#                    {{ 'label.options'|trans }}#}
-{#                {% endif %}#}
-
             <div class="sort-bar">
-                <div><span>Sortuj: </span></div>
+                <div><span>{{ 'label.sort'|trans }}: </span></div>
                     <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'a.title') }}</span>
                     <span>|</span>
                     <span class="sort-item">{{ knp_pagination_sortable(pagination, 'label.published_date'|trans, 'a.publishedAt') }}</span>
@@ -81,15 +73,12 @@
                 </div>
             {% endfor %}
         </section>
-
         <div class="navigation text-center flex-column">
             {{ knp_pagination_render(pagination) }}
         </div>
-
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
     {% endif %}
-
 {% endblock %}
