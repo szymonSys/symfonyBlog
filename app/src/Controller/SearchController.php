@@ -21,11 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchController extends AbstractController
 {
     /**
+     * View action.
+     *
      * @param Request           $request
      * @param UserRepository    $userRepository
      * @param ArticleRepository $articleRepository
      * @param TagRepository     $tagRepository
-     * @param string            $search
      *
      * @return Response
      *

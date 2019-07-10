@@ -5,6 +5,7 @@
 
 namespace App\Service;
 
+use Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -33,9 +34,9 @@ class FileUploader
     /**
      * Upload file.
      *
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param UploadedFile $file
      *
-     * @throws \Exception
+     * @throws Exception
      *
      * @return string File name
      */

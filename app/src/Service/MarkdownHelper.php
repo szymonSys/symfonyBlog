@@ -15,14 +15,14 @@ class MarkdownHelper
     /**
      * Markdown.
      *
-     * @var \Michelf\MarkdownInterface
+     * @var MarkdownInterface
      */
     private $markdown;
 
     /**
      * MarkdownHelper constructor.
      *
-     * @param \Michelf\MarkdownInterface $markdown Markdown
+     * @param MarkdownInterface $markdown Markdown
      */
     public function __construct(MarkdownInterface $markdown)
     {

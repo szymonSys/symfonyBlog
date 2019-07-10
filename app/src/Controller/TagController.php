@@ -24,11 +24,14 @@ class TagController extends AbstractController
     /**
      * Articles view action.
      *
-     * @param Request            $request
-     * @param ArticleRepository  $repository
-     * @param PaginatorInterface $paginator
+     * @param Request            $request           HTTP request
+     * @param TagRepository      $tagRepository     Tag repository
+     * @param ArticleRepository  $articleRepository Article repository
+     * @param PaginatorInterface $paginator         Paginator
+     * @param int                $id                Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     *
      * @Route(
      *     "/{name}/{id}",
      *     name="tag_articles",

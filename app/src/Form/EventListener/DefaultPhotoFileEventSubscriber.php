@@ -42,7 +42,7 @@ class DefaultPhotoFileEventSubscriber implements EventSubscriberInterface
     /**
      * Pre submit handler.
      *
-     * @param \Symfony\Component\Form\FormEvent $event Event
+     * @param FormEvent $event Event
      */
     public function preSubmitData(FormEvent $event): void
     {

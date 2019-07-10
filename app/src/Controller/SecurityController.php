@@ -5,6 +5,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +19,9 @@ class SecurityController extends AbstractController
     /**
      * Login form action.
      *
-     * @param \Symfony\Component\Security\Http\Authentication\AuthenticationUtils $authenticationUtils Auth utils
+     * @param AuthenticationUtils $authenticationUtils Auth utils
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/login",
@@ -51,7 +52,7 @@ class SecurityController extends AbstractController
     /**
      * Logout action.
      *
-     * @throws \Exception
+     * @throws Exception
      *
      * @Route(
      *     "/logout",
@@ -61,7 +62,7 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         // Request is intercepted before reaches this exception:
-        throw new \Exception('Internal security module error');
+        throw new Exception('Internal security module error');
     }
 
 //    /**

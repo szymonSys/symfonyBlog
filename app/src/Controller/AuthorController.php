@@ -10,6 +10,8 @@ use App\Entity\User;
 use App\Form\AuthorType;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,9 +56,11 @@ class AuthorController extends AbstractController
     /**
      * View action.
      *
-     * @param Request            $request
-     * @param PaginatorInterface $paginator
-     * @param int                $id
+     * @param Request            $request           HTTP request
+     * @param ArticleRepository  $articleRepository Article repository
+     * @param UserRepository     $userRepository    User repository
+     * @param PaginatorInterface $paginator         Paginator
+     * @param int                $id                Element Id
      *
      * @return Response
      *
@@ -103,14 +107,16 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @param Request        $request
-     * @param UserRepository $repository
-     * @param int            $id
+     * Edit author action.
+     *
+     * @param Request        $request    HTTP request
+     * @param UserRepository $repository User repository
+     * @param int            $id         Element Id
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/edit",

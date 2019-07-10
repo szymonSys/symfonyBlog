@@ -1,13 +1,19 @@
 <?php
-
+/**
+ * Photo repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Photo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class PhotoRepository.
+ *
  * @method Photo|null find($id, $lockMode = null, $lockVersion = null)
  * @method Photo|null findOneBy(array $criteria, array $orderBy = null)
  * @method Photo[]    findAll()
@@ -15,6 +21,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PhotoRepository extends ServiceEntityRepository
 {
+    /**
+     * PhotoRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Photo::class);
@@ -23,7 +34,7 @@ class PhotoRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -34,10 +45,10 @@ class PhotoRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Photo $photo Photo entity
+     * @param Photo $photo Photo entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Photo $photo): void
     {
@@ -48,10 +59,10 @@ class PhotoRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\Photo $photo Photo entity
+     * @param Photo $photo Photo entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Photo $photo): void
     {
@@ -62,41 +73,12 @@ class PhotoRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?: $this->createQueryBuilder('p');
     }
-
-    // /**
-    //  * @return Photo[] Returns an array of Photo objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Photo
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

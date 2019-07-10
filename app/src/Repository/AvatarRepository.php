@@ -1,13 +1,19 @@
 <?php
-
+/**
+ * Avatar repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Avatar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class CategoryRepository.
+ *
  * @method Avatar|null find($id, $lockMode = null, $lockVersion = null)
  * @method Avatar|null findOneBy(array $criteria, array $orderBy = null)
  * @method Avatar[]    findAll()
@@ -15,6 +21,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class AvatarRepository extends ServiceEntityRepository
 {
+    /**
+     * AvatarRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Avatar::class);
@@ -23,7 +34,7 @@ class AvatarRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -34,10 +45,10 @@ class AvatarRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Avatar $avatar Avatar entity
+     * @param Avatar $avatar Avatar entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Avatar $avatar): void
     {
@@ -48,10 +59,10 @@ class AvatarRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\Avatar $avatar Avatar entity
+     * @param Avatar $avatar Avatar entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Avatar $avatar): void
     {
@@ -62,9 +73,9 @@ class AvatarRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {

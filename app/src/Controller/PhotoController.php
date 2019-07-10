@@ -10,6 +10,8 @@ use App\Form\PhotoType;
 use App\Repository\ArticleRepository;
 use App\Repository\PhotoRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,6 +28,11 @@ class PhotoController extends AbstractController
 {
     private $uploaderService = null;
 
+    /**
+     * PhotoController constructor.
+     *
+     * @param FileUploader $uploaderService
+     */
     public function __construct(FileUploader $uploaderService)
     {
         $this->uploaderService = $uploaderService;
@@ -34,14 +41,15 @@ class PhotoController extends AbstractController
     /**
      * New action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\PhotoRepository           $repository Photo repository
-     * @param int                                       $id
+     * @param Request           $request           HTTP request
+     * @param PhotoRepository   $photoRepository   Photo repository
+     * @param ArticleRepository $articleRepository Article repository
+     * @param int               $id                Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/photo/new",
@@ -95,15 +103,17 @@ class PhotoController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP  request
-     * @param \App\Entity\Photo                         $photo      Photo entity
-     * @param \App\Repository\PhotoRepository           $repository Photo repository
-     * @param \Symfony\Component\Filesystem\Filesystem  $filesystem Filesystem component
+     * @param Request           $request           HTTP request
+     * @param ArticleRepository $articleRepository Article repository
+     * @param PhotoRepository   $photoRepository   Photo repository
+     * @param Filesystem        $filesystem        Filesystem component
+     * @param int               $articleId         Article Id
+     * @param int               $id                Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{articleId}/photo/{id}/edit",

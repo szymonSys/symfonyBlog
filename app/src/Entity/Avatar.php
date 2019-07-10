@@ -1,9 +1,14 @@
 <?php
-
+/**
+ * Avatar entity.
+ */
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     fields={"file"}
  * )
  */
-class Avatar implements \Serializable
+class Avatar implements Serializable
 {
     /**
      * Primary key.
@@ -42,7 +47,7 @@ class Avatar implements \Serializable
     /**
      * Created at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      *
@@ -55,7 +60,7 @@ class Avatar implements \Serializable
     /**
      * Updated at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      *
@@ -107,9 +112,9 @@ class Avatar implements \Serializable
     /**
      * Getter for Created at.
      *
-     * @return \DateTimeInterface|null Created at
+     * @return DateTimeInterface|null Created at
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -117,9 +122,11 @@ class Avatar implements \Serializable
     /**
      * Setter for Created at.
      *
-     * @param \DateTimeInterface $createdAt Created at
+     * @param DateTimeInterface $createdAt Created at
+     *
+     * @return Avatar
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -129,9 +136,9 @@ class Avatar implements \Serializable
     /**
      * Getter for Updated at.
      *
-     * @return \DateTimeInterface|null Updated at
+     * @return DateTimeInterface|null Updated at
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -139,9 +146,11 @@ class Avatar implements \Serializable
     /**
      * Setter for Updated at.
      *
-     * @param \DateTimeInterface $updatedAt Updated at
+     * @param DateTimeInterface $updatedAt Updated at
+     *
+     * @return Avatar
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -171,7 +180,7 @@ class Avatar implements \Serializable
     /**
      * Getter for User.
      *
-     * @return \App\Entity\User|null User entity
+     * @return User|null User entity
      */
     public function getUser(): ?User
     {
@@ -181,7 +190,7 @@ class Avatar implements \Serializable
     /**
      * Setter for User.
      *
-     * @param \App\Entity\User $user User entity
+     * @param User $user User entity
      */
     public function setUser(?User $user): void
     {

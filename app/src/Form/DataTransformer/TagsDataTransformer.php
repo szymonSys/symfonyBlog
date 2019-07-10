@@ -7,6 +7,9 @@ namespace App\Form\DataTransformer;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -17,14 +20,14 @@ class TagsDataTransformer implements DataTransformerInterface
     /**
      * Tag repository.
      *
-     * @var \App\Repository\TagRepository|null
+     * @var TagRepository|null
      */
     private $repository = null;
 
     /**
      * TagsDataTransformer constructor.
      *
-     * @param \App\Repository\TagRepository $repository Tag repository
+     * @param TagRepository $repository Tag repository
      */
     public function __construct(TagRepository $repository)
     {
@@ -34,13 +37,13 @@ class TagsDataTransformer implements DataTransformerInterface
     /**
      * Transform array of tags to string of names.
      *
-     * @param \Doctrine\Common\Collections\Collection $tags Tags entity collection
+     * @param Collection $tags Tags entity collection
      *
      * @return string Result
      */
     public function transform($tags): string
     {
-        if (null == $tags) {
+        if (null === $tags) {
             return '';
         }
 
@@ -60,8 +63,8 @@ class TagsDataTransformer implements DataTransformerInterface
      *
      * @return array Result
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function reverseTransform($value): array
     {
@@ -72,7 +75,7 @@ class TagsDataTransformer implements DataTransformerInterface
         foreach ($tagTitles as $tagTitle) {
             if ('' !== trim($tagTitle)) {
                 $tag = $this->repository->findOneByName(strtolower($tagTitle));
-                if (null == $tag) {
+                if (null === $tag) {
                     $tag = new Tag();
                     $tag->setName($tagTitle);
                     $this->repository->save($tag);

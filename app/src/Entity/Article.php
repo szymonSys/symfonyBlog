@@ -1,13 +1,18 @@
 <?php
-
+/**
+ * Article entity.
+ */
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class article.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
@@ -23,6 +28,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime")
+     *
      * @Gedmo\Timestampable(on="create")
      */
     private $publishedAt;
@@ -38,7 +44,8 @@ class Article
     private $body;
 
     /**
-     * @var \App\Entity\Category
+     * @var Category
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -47,7 +54,7 @@ class Article
     /**
      * Author.
      *
-     * @var \App\Entity\User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      *
@@ -88,34 +95,66 @@ class Article
      */
     private $coverPhoto;
 
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * Get int action.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPublishedAt(): ?\DateTimeInterface
+    /**
+     * Getter for publishedAt.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getPublishedAt(): ?DateTimeInterface
     {
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    /**
+     * Setter for publishedAt.
+     *
+     * @param DateTimeInterface $publishedAt
+     *
+     * @return Article
+     */
+    public function setPublishedAt(DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
+    /**
+     * Getter for title.
+     *
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Setter for title.
+     *
+     * @param string $title
+     *
+     * @return Article
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -123,11 +162,23 @@ class Article
         return $this;
     }
 
+    /**
+     * Getter for body.
+     *
+     * @return string|null
+     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
+    /**
+     * Setter for body.
+     *
+     * @param string $body
+     *
+     * @return Article
+     */
     public function setBody(string $body): self
     {
         $this->body = $body;
@@ -135,11 +186,23 @@ class Article
         return $this;
     }
 
+    /**
+     * Getter for category.
+     *
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category
+     *
+     * @return Article
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
@@ -147,11 +210,23 @@ class Article
         return $this;
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author
+     *
+     * @return Article
+     */
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
@@ -160,6 +235,8 @@ class Article
     }
 
     /**
+     * Getter for tags.
+     *
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -167,6 +244,13 @@ class Article
         return $this->tags;
     }
 
+    /**
+     * Add adction for tag.
+     *
+     * @param Tag $tag
+     *
+     * @return Article
+     */
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -176,6 +260,13 @@ class Article
         return $this;
     }
 
+    /**
+     * Remove action for tag.
+     *
+     * @param Tag $tag
+     *
+     * @return Article
+     */
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -186,6 +277,8 @@ class Article
     }
 
     /**
+     * Getter for comments.
+     *
      * @return Collection|Comment[]
      */
     public function getComments(): Collection
@@ -193,6 +286,13 @@ class Article
         return $this->comments;
     }
 
+    /**
+     * Add action for comment.
+     *
+     * @param Comment $comment
+     *
+     * @return Article
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -203,6 +303,13 @@ class Article
         return $this;
     }
 
+    /**
+     * Remove action for comment.
+     *
+     * @param Comment $comment
+     *
+     * @return Article
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -216,11 +323,23 @@ class Article
         return $this;
     }
 
+    /**
+     * Getter for coverPhoto.
+     *
+     * @return Photo|null
+     */
     public function getCoverPhoto(): ?Photo
     {
         return $this->coverPhoto;
     }
 
+    /**
+     * Setter for coverPhoto.
+     *
+     * @param Photo $coverPhoto
+     *
+     * @return Article
+     */
     public function setCoverPhoto(Photo $coverPhoto): self
     {
         $this->coverPhoto = $coverPhoto;

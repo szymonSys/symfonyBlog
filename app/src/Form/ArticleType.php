@@ -23,14 +23,14 @@ class ArticleType extends AbstractType
     /**
      * Tags data transformer.
      *
-     * @var \App\Form\DataTransformer\TagsDataTransformer|null
+     * @var TagsDataTransformer|null
      */
     private $tagsDataTransformer = null;
 
     /**
      * ArticleType constructor.
      *
-     * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
+     * @param TagsDataTransformer $tagsDataTransformer Tags data transformer
      */
     public function __construct(TagsDataTransformer $tagsDataTransformer)
     {

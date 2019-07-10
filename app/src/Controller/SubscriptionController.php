@@ -9,6 +9,8 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +25,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class SubscriptionController extends AbstractController
 {
     /**
+     * Index action.
+     *
      * @param Request            $request
      * @param PaginatorInterface $paginator
-     * @param UserRepository     $repository
+     * @param ArticleRepository  $repository
      *
      * @return Response
      *
@@ -55,6 +59,8 @@ class SubscriptionController extends AbstractController
     }
 
     /**
+     * Show followed action.
+     *
      * @param Request            $request
      * @param PaginatorInterface $paginator
      * @param UserRepository     $repository
@@ -81,12 +87,14 @@ class SubscriptionController extends AbstractController
         );
 
         return $this->render(
-                    'subscription/followed.html.twig',
-                    ['pagination' => $pagination]
-                );
+            'subscription/followed.html.twig',
+            ['pagination' => $pagination]
+        );
     }
 
     /**
+     * Show followers action.
+     *
      * @param Request            $request
      * @param PaginatorInterface $paginator
      * @param UserRepository     $repository
@@ -119,13 +127,15 @@ class SubscriptionController extends AbstractController
     }
 
     /**
+     * Follow action.
+     *
      * @param UserRepository $repository
      * @param int            $id
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/follow",
@@ -165,13 +175,15 @@ class SubscriptionController extends AbstractController
     }
 
     /**
+     * Unfollow action.
+     *
      * @param UserRepository $repository
      * @param int            $id
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/unfollow",

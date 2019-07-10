@@ -9,6 +9,7 @@ use App\Entity\Photo;
 use App\Service\FileUploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -20,14 +21,14 @@ class PhotoUploadListener
     /**
      * Uploader service.
      *
-     * @var \App\Service\FileUploader|null
+     * @var FileUploader|null
      */
     protected $uploaderService = null;
 
     /**
      * PhotoUploadListener constructor.
      *
-     * @param \App\Service\FileUploader $fileUploader File uploader service
+     * @param FileUploader $fileUploader File uploader service
      */
     public function __construct(FileUploader $fileUploader)
     {
@@ -37,9 +38,9 @@ class PhotoUploadListener
     /**
      * Pre persist.
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args Event args
+     * @param LifecycleEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function prePersist(LifecycleEventArgs $args): void
     {
@@ -51,9 +52,9 @@ class PhotoUploadListener
     /**
      * Pre update.
      *
-     * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args Event args
+     * @param PreUpdateEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function preUpdate(PreUpdateEventArgs $args): void
     {
@@ -65,9 +66,9 @@ class PhotoUploadListener
     /**
      * Upload file.
      *
-     * @param \App\Entity\Photo $entity Photo entity
+     * @param Photo $entity Photo entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function uploadFile($entity): void
     {
@@ -85,9 +86,9 @@ class PhotoUploadListener
     /**
      * Post load.
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args Event args
+     * @param LifecycleEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postLoad(LifecycleEventArgs $args)
     {

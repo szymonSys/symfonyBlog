@@ -1,14 +1,20 @@
 <?php
-
+/**
+ * Comment repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class CommentRepository.
+ *
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
  * @method Comment[]    findAll()
@@ -16,12 +22,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    /**
+     * CommentRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Comment::class);
     }
 
     /**
+     * Find for article action.
+     *
      * @param int $articleId
      *
      * @return array
@@ -31,7 +44,6 @@ class CommentRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('c')
             ->select('c')
             ->innerJoin('App\Entity\Article', 'a', Join::WITH, 'a = c.article')
-//            ->innerJoin('App\Entity\User', 'u', Join::WITH, 'u = c.author')
             ->andWhere('a.id = :articleId')
             ->setParameter('articleId', $articleId)
             ->orderBy('c.createdAt', 'DESC')
@@ -43,7 +55,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -54,10 +66,10 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Comment $comment Comment entity
+     * @param Comment $comment Comment entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Comment $comment): void
     {
@@ -68,10 +80,10 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\Comment $comment Comment entity
+     * @param Comment $comment Comment entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Comment $comment): void
     {
@@ -82,41 +94,12 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?: $this->createQueryBuilder('c');
     }
-
-    // /**
-    //  * @return Comment[] Returns an array of Comment objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Comment
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

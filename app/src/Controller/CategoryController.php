@@ -2,7 +2,6 @@
 /**
  * Category controller.
  */
-
 namespace App\Controller;
 
 use App\Entity\Article;
@@ -10,6 +9,8 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -27,11 +28,11 @@ class CategoryController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
+     * @param Request            $request    HTTP request
+     * @param CategoryRepository $repository Category repository
+     * @param PaginatorInterface $paginator  Paginator
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @Route(
      *     "/",
@@ -47,30 +48,33 @@ class CategoryController extends AbstractController
         );
 
         return $this->render(
-          'category/index.html.twig',
-          ['pagination' => $pagination]
+            'category/index.html.twig',
+            ['pagination' => $pagination]
         );
     }
 
     /**
      * View action.
      *
-     * @param \App\Entity\Category               $category   Category entity
-     * @param \App\Repository\CategoryRepository $repository Category repository
-     * @param int                                $id         Element Id
+     * @param Request            $request            HTTP request
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param PaginatorInterface $paginator          Paginator
+     * @param ArticleRepository  $articleRepository  Article repository
+     * @param string             $name               Element name
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/{name}/articles",
      *     name="category_view",
-     *
      * )
      */
     public function view(Request $request, CategoryRepository $categoryRepository, PaginatorInterface $paginator, ArticleRepository $articleRepository, string $name): Response
     {
         if (!is_null($name)) {
             $categoryName = $categoryRepository->findOneBy(['name' => $name])->getName();
+        } else {
+            return $this->redirectToRoute('category_index');
         }
 
         $pagination = $paginator->paginate(
@@ -91,14 +95,13 @@ class CategoryController extends AbstractController
     /**
      * New action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                                       $id         Element Id
+     * @param Request            $request    HTTP request
+     * @param CategoryRepository $repository Category repository
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/new",
@@ -135,15 +138,14 @@ class CategoryController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Entity\Category                      $category   Category entity
-     * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                                       $id         Element Id
+     * @param Request            $request    HTTP request
+     * @param CategoryRepository $repository Category repository
+     * @param int                $id         Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/edit",
@@ -188,15 +190,14 @@ class CategoryController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Entity\Category                      $category   Category entity
-     * @param \App\Repository\CategoryRepository        $repository Category repository
-     * @param int                                       $id         Element Id
+     * @param Request            $request    HTTP request
+     * @param CategoryRepository $repository Category repository
+     * @param int                $id         Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/delete",

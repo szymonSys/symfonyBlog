@@ -17,18 +17,17 @@ class ArticleFixtures extends AbstractBaseFixtures implements DependentFixtureIn
     /**
      * Load.
      *
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(50, 'article', function ($i) {
+        $this->createMany(50, 'article', function () {
             $article = new Article();
             $article->setTitle($this->faker->sentence);
             $article->setPublishedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $article->setBody($this->faker->paragraph);
             $article->setCategory($this->getRandomReference('categories'));
             $article->setAuthor($this->getRandomReference('users'));
-//            $article->addTag($this->getRandomReference('tags'));
 
             return $article;
         });

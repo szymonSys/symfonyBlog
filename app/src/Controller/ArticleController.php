@@ -10,6 +10,8 @@ use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,11 +28,11 @@ class ArticleController extends AbstractController
     /**
      * Index action.
      *
-     * @param \App\Repository\ArticleRepository         $repository Repository
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
+     * @param Request            $request    HTTP request
+     * @param ArticleRepository  $repository Repository
+     * @param PaginatorInterface $paginator  Paginator
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/",
@@ -43,7 +45,7 @@ class ArticleController extends AbstractController
             $repository->queryAll(),
             $request->query->getInt('page', 1),
             Article::NUMBER_OF_ITEMS
-            );
+        );
 
         return $this->render(
             'article/index.html.twig',
@@ -54,11 +56,12 @@ class ArticleController extends AbstractController
     /**
      * View action.
      *
-
-     * @param \App\Repository\ArticleRepository $repository Article repository
-     * @param int                               $id         Element Id
+     * @param Request           $request           HTTP request
+     * @param ArticleRepository $articleRepository Article repository
+     * @param CommentRepository $commentRepository Comment repository
+     * @param int               $id                Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
      * @Route(
      *     "/article/{id}",
@@ -81,7 +84,11 @@ class ArticleController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $comment->setArticle($article);
                 $comment->setAuthor($this->getUser());
-                $commentRepository->save($comment);
+                try {
+                    $commentRepository->save($comment);
+                } catch (OptimisticLockException $e) {
+                } catch (ORMException $e) {
+                }
 
                 $this->addFlash('success', 'message.comment_created_successfully');
 
@@ -102,13 +109,13 @@ class ArticleController extends AbstractController
     /**
      * New action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository         $repository Article repository
+     * @param Request           $request    HTTP request
+     * @param ArticleRepository $repository Article repository
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/article/new",
@@ -129,12 +136,9 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setAuthor($this->getUser());
             $repository->save($article);
-
             $this->addFlash('success', 'message.article_created_successfully');
 
-            return $this->redirectToRoute(
-                'photo_new', ['id' => $article->getId()]
-            );
+            return $this->redirectToRoute('photo_new', ['id' => $article->getId()]);
         }
 
         return $this->render(
@@ -146,14 +150,14 @@ class ArticleController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository         $repository Article repository
-     * @param int                                       $id         Element Id
+     * @param Request           $request    HTTP request
+     * @param ArticleRepository $repository Article repository
+     * @param int               $id         Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/article/{id}/edit",
@@ -193,14 +197,14 @@ class ArticleController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository         $repository Article repository
-     *                                                              $category = $repository->find($id);
+     * @param Request           $request    HTTP request
+     * @param ArticleRepository $repository Article repository
+     * @param int               $id         Element Id
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return Response HTTP response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/article/{id}/delete",

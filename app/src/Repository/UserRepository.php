@@ -1,14 +1,20 @@
 <?php
-
+/**
+ * User repository.
+ */
 namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class UserRepository.
+ *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
@@ -16,12 +22,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
+    /**
+     * UserRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
     }
 
     /**
+     * Finding author data method.
+     *
      * @param User $user
      *
      * @return User[]
@@ -41,7 +54,11 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * Finding followed author's articles method.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
      */
     public function findFollowedAuthorsArticles(int $userId): QueryBuilder
     {
@@ -56,6 +73,8 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
+     * Search action.
+     *
      * @param string $searchParam
      *
      * @return array
@@ -75,7 +94,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find followed authors.
+     * Finding followed authors method.
      *
      * @param User $user
      *
@@ -87,20 +106,27 @@ class UserRepository extends ServiceEntityRepository
             ->innerJoin('App\Entity\User', 'f', Join::WITH, 'f = u')
             ->orderBy('f.firstName', 'ASC');
 
-        foreach ($user->getFollowedAuthors() as $key => $author) {
+        foreach ($user->getFollowedAuthors() as $author) {
             $qb->orWhere('f.id = '.$author->getId());
         }
 
         return $qb;
     }
 
+    /**
+     * Finding all followers method.
+     *
+     * @param User $user
+     *
+     * @return QueryBuilder
+     */
     public function findFollowers(User $user): QueryBuilder
     {
         $qb = $this->createQueryBuilder('u')
             ->innerJoin('App\Entity\User', 'f', Join::WITH, 'u = f')
             ->orderBy('f.firstName', 'ASC');
 
-        foreach ($user->getFollowers() as $key => $author) {
+        foreach ($user->getFollowers() as $author) {
             $qb->orWhere('f.id = '.$author->getId());
         }
 
@@ -110,7 +136,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -121,10 +147,10 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\User $user User entity
+     * @param User $user User entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(User $user): void
     {
@@ -135,10 +161,10 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\User $user User entity
+     * @param User $user User entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(User $user): void
     {
@@ -149,41 +175,12 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?: $this->createQueryBuilder('u');
     }
-
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

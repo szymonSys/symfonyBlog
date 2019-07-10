@@ -1,11 +1,11 @@
 <?php
-
 /**
  * User entity.
  */
-
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -65,7 +65,7 @@ class User implements UserInterface
     /**
      * Created at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @Gedmo\Timestampable(on="create")
      *
@@ -78,7 +78,7 @@ class User implements UserInterface
     /**
      * Updated at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @Gedmo\Timestampable(on="update")
      *
@@ -190,6 +190,9 @@ class User implements UserInterface
      */
     private $avatar;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -211,9 +214,9 @@ class User implements UserInterface
     /**
      * Getter for the Created At.
      *
-     * @return \DateTimeInterface|null Created At
+     * @return DateTimeInterface|null Created At
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -221,9 +224,9 @@ class User implements UserInterface
     /**
      * Setter for the Created At.
      *
-     * @param \DateTimeInterface $createdAt Created At
+     * @param DateTimeInterface $createdAt Created At
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
+    public function setCreatedAt(DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -231,9 +234,9 @@ class User implements UserInterface
     /**
      * Getter for the Updated At.
      *
-     * @return \DateTimeInterface|null updated at
+     * @return DateTimeInterface|null updated at
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -241,9 +244,9 @@ class User implements UserInterface
     /**
      * Setter for the Updated At.
      *
-     * @param \DateTimeInterface $updatedAt Updated at
+     * @param DateTimeInterface $updatedAt Updated at
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
+    public function setUpdatedAt(DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -308,7 +311,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every users at least has ROLE_USER
         $roles[] = static::ROLE_USER;
 
         return array_unique($roles);
@@ -341,11 +343,17 @@ class User implements UserInterface
         return $isAdmin;
     }
 
+    /**
+     * Make admin method.
+     */
     public function makeAdmin(): void
     {
         $this->roles[] = 'ROLE_ADMIN';
     }
 
+    /**
+     * Divest admin method.
+     */
     public function divestAdmin(): void
     {
         if (isset($this->roles[1]) && 'ROLE_ADMIN' === $this->roles[1]) {
@@ -354,6 +362,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for salt.
+     *
      * @see UserInterface
      */
     public function getSalt()
@@ -362,6 +372,8 @@ class User implements UserInterface
     }
 
     /**
+     * Erase creditionals method.
+     *
      * @see UserInterface
      */
     public function eraseCredentials()
@@ -390,11 +402,23 @@ class User implements UserInterface
         $this->firstName = $firstName;
     }
 
+    /**
+     * Getter for blogName.
+     *
+     * @return string|null
+     */
     public function getBlogName(): ?string
     {
         return $this->blogName;
     }
 
+    /**
+     * Setter for blogName.
+     *
+     * @param string|null $blogName
+     *
+     * @return User
+     */
     public function setBlogName(?string $blogName): self
     {
         $this->blogName = $blogName;
@@ -403,6 +427,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for articles.
+     *
      * @return Collection|Article[]
      */
     public function getArticles(): Collection
@@ -410,6 +436,13 @@ class User implements UserInterface
         return $this->articles;
     }
 
+    /**
+     * Add action for article.
+     *
+     * @param Article $article
+     *
+     * @return User
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -420,6 +453,13 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Remove action for article.
+     *
+     * @param Article $article
+     *
+     * @return User
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
@@ -434,6 +474,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for followedAuthors.
+     *
      * @return Collection|self[]
      */
     public function getFollowedAuthors(): Collection
@@ -441,7 +483,14 @@ class User implements UserInterface
         return $this->followedAuthors;
     }
 
-    public function addFollowedAuthor(self $followedAuthor): self
+    /**
+     * Add action for followedAuthor.
+     *
+     * @param User $followedAuthor
+     *
+     * @return User
+     */
+    public function addFollowedAuthor(User $followedAuthor): self
     {
         if (!$this->followedAuthors->contains($followedAuthor)) {
             $this->followedAuthors[] = $followedAuthor;
@@ -450,7 +499,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeFollowedAuthor(self $followedAuthor): self
+    /**
+     * Remove action for followedAuthor.
+     *
+     * @param User $followedAuthor
+     *
+     * @return User
+     */
+    public function removeFollowedAuthor(User $followedAuthor): self
     {
         if ($this->followedAuthors->contains($followedAuthor)) {
             $this->followedAuthors->removeElement($followedAuthor);
@@ -460,6 +516,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for followers.
+     *
      * @return Collection|self[]
      */
     public function getFollowers(): Collection
@@ -467,7 +525,14 @@ class User implements UserInterface
         return $this->followers;
     }
 
-    public function addFollower(self $follower): self
+    /**
+     * Add action for follower.
+     *
+     * @param User $follower
+     *
+     * @return User
+     */
+    public function addFollower(User $follower): self
     {
         if (!$this->followers->contains($follower)) {
             $this->followers[] = $follower;
@@ -477,7 +542,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeFollower(self $follower): self
+    /**
+     * Remove action for follower.
+     *
+     * @param User $follower
+     *
+     * @return User
+     */
+    public function removeFollower(User $follower): self
     {
         if ($this->followers->contains($follower)) {
             $this->followers->removeElement($follower);
@@ -488,6 +560,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for comments.
+     *
      * @return Collection|Comment[]
      */
     public function getComments(): Collection
@@ -495,6 +569,13 @@ class User implements UserInterface
         return $this->comments;
     }
 
+    /**
+     * Add action for comment.
+     *
+     * @param Comment $comment
+     *
+     * @return User
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -505,6 +586,13 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Remove action for comment.
+     *
+     * @param Comment $comment
+     *
+     * @return User
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -518,11 +606,23 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Getter for bio.
+     *
+     * @return string|null
+     */
     public function getBio(): ?string
     {
         return $this->bio;
     }
 
+    /**
+     * Setter for bio.
+     *
+     * @param string|null $bio
+     *
+     * @return User
+     */
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;
@@ -530,11 +630,23 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Getter for avatar.
+     *
+     * @return Avatar|null
+     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
+    /**
+     * Setter for avatar.
+     *
+     * @param Avatar|null $avatar
+     *
+     * @return User
+     */
     public function setAvatar(?Avatar $avatar): self
     {
         $this->avatar = $avatar;

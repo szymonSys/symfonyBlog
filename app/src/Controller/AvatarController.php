@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\Avatar;
 use App\Form\AvatarType;
 use App\Repository\AvatarRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -26,6 +28,11 @@ class AvatarController extends AbstractController
 {
     private $uploaderService = null;
 
+    /**
+     * AvatarController constructor.
+     *
+     * @param FileUploader $uploaderService
+     */
     public function __construct(FileUploader $uploaderService)
     {
         $this->uploaderService = $uploaderService;
@@ -39,8 +46,8 @@ class AvatarController extends AbstractController
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/new",
@@ -81,15 +88,15 @@ class AvatarController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request          $request
-     * @param int              $id
-     * @param AvatarRepository $repository
-     * @param Filesystem       $filesystem
+     * @param Request          $request    HTTP request
+     * @param AvatarRepository $repository Avatar repository
+     * @param Filesystem       $filesystem Filesystem
+     * @param int              $id         Element Id
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/edit",
@@ -151,14 +158,14 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @param Request          $request
-     * @param AvatarRepository $repository
-     * @param int              $id
+     * @param Request          $request    HTTP request
+     * @param AvatarRepository $repository Avatar repository
+     * @param int              $id         Element Id
      *
      * @return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/delete",

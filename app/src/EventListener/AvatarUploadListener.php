@@ -9,6 +9,7 @@ use App\Entity\Avatar;
 use App\Service\FileUploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,7 +22,7 @@ class AvatarUploadListener
     /**
      * Uploader service.
      *
-     * @var \App\Service\FileUploader|null
+     * @var FileUploader|null
      */
     protected $uploaderService = null;
 
@@ -35,7 +36,8 @@ class AvatarUploadListener
     /**
      * PhotoUploadListener constructor.
      *
-     * @param \App\Service\FileUploader $fileUploader File uploader service
+     * @param FileUploader $fileUploader File uploader service
+     * @param Filesystem   $filesystem   Filesystem
      */
     public function __construct(FileUploader $fileUploader, Filesystem $filesystem)
     {
@@ -46,9 +48,9 @@ class AvatarUploadListener
     /**
      * Pre persist.
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args Event args
+     * @param LifecycleEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function prePersist(LifecycleEventArgs $args): void
     {
@@ -60,9 +62,9 @@ class AvatarUploadListener
     /**
      * Pre update.
      *
-     * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args Event args
+     * @param PreUpdateEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function preUpdate(PreUpdateEventArgs $args): void
     {
@@ -74,9 +76,9 @@ class AvatarUploadListener
     /**
      * Upload file.
      *
-     * @param \App\Entity\Avatar $entity Avatar entity
+     * @param Avatar $entity Avatar entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function uploadFile($entity): void
     {
@@ -94,9 +96,9 @@ class AvatarUploadListener
     /**
      * Post load.
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args Event args
+     * @param LifecycleEventArgs $args Event args
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postLoad(LifecycleEventArgs $args)
     {
@@ -118,7 +120,7 @@ class AvatarUploadListener
     /**
      * Pre remove.
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
+     * @param LifecycleEventArgs $args
      */
     public function preRemove(LifecycleEventArgs $args)
     {
@@ -132,7 +134,7 @@ class AvatarUploadListener
     /**
      * Remove file from disk.
      *
-     * @param \App\Entity\Avatar $entity Avatar entity
+     * @param Avatar $entity Avatar entity
      */
     private function removeFile($entity): void
     {

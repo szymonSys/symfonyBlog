@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Registration form type.
+ */
 namespace App\Form;
 
 use App\Entity\User;
@@ -13,8 +15,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
+/**
+ * Class RegistrationFormType.
+ */
 class RegistrationFormType extends AbstractType
 {
+    /**
+     * Build form action.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,7 +38,8 @@ class RegistrationFormType extends AbstractType
                     'attr' => ['max_length' => 255],
                 ]
             )
-            ->add('email',
+            ->add(
+                'email',
                 EmailType::class,
                 [
                     'label' => 'label.mail',
@@ -44,19 +56,27 @@ class RegistrationFormType extends AbstractType
                 'first_options' => ['label' => 'label.password'],
                 'second_options' => ['label' => 'label.repeat_password'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
+                    new NotBlank(
+                        [
+                            'message' => 'Please enter a password',
+                        ]
+                    ),
+                    new Length(
+                        [
+                            'min' => 6,
+                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            'max' => 4096,
+                        ]
+                    ),
                 ],
             ]);
     }
 
+    /**
+     * Configure options action.
+     *
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

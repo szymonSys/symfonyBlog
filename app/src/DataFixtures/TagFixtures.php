@@ -17,11 +17,11 @@ class TagFixtures extends AbstractBaseFixtures implements DependentFixtureInterf
     /**
      * Load.
      *
-     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(35, 'tags', function ($i) {
+        $this->createMany(35, 'tags', function () {
             $tag = new Tag();
             $tag->setName($this->faker->word);
             $tag->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));

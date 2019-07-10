@@ -1,13 +1,18 @@
 <?php
-
+/**
+ * Tag repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class TagRepository.
+ *
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tag[]    findAll()
@@ -15,12 +20,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TagRepository extends ServiceEntityRepository
 {
+    /**
+     * TagRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Tag::class);
     }
 
     /**
+     * Searching method.
+     *
      * @param string $searchParam
      *
      * @return array
@@ -42,10 +54,10 @@ class TagRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Tag $article Tag entity
+     * @param Tag $tag Tag entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Tag $tag): void
     {
@@ -56,43 +68,14 @@ class TagRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\Tag $article Tag entity
+     * @param Tag $tag Tag entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Tag $tag): void
     {
         $this->_em->remove($tag);
         $this->_em->flush($tag);
     }
-
-    // /**
-    //  * @return Tag[] Returns an array of Tag objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Tag
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

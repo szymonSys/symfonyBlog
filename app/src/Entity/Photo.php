@@ -1,14 +1,21 @@
 <?php
-
+/**
+ * Photo entity.
+ */
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class photo.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\PhotoRepository")
  * @ORM\Table(
  *     name="photos",
@@ -24,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     fields={"file"}
  * )
  */
-class Photo implements \Serializable
+class Photo implements Serializable
 {
     /**
      * Primary key.
@@ -40,7 +47,7 @@ class Photo implements \Serializable
     /**
      * Created at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      *
@@ -53,7 +60,7 @@ class Photo implements \Serializable
     /**
      * Updated at.
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      *
@@ -92,29 +99,58 @@ class Photo implements \Serializable
      */
     private $article;
 
+    /**
+     * Getter for id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * Getter for createdAt.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Setter for createdAt.
+     *
+     * @param DateTimeInterface $createdAt
+     *
+     * @return Photo
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * Getter for updatedAt.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Setter for updatedAt.
+     *
+     * @param DateTimeInterface $updatedAt
+     *
+     * @return Photo
+     */
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -141,15 +177,22 @@ class Photo implements \Serializable
         $this->file = $file;
     }
 
+    /**
+     * Getter for article.
+     *
+     * @return Article|null
+     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
     /**
-     * Getter for Article.
+     * Setter for article.
      *
-     * @return \App\Entity\Article|null Article entity
+     * @param Article $article
+     *
+     * @return Photo
      */
     public function setArticle(Article $article): self
     {

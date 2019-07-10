@@ -1,16 +1,22 @@
 <?php
-
+/**
+ * Article repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Article;
 use App\Entity\Tag;
 use App\Entity\User;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
+ * Class ArticleRepository.
+ *
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
  * @method Article|null findOneBy(array $criteria, array $orderBy = null)
  * @method Article[]    findAll()
@@ -21,7 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * ArticleRepository constructor.
      *
-     * @param \Symfony\Bridge\Doctrine\RegistryInterface $registry Registry
+     * @param RegistryInterface $registry Registry
      */
     public function __construct(RegistryInterface $registry)
     {
@@ -29,22 +35,29 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * Finding all articles than category.
+     *
+     * @param string $categoryName Category name
+     *
+     * @return QueryBuilder Query builder
      */
-    public function findAllThanCategory($category): QueryBuilder
+    public function findAllThanCategory($categoryName): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a')
             ->innerJoin('a.category', 'c')
             ->andWhere('c.name = :category')
-            ->setParameter('category', $category)
+            ->setParameter('category', $categoryName)
             ->orderBy('a.publishedAt', 'DESC');
-//            ->getQuery();
 
         return $qb;
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * Finding all articles than user id.
+     *
+     * @param int $userId User Id
+     *
+     * @return QueryBuilder Query builder
      */
     public function findAllThanUserId(int $userId): QueryBuilder
     {
@@ -87,6 +100,8 @@ class ArticleRepository extends ServiceEntityRepository
 //    }
 
     /**
+     * Search action.
+     *
      * @param string $searchParam
      *
      * @return array
@@ -105,6 +120,8 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find by tag action.
+     *
      * @param Tag $tag
      *
      * @return QueryBuilder
@@ -127,7 +144,7 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -138,10 +155,10 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Article $article Article entity
+     * @param Article $article Article entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Article $article): void
     {
@@ -152,10 +169,10 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * Delete record.
      *
-     * @param \App\Entity\Article $article Article entity
+     * @param Article $article Article entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Article $article): void
     {
@@ -166,9 +183,9 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @return QueryBuilder Query builder
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {

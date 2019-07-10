@@ -6,6 +6,8 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +24,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @param Request        $request
-     * @param UserRepository $repository
-     * @param int            $id
+     * Edit role action.
+     *
+     * @param Request        $request    HTTP request
+     * @param UserRepository $repository User repository
+     * @param int            $id         Element Id
      *
      * @return Response
      *
@@ -50,7 +54,11 @@ class UserController extends AbstractController
             } else {
                 $user->makeAdmin();
             }
-            $repository->save($user);
+            try {
+                $repository->save($user);
+            } catch (OptimisticLockException $e) {
+            } catch (ORMException $e) {
+            }
             $this->addFlash('success', 'message.user_role_edited_successfully');
 
             return $this->redirectToRoute('author_index');
@@ -70,14 +78,14 @@ class UserController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request        $request
-     * @param UserRepository $repository
-     * @param int            $id
+     * @param Request        $request    HTTP request
+     * @param UserRepository $repository User repository
+     * @param int            $id         Element Id
      *
      *@return Response
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @Route(
      *     "/{id}/delete",

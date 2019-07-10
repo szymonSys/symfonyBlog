@@ -17,14 +17,14 @@ class AppExtension extends AbstractExtension
     /**
      * Markdown helper.
      *
-     * @var \App\Service\MarkdownHelper
+     * @var MarkdownHelper
      */
     private $markdownHelper;
 
     /**
      * AppExtension constructor.
      *
-     * @param \App\Service\MarkdownHelper $markdownHelper Markdown helper
+     * @param MarkdownHelper $markdownHelper Markdown helper
      */
     public function __construct(MarkdownHelper $markdownHelper)
     {

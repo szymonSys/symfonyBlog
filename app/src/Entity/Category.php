@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Category entity.
+ */
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class category.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category
@@ -70,21 +74,41 @@ class Category
      */
     private $articles;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * Getter for id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for name.
+     *
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param string $name
+     *
+     * @return Category
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -92,11 +116,23 @@ class Category
         return $this;
     }
 
+    /**
+     * Getter for code.
+     *
+     * @return string|null
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
+    /**
+     * Setter for code.
+     *
+     * @param string $code
+     *
+     * @return Category
+     */
     public function setCode(string $code): self
     {
         $this->code = $code;
@@ -105,6 +141,8 @@ class Category
     }
 
     /**
+     * Getter for articles.
+     *
      * @return Collection|Article[]
      */
     public function getArticles(): Collection
@@ -112,6 +150,13 @@ class Category
         return $this->articles;
     }
 
+    /**
+     * Add action for article.
+     *
+     * @param Article $article
+     *
+     * @return Category
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -122,6 +167,13 @@ class Category
         return $this;
     }
 
+    /**
+     * Remove action for article.
+     *
+     * @param Article $article
+     *
+     * @return Category
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
